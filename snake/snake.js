@@ -13,10 +13,24 @@ const numbers = {
     width: map.height / box.height
 };
 
+let direction;
 const snakeBody = [];
 const mapOther = [];
 
-let direction = 'right';
+const strategies = {
+    37: () => {
+        return direction = 'left';
+    },
+    38: () => {
+        return direction = 'up';
+    },
+    39: () => {
+        return direction = 'right';
+    },
+    40: () => {
+        return direction = 'down';
+    }
+}
 
 const initMap = () => {
     const map = document.querySelector('.map');
@@ -43,22 +57,7 @@ const initMap = () => {
 
 const initKeyupSubscript = () => {
     document.onkeyup = (event) => {
-        switch (event.keyCode) {
-            case 37:
-                direction = 'left';
-                break;
-            case 38:
-                direction = 'up';
-                break;
-            case 39:
-                direction = 'right';
-                break;
-            case 40:
-                direction = 'down';
-                break;
-            default:
-                break;
-        }
+        return strategies[event.keyCode];
     }
 }
 
