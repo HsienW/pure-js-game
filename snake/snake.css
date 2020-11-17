@@ -1,24 +1,28 @@
 body {
-    margin: 0;
-}
-
-.map {
-    width: 800px;
-    height: 400px;
-    margin: auto;
+    width: 100vw;
+    height: 100vh;
     display: flex;
-    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    margin: 0;
+    background: #2c2c2c;
 }
 
-.box{
-    border: 1px solid black;
-    box-sizing: border-box;
+.game-map {
+    background-color: #cacaca;
+    width: 100vmin;
+    height: 100vmin;
+    display: grid;
+    grid-template-rows: repeat(21, 1fr);
+    grid-template-columns: repeat(21, 1fr);
 }
 
-.snake-body{
-    background-color: blue;
+.snake {
+    background-color: #386994;
+    border: .25vmin solid black;
 }
 
 .food {
-    background-color: green;
+    background-color: #ffa000;
+    border: .25vmin solid black;
 }
