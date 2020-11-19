@@ -8,7 +8,7 @@ body {
     background: #2c2c2c;
 }
 
-.game-map {
+#game-map {
     background-color: #cacaca;
     width: 100vmin;
     height: 100vmin;
