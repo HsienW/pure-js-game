@@ -1,9 +1,9 @@
 import {renderFood} from './food.js';
 
 let lastRenderTime = 0;
-const snakeSpeed = 1;
-const snakeBody = [{x: 11, y: 11}];
-const gameMap = document.getElementById('game-map')
+export const snakeSpeed = 1;
+export const snakeBody = [{x: 11, y: 11}];
+export const gameMap = document.getElementById('game-map')
 
 const renderSnake = (map) => {
     snakeBody.forEach((bodyItem) => {
