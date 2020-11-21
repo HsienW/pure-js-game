@@ -1,7 +1,8 @@
 import {randomLayoutPosition} from './layout.js';
-import {checkOnSnakeBody} from './util';
+import {checkOnSnakeBody} from './util.js';
+import {snakeBody, addSnakeBody} from './snake.js';
 
-let food = createFoodPosition();
+const addBodyRate = 5;
 
 const createFoodPosition = () => {
     let newFoodPosition;
@@ -11,9 +12,12 @@ const createFoodPosition = () => {
     return newFoodPosition;
 }
 
+let food = createFoodPosition();
+
 export const updateFood = () => {
-    if (checkOnSnakeBody(food)) {
-        // todo add check update food position
+    if (checkOnSnakeBody(food, snakeBody)) {
+        addSnakeBody(addBodyRate);
+        food = createFoodPosition();
     }
 }
 
