@@ -1,9 +1,15 @@
-import {renderFood} from './food.js';
+import {renderFood, updateFood} from './food.js';
 
 let lastRenderTime = 0;
+let newSnakeBody = 0;
+
 export const snakeSpeed = 1;
 export const snakeBody = [{x: 11, y: 11}];
 export const gameMap = document.getElementById('game-map')
+
+export const addSnakeBody = (addRate) => {
+    newSnakeBody += addRate
+};
 
 const renderSnake = (map) => {
     snakeBody.forEach((bodyItem) => {
@@ -21,6 +27,10 @@ const draw = () => {
     renderFood(gameMap);
 }
 
+const update = () => {
+    updateFood();
+}
+
 const main = (currentTime) => {
     window.requestAnimationFrame(main);
 
@@ -30,7 +40,8 @@ const main = (currentTime) => {
     }
 
     lastRenderTime = currentTime;
-    draw();
+    draw()
+    update();
 }
 
 window.requestAnimationFrame(main);
