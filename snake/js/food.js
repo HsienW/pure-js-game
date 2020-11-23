@@ -1,6 +1,6 @@
 import {randomLayoutPosition} from './layout.js';
 import {checkOnSnakeBody} from './util.js';
-import {snakeBody, addSnakeBody} from './snake.js';
+import {snakeBody, expandSnakeBody} from './snake.js';
 
 const addBodyRate = 5;
 
@@ -16,7 +16,7 @@ let food = createFoodPosition();
 
 export const updateFood = () => {
     if (checkOnSnakeBody(food, snakeBody)) {
-        addSnakeBody(addBodyRate);
+        expandSnakeBody(addBodyRate);
         food = createFoodPosition();
     }
 }
