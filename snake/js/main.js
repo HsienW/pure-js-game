@@ -1,7 +1,7 @@
 import {updateFood, renderFood} from './food.js';
 import {gameMap, snakeSpeed, updateSnake, renderSnake} from './snake.js';
 
-let lastRenderTime = 0;
+let lastRenderTime = 2;
 
 const draw = () => {
     gameMap.innerHTML = '';
