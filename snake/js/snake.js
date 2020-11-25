@@ -20,10 +20,9 @@ export const updateSnake = () => {
     addSnakeBody();
 
     const currentDirection = getDirection();
-    for (let i = snakeBody.length - 2; i >= 0; i--) {
-        snakeBody[i + 1] = {...snakeBody[i]};
-    }
-
+    // for (let i = snakeBody.length - 2; i >= 0; i--) {
+    //     snakeBody[i + 1] = {...snakeBody[i]};
+    // }
     snakeBody[0].x += currentDirection.x;
     snakeBody[0].y += currentDirection.y;
 }
