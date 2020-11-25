@@ -17,7 +17,7 @@ export const operation = {
 }
 
 window.addEventListener('keydown', event => {
-    direction = operation[event.key];
+    direction = operation[event.key]();
 });
 
 export function getDirection() {
