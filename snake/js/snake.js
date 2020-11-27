@@ -11,6 +11,7 @@ export const expandSnakeBody = (addRate) => {
 
 const addSnakeBody = () => {
     for (let i = 0; i < newSnakeBody; i++) {
+        console.log(snakeBody);
         snakeBody.push({...snakeBody[snakeBody.length - 1]});
     }
     newSnakeBody = 0;
@@ -20,9 +21,9 @@ export const updateSnake = () => {
     addSnakeBody();
 
     const currentDirection = getDirection();
-    // for (let i = snakeBody.length - 2; i >= 0; i--) {
-    //     snakeBody[i + 1] = {...snakeBody[i]};
-    // }
+    for (let i = snakeBody.length - 2; i >= 0; i--) {
+        snakeBody[i + 1] = {...snakeBody[i]};
+    }
     snakeBody[0].x += currentDirection.x;
     snakeBody[0].y += currentDirection.y;
 }
