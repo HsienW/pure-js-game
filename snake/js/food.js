@@ -2,7 +2,7 @@ import {randomLayoutPosition} from './layout.js';
 import {checkOnSnakeBody} from './util.js';
 import {snakeBody, expandSnakeBody} from './snake.js';
 
-const addBodyRate = 5;
+const addBodyRate = 1;
 
 const createFoodPosition = () => {
     let newFoodPosition;
