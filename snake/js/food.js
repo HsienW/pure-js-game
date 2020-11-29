@@ -2,6 +2,7 @@ import {randomLayoutPosition} from './layout.js';
 import {checkOnSnakeBody} from './util.js';
 import {snakeBody, expandSnakeBody} from './snake.js';
 
+// 吃到食物後, 蛇會增長的格子數
 const addBodyRate = 1;
 
 const createFoodPosition = () => {
@@ -15,6 +16,7 @@ const createFoodPosition = () => {
 let food = createFoodPosition();
 
 export const updateFood = () => {
+    // 檢查蛇是否有吃到食物
     if (checkOnSnakeBody(food, snakeBody)) {
         expandSnakeBody(addBodyRate);
         food = createFoodPosition();
