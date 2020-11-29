@@ -1,15 +1,22 @@
 import {getDirection} from './operation.js';
+import {checkOnSnakeBody} from './util.js';
 
 let newSnakeBody = 0;
 export const snakeSpeed = 1;
-export const snakeBody = [
-    {x: 1, y: 11},
-];
-export const gameMap = document.getElementById('game-map')
+export const snakeBody = [{x: 11, y: 11}];
+export const gameMap = document.getElementById('game-map');
+
+export const getSnakeHead = () => {
+    return snakeBody[0]
+}
+
+export const snakeBodyIntersection = () => {
+    return checkOnSnakeBody(snakeBody[0], { ignoreHead: true })
+}
 
 export const expandSnakeBody = (addRate) => {
     newSnakeBody += addRate;
-};
+}
 
 const addSnakeBody = () => {
     // 每次迴圈都會把 addRate 中最後一個 push 進 snakeBody
