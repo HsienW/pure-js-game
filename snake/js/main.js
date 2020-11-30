@@ -1,13 +1,13 @@
 import {updateFood, renderFood} from './food.js';
 import {gameMap, snakeSpeed, updateSnake, renderSnake, getSnakeHead, snakeBodyIntersection} from './snake.js';
-import {outsideLayout} from './layout.js';
+import {outsideMap} from './map.js';
 
 let gameOver = false;
 let lastRenderTime = 2;
 
 // 取當前的蛇頭座標是否超出邊界 & 蛇頭是否撞到自己的身體
 const checkGameOver = () => {
-    gameOver = outsideLayout(getSnakeHead()) || snakeBodyIntersection();
+    gameOver = outsideMap(getSnakeHead()) || snakeBodyIntersection();
 }
 
 const draw = () => {

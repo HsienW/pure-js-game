@@ -1,4 +1,4 @@
-import {randomLayoutPosition} from './layout.js';
+import {randomMapPosition} from './map.js';
 import {checkOnSnakeBody} from './util.js';
 import {snakeBody, expandSnakeBody} from './snake.js';
 
@@ -8,7 +8,7 @@ const addBodyRate = 1;
 const createFoodPosition = () => {
     let newFoodPosition;
     while (newFoodPosition === null || newFoodPosition === undefined) {
-        newFoodPosition = randomLayoutPosition();
+        newFoodPosition = randomMapPosition();
     }
     return newFoodPosition;
 }
