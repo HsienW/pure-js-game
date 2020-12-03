@@ -44,7 +44,11 @@ window.addEventListener('keydown', event => {
     direction = operation[event.key]();
 });
 
-export function getDirection() {
+const getDirection = () => {
     lastDirection = direction
     return lastDirection;
+}
+
+export {
+    getDirection
 }
