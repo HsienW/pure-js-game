@@ -1,5 +1,5 @@
 export const gameMap = document.getElementById('game-map');
-const mapSize = 21;
+const mapSize = 41;
 
 // 亂數隨機產生在 21 * 21 範圍內的一組 x y 座標
 const randomMapPosition = () => {
