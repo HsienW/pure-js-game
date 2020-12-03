@@ -21,7 +21,7 @@ const draw = () => {
 }
 
 const update = () => {
-    food.updateFood();
+    food.updateFood(snakeA);
     snakeA.updateSnake(getDirection);
     snakeB.updateSnake(getDirection);
     checkGameOver();

@@ -18,7 +18,7 @@ Food.prototype.createFoodPosition = function () {
 
 Food.prototype.updateFood = function (snake) {
     // 檢查蛇是否有吃到食物
-    if (checkOnSnakeBody(snake.snakeBody)) {
+    if (checkOnSnakeBody(this.foodPosition, snake.snakeBody)) {
         // 有吃到的話就增長蛇身體, 並且重新產生食物
         snake.expandSnakeBody(this.addBodyRate);
         this.foodPosition = this.createFoodPosition();
