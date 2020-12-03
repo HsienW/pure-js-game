@@ -12,7 +12,7 @@ Snake.prototype.getSnakeHead = function () {
 }
 
 Snake.prototype.snakeBodyIntersection = function (checkOnSnakeBody, ignoreHead) {
-    return checkOnSnakeBody(this.snakeBody[0], ignoreHead);
+    return checkOnSnakeBody(this.snakeBody[0], this.snakeBody, ignoreHead);
 }
 
 Snake.prototype.expandSnakeBody = function (addRate) {
@@ -27,8 +27,8 @@ Snake.prototype.addSnakeBody = function () {
     this.newSnakeBody = 0;
 }
 
-Snake.prototype.updateSnake = function (addSnakeBody, getDirection) {
-    addSnakeBody();
+Snake.prototype.updateSnake = function (getDirection) {
+    this.addSnakeBody();
     // 取得蛇頭位子的 x y 座標
     const currentDirection = getDirection();
 
@@ -44,12 +44,12 @@ Snake.prototype.updateSnake = function (addSnakeBody, getDirection) {
     this.snakeBody[0].y += currentDirection.y;
 }
 
-Snake.prototype.renderSnake = function (map) {
+Snake.prototype.renderSnake = function (map, snakeGamerStyle) {
     this.snakeBody.forEach((bodyItem) => {
         const snakeElement = document.createElement('div');
         snakeElement.style.gridRowStart = bodyItem.y;
         snakeElement.style.gridColumnStart = bodyItem.x;
-        snakeElement.classList.add('snake');
+        snakeElement.classList.add(snakeGamerStyle);
         map.appendChild(snakeElement);
     })
 }
