@@ -1,11 +1,14 @@
 import {randomMapPosition} from './map.js';
 import {checkOnSnakeBody} from './util.js';
-import {snakeA} from './snake.js';
+// import {snakeA} from './snake.js';
 
-// 吃到食物後, 蛇身體會增長的格子數
-const addBodyRate = 1;
+const Food = function (foodPosition, addBodyRate) {
+    this.foodPosition = foodPosition;
+    // 吃到食物後, 蛇身體會增長的格子數
+    this.addBodyRate = addBodyRate;
+}
 
-const createFoodPosition = () => {
+Food.prototype.createFoodPosition = function () {
     let newFoodPosition;
     while (newFoodPosition === null || newFoodPosition === undefined) {
         newFoodPosition = randomMapPosition();
@@ -13,26 +16,63 @@ const createFoodPosition = () => {
     return newFoodPosition;
 }
 
-let food = createFoodPosition();
-
-const updateFood = () => {
+Food.prototype.updateFood = function (snake) {
     // 檢查蛇是否有吃到食物
-    if (checkOnSnakeBody(food, snakeA.snakeBody)) {
+    if (checkOnSnakeBody(snake.snakeBody)) {
         // 有吃到的話就增長蛇身體, 並且重新產生食物
-        snakeA.expandSnakeBody(addBodyRate);
-        food = createFoodPosition();
+        snake.expandSnakeBody(this.addBodyRate);
+        this.foodPosition = this.createFoodPosition();
     }
 }
 
-const renderFood = (map) => {
+Food.prototype.renderFood = function (map) {
     const foodElement = document.createElement('div');
-    foodElement.style.gridRowStart = food.y;
-    foodElement.style.gridColumnStart = food.x;
+    foodElement.style.gridRowStart = this.foodPosition.y;
+    foodElement.style.gridColumnStart = this.foodPosition.x;
     foodElement.classList.add('food');
     map.appendChild(foodElement);
 }
 
+const initFoodPosition = randomMapPosition();
+const food = new Food(initFoodPosition, 1);
+
 export {
-    updateFood,
-    renderFood
+    food
 }
+
+
+
+// 吃到食物後, 蛇身體會增長的格子數
+// const addBodyRate = 1;
+//
+// const createFoodPosition = () => {
+//     let newFoodPosition;
+//     while (newFoodPosition === null || newFoodPosition === undefined) {
+//         newFoodPosition = randomMapPosition();
+//     }
+//     return newFoodPosition;
+// }
+//
+// let food = createFoodPosition();
+//
+// const updateFood = () => {
+//     // 檢查蛇是否有吃到食物
+//     if (checkOnSnakeBody(food, snakeA.snakeBody)) {
+//         // 有吃到的話就增長蛇身體, 並且重新產生食物
+//         snakeA.expandSnakeBody(addBodyRate);
+//         food = createFoodPosition();
+//     }
+// }
+//
+// const renderFood = (map) => {
+//     const foodElement = document.createElement('div');
+//     foodElement.style.gridRowStart = food.y;
+//     foodElement.style.gridColumnStart = food.x;
+//     foodElement.classList.add('food');
+//     map.appendChild(foodElement);
+// }
+//
+// export {
+//     updateFood,
+//     renderFood
+// }

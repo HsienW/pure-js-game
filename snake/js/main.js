@@ -1,9 +1,9 @@
-import {updateFood, renderFood} from './food.js';
+import {food} from './food.js';
 import {snakeA, snakeB} from './snake.js';
-// import {snakeSpeed, updateSnake, renderSnake, getSnakeHead, snakeBodyIntersection} from './snake.js';
 import {gameMap, outsideMap} from './map.js';
 import {getDirection} from './operation.js';
 import {checkOnSnakeBody} from './util.js';
+// import {snakeSpeed, updateSnake, renderSnake, getSnakeHead, snakeBodyIntersection} from './snake.js';
 
 let gameOver = false;
 let lastRenderTime = 2;
@@ -17,11 +17,11 @@ const draw = () => {
     gameMap.innerHTML = '';
     snakeA.renderSnake(gameMap, 'snake-gamer-a');
     snakeB.renderSnake(gameMap, 'snake-gamer-b');
-    renderFood(gameMap);
+    food.renderFood(gameMap);
 }
 
 const update = () => {
-    updateFood();
+    food.updateFood();
     snakeA.updateSnake(getDirection);
     snakeB.updateSnake(getDirection);
     checkGameOver();
