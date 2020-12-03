@@ -2,19 +2,18 @@ import {getDirection} from './operation.js';
 import {checkOnSnakeBody} from './util.js';
 
 let newSnakeBody = 0;
-export const snakeSpeed = 1;
-export const snakeBody = [{x: 11, y: 11}];
-export const gameMap = document.getElementById('game-map');
+const snakeSpeed = 1;
+const snakeBody = [{x: 11, y: 11}];
 
-export const getSnakeHead = () => {
+const getSnakeHead = () => {
     return snakeBody[0];
 }
 
-export const snakeBodyIntersection = () => {
+const snakeBodyIntersection = () => {
     return checkOnSnakeBody(snakeBody[0], { ignoreHead: true });
 }
 
-export const expandSnakeBody = (addRate) => {
+const expandSnakeBody = (addRate) => {
     newSnakeBody += addRate;
 }
 
@@ -26,7 +25,7 @@ const addSnakeBody = () => {
     newSnakeBody = 0;
 }
 
-export const updateSnake = () => {
+const updateSnake = () => {
     addSnakeBody();
     // 取得蛇頭位子的 x y 座標
     const currentDirection = getDirection();
@@ -43,7 +42,7 @@ export const updateSnake = () => {
     snakeBody[0].y += currentDirection.y;
 }
 
-export const renderSnake = (map) => {
+const renderSnake = (map) => {
     snakeBody.forEach((bodyItem) => {
         const snakeElement = document.createElement('div');
         snakeElement.style.gridRowStart = bodyItem.y;
@@ -51,4 +50,14 @@ export const renderSnake = (map) => {
         snakeElement.classList.add('snake');
         map.appendChild(snakeElement);
     })
+}
+
+export {
+    snakeSpeed,
+    snakeBody,
+    getSnakeHead,
+    snakeBodyIntersection,
+    expandSnakeBody,
+    updateSnake,
+    renderSnake
 }

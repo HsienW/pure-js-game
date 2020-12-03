@@ -1,6 +1,6 @@
 import {updateFood, renderFood} from './food.js';
-import {gameMap, snakeSpeed, updateSnake, renderSnake, getSnakeHead, snakeBodyIntersection} from './snake.js';
-import {outsideMap} from './map.js';
+import {snakeSpeed, updateSnake, renderSnake, getSnakeHead, snakeBodyIntersection} from './snake.js';
+import {gameMap, outsideMap} from './map.js';
 
 let gameOver = false;
 let lastRenderTime = 2;

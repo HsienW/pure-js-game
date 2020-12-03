@@ -15,7 +15,7 @@ const createFoodPosition = () => {
 
 let food = createFoodPosition();
 
-export const updateFood = () => {
+const updateFood = () => {
     // 檢查蛇是否有吃到食物
     if (checkOnSnakeBody(food, snakeBody)) {
         // 有吃到的話就增長蛇身體, 並且重新產生食物
@@ -24,10 +24,15 @@ export const updateFood = () => {
     }
 }
 
-export const renderFood = (map) => {
+const renderFood = (map) => {
     const foodElement = document.createElement('div');
     foodElement.style.gridRowStart = food.y;
     foodElement.style.gridColumnStart = food.x;
     foodElement.classList.add('food');
     map.appendChild(foodElement);
+}
+
+export {
+    updateFood,
+    renderFood
 }
