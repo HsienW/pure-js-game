@@ -1,14 +1,19 @@
 // import {getDirection} from './operation.js';
 // import {checkOnSnakeBody} from './util.js';
 
-const Snake = function (speed, initBodyPosition) {
+const Snake = function (speed, initBodyPosition, direction) {
     this.newSnakeBody = 0;
     this.snakeSpeed = speed;
     this.snakeBody = initBodyPosition;
+    this.direction = direction;
 }
 
 Snake.prototype.getSnakeHead = function () {
     return this.snakeBody[0];
+}
+
+Snake.prototype.getDirection = function () {
+    return this.direction;
 }
 
 Snake.prototype.snakeBodyIntersection = function (checkOnSnakeBody, ignoreHead) {
@@ -27,10 +32,10 @@ Snake.prototype.addSnakeBody = function () {
     this.newSnakeBody = 0;
 }
 
-Snake.prototype.updateSnake = function (getDirection) {
+Snake.prototype.updateSnake = function () {
     this.addSnakeBody();
     // 取得蛇頭位子的 x y 座標
-    const currentDirection = getDirection();
+    const currentDirection = this.getDirection();
 
     // 因為蛇頭會往前移一格, 所以身體也要跟著移一格
     for (let i = this.snakeBody.length - 2; i >= 0; i--) {
@@ -54,8 +59,8 @@ Snake.prototype.renderSnake = function (map, snakeGamerStyle) {
     })
 }
 
-const snakeA = new Snake(1, [{x: 11, y: 11}]);
-const snakeB = new Snake(1, [{x: 31, y: 31}]);
+const snakeA = new Snake(1, [{x: 11, y: 11}], {x: 0, y: 0});
+const snakeB = new Snake(1, [{x: 31, y: 31}], {x: 0, y: 0});
 
 export {
     snakeA,

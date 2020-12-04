@@ -1,54 +1,108 @@
-let direction = {x: 0, y: 0};
-let lastDirection = {x: 0, y: 0};
-
 // const Operation = function () {
-//     this.direction = function (operationStrategy) {
-//         return operationStrategy.operation();
+//     this.runDirection = function (operation) {
+//         return operation.operation();
 //     }
 // }
 //
-// const ArrowUp = function () {
-//     this.operation = function () {
-//         if (lastDirection.y !== 0) return;
+// const Up = function () {
+//     this.operation = function (direction) {
+//         if (direction.y !== 0) return;
 //         return {x: 0, y: -1};
 //     }
 // }
 //
-// const ArrowDown = function () {
-//     this.operation = function () {
-//         if (lastDirection.y !== 0) return;
+// const Down = function () {
+//     this.operation = function (direction) {
+//         if (direction.y !== 0) return;
 //         return {x: 0, y: 1};
 //     }
 // }
+//
+// const Left = function () {
+//     this.operation = function (direction) {
+//         if (direction.x !== 0) return;
+//         return {x: -1, y: 0};
+//     }
+// }
+//
+// const Right = function () {
+//     this.operation = function (direction) {
+//         if (direction.x !== 0) return;
+//         return {x: 1, y: 0};
+//     }
+// }
 
-export const operation = {
-    'ArrowUp': () => {
-        if (lastDirection.y !== 0) return;
+// let direction = {x: 0, y: 0};
+// let lastDirection = {x: 0, y: 0};
+
+const operation = {
+    up: (direction) => {
+        if (direction.y !== 0) return;
         return {x: 0, y: -1};
     },
-    'ArrowDown': () => {
-        if (lastDirection.y !== 0) return;
+    down: (direction) => {
+        if (direction.y !== 0) return;
         return {x: 0, y: 1};
     },
-    'ArrowLeft': () => {
-        if (lastDirection.x !== 0) return;
+    left: (direction) => {
+        if (direction.x !== 0) return;
         return {x: -1, y: 0};
     },
-    'ArrowRight': () => {
-        if (lastDirection.x !== 0) return;
+    right: (direction) => {
+        if (direction.x !== 0) return;
         return {x: 1, y: 0};
     }
 }
 
+const gamerAOperation = {
+    'ArrowUp': (direction) => {
+        operation.up(direction);
+    },
+    'ArrowDown': (direction) => {
+        operation.down(direction);
+    },
+    'ArrowLeft': (direction) => {
+        operation.left(direction);
+    },
+    'ArrowRight': (direction) => {
+        operation.right(direction);
+    }
+}
+
+const gamerBOperation = {
+    'KeyW': (direction) => {
+        operation.up(direction);
+    },
+    'KeyS': (direction) => {
+        operation.down(direction);
+    },
+    'KeyA': (direction) => {
+        operation.left(direction);
+    },
+    'KeyD': (direction) => {
+        operation.right(direction);
+    }
+}
+
+
 window.addEventListener('keydown', event => {
-    direction = operation[event.key]();
+
+    console.log('=================================');
+    console.log(event.code);
+
+    // snakeGamerA[event.code](operation);
+    // direction = operation[event.key]();
+
+    // operation.runDirection()
+
+    // sortProgram.runSort(new HeapSort())
 });
 
-const getDirection = () => {
-    lastDirection = direction
-    return lastDirection;
-}
-
-export {
-    getDirection
-}
+// const getDirection = () => {
+//     lastDirection = direction
+//     return lastDirection;
+// }
+//
+// export {
+//     getDirection
+// }
