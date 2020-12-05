@@ -54,22 +54,22 @@ const operation = {
     }
 }
 
-const gamerAOperation = {
-    'ArrowUp': (direction) => {
+const aGamerOperation = {
+    ArrowUp: (direction) => {
         operation.up(direction);
     },
-    'ArrowDown': (direction) => {
+    ArrowDown: (direction) => {
         operation.down(direction);
     },
-    'ArrowLeft': (direction) => {
+    ArrowLeft: (direction) => {
         operation.left(direction);
     },
-    'ArrowRight': (direction) => {
+    ArrowRight: (direction) => {
         operation.right(direction);
     }
 }
 
-const gamerBOperation = {
+const bGamerOperation = {
     'KeyW': (direction) => {
         operation.up(direction);
     },
@@ -84,19 +84,10 @@ const gamerBOperation = {
     }
 }
 
-
-window.addEventListener('keydown', event => {
-
-    console.log('=================================');
-    console.log(event.code);
-
-    // snakeGamerA[event.code](operation);
-    // direction = operation[event.key]();
-
-    // operation.runDirection()
-
-    // sortProgram.runSort(new HeapSort())
-});
+export {
+    aGamerOperation,
+    bGamerOperation
+}
 
 // const getDirection = () => {
 //     lastDirection = direction
