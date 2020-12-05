@@ -1,9 +1,11 @@
+// import {getDirection} from './operation.js';
+// import {snakeSpeed, updateSnake, renderSnake, getSnakeHead, snakeBodyIntersection} from './snake.js';
+
 import {food} from './food.js';
 import {snakeA, snakeB} from './snake.js';
 import {gameMap, outsideMap} from './map.js';
-import {getDirection} from './operation.js';
 import {checkOnSnakeBody} from './util.js';
-// import {snakeSpeed, updateSnake, renderSnake, getSnakeHead, snakeBodyIntersection} from './snake.js';
+import {aGamerOperation, bGamerOperation} from './operation.js';
 
 let gameOver = false;
 let lastRenderTime = 2;
@@ -22,8 +24,8 @@ const draw = () => {
 
 const update = () => {
     food.updateFood(snakeA);
-    snakeA.updateSnake(getDirection);
-    snakeB.updateSnake(getDirection);
+    snakeA.updateSnake();
+    snakeB.updateSnake();
     checkGameOver();
 }
 
@@ -45,5 +47,9 @@ const main = (currentTime) => {
     draw()
     update();
 }
+
+snakeA.initListenerOperation();
+snakeA.setGamerOperation(aGamerOperation);
+// snakeB.initListenerOperation();
 
 window.requestAnimationFrame(main);

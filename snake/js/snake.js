@@ -6,6 +6,19 @@ const Snake = function (speed, initBodyPosition, direction) {
     this.snakeSpeed = speed;
     this.snakeBody = initBodyPosition;
     this.direction = direction;
+    this.gamerOperation = null;
+    this.setGamerOperation = function (gamerOperation) {
+        this.gamerOperation = gamerOperation;
+    };
+    this.initListenerOperation = function () {
+        window.addEventListener('keydown', event => {
+            // todo should fix gamerOperation is empty object
+            console.log(event.code);
+            console.log(JSON.stringify(this.gamerOperation));
+            console.log(JSON.stringify(this.gamerOperation.ArrowLeft));
+            this.gamerOperation['ArrowLef'](this.direction);
+        });
+    }
 }
 
 Snake.prototype.getSnakeHead = function () {
@@ -58,6 +71,7 @@ Snake.prototype.renderSnake = function (map, snakeGamerStyle) {
         map.appendChild(snakeElement);
     })
 }
+
 
 const snakeA = new Snake(1, [{x: 11, y: 11}], {x: 0, y: 0});
 const snakeB = new Snake(1, [{x: 31, y: 31}], {x: 0, y: 0});
