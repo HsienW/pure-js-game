@@ -1,22 +1,16 @@
 // import {getDirection} from './operation.js';
 // import {checkOnSnakeBody} from './util.js';
 
-const Snake = function (speed, initBodyPosition, direction) {
+import {aGamerOperation} from './operation.js';
+
+const Snake = function (speed, initBodyPosition, operation) {
     this.newSnakeBody = 0;
     this.snakeSpeed = speed;
     this.snakeBody = initBodyPosition;
-    this.direction = direction;
-    this.gamerOperation = null;
-    this.setGamerOperation = function (gamerOperation) {
-        this.gamerOperation = gamerOperation;
-    };
+    this.snakeOperation = operation;
     this.initListenerOperation = function () {
         window.addEventListener('keydown', event => {
-            // todo should fix gamerOperation is empty object
-            console.log(event.code);
-            console.log(JSON.stringify(this.gamerOperation));
-            console.log(JSON.stringify(this.gamerOperation.ArrowLeft));
-            this.gamerOperation['ArrowLef'](this.direction);
+            this.snakeOperation.gamerOperation[event.code]();
         });
     }
 }
@@ -26,7 +20,7 @@ Snake.prototype.getSnakeHead = function () {
 }
 
 Snake.prototype.getDirection = function () {
-    return this.direction;
+    return this.snakeOperation.getCurrentDirection();
 }
 
 Snake.prototype.snakeBodyIntersection = function (checkOnSnakeBody, ignoreHead) {
@@ -73,8 +67,8 @@ Snake.prototype.renderSnake = function (map, snakeGamerStyle) {
 }
 
 
-const snakeA = new Snake(1, [{x: 11, y: 11}], {x: 0, y: 0});
-const snakeB = new Snake(1, [{x: 31, y: 31}], {x: 0, y: 0});
+const snakeA = new Snake(1, [{x: 11, y: 11}], aGamerOperation);
+const snakeB = new Snake(1, [{x: 31, y: 31}]);
 
 export {
     snakeA,
