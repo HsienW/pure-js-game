@@ -1,12 +1,15 @@
-const Operation = function (direction, gamerOperation) {
+const Operation = function (direction) {
     this.direction = direction;
-    this.gamerOperation = gamerOperation;
+    this.doUp = function () {
+        if (this.direction.y !== 0) return;
+        this.direction = {x: 0, y: -1};
+    };
 }
 
-Operation.prototype.doUp = function (direction) {
-    if (direction.y !== 0) return;
-    return {x: 0, y: -1};
-};
+// Operation.prototype.doUp = function (direction) {
+//     if (direction.y !== 0) return;
+//     return {x: 0, y: -1};
+// };
 
 Operation.prototype.doDown = function (direction) {
     if (direction.y !== 0) return;
@@ -77,9 +80,17 @@ Operation.prototype.getCurrentDirection = function () {
 //     }
 // }
 
+
+const GamerOperation = function (gamerOperation) {
+    this.gamerOperation = gamerOperation;
+}
+
+GamerOperation.prototype = new Operation({x: 0, y: 0});
+
 const oneOperation = {
     ArrowUp: function () {
-        this.doUp(this.direction);
+        console.log(JSON.stringify(this));
+        this.doUp();
     },
     ArrowDown: function () {
         this.doDown(this.direction);
@@ -92,7 +103,7 @@ const oneOperation = {
     }
 }
 
-const aGamerOperation = new Operation({x: 0, y: 0}, oneOperation);
+const aGamerOperation = new GamerOperation(oneOperation);
 
 export {
     aGamerOperation

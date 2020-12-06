@@ -10,7 +10,9 @@ const Snake = function (speed, initBodyPosition, operation) {
     this.snakeOperation = operation;
     this.initListenerOperation = function () {
         window.addEventListener('keydown', event => {
-            this.snakeOperation.gamerOperation[event.code]();
+            if(event.code === 'ArrowUp') {
+                this.snakeOperation.gamerOperation[event.code](this);
+            }
         });
     }
 }
@@ -65,7 +67,6 @@ Snake.prototype.renderSnake = function (map, snakeGamerStyle) {
         map.appendChild(snakeElement);
     })
 }
-
 
 const snakeA = new Snake(1, [{x: 11, y: 11}], aGamerOperation);
 const snakeB = new Snake(1, [{x: 31, y: 31}]);
