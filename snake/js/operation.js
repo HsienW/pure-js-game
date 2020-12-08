@@ -37,46 +37,25 @@ const aGamerOperation = {
     }
 }
 
-export {
-    aGamerOperation
+const bGamerOperation = {
+    KeyW: function (direction) {
+        return baseOperation.doUp(direction);
+    },
+    KeyS: function (direction) {
+        return baseOperation.doDown(direction);
+    },
+    KeyA: function (direction) {
+        return baseOperation.doLeft(direction);
+    },
+    KeyD: function (direction) {
+        return baseOperation.doRight(direction);
+    }
 }
 
-// const baseOperation = new Operation();
-// const aGamerOperation = new GamerOperation(oneOperation);
-//
-// export {
-//     aGamerOperation
-// }
-
-// const aGamerOperation = {
-//     ArrowUp: (direction) => {
-//         operation.up(direction);
-//     },
-//     ArrowDown: (direction) => {
-//         operation.down(direction);
-//     },
-//     ArrowLeft: (direction) => {
-//         operation.left(direction);
-//     },
-//     ArrowRight: (direction) => {
-//         operation.right(direction);
-//     }
-// }
-//
-// const bGamerOperation = {
-//     'KeyW': (direction) => {
-//         operation.up(direction);
-//     },
-//     'KeyS': (direction) => {
-//         operation.down(direction);
-//     },
-//     'KeyA': (direction) => {
-//         operation.left(direction);
-//     },
-//     'KeyD': (direction) => {
-//         operation.right(direction);
-//     }
-// }
+export {
+    aGamerOperation,
+    bGamerOperation
+}
 
 // export {
 //     aGamerOperation,
