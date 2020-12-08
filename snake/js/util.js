@@ -10,7 +10,14 @@ const checkOnSnakeBody = (position, bodyData, {ignoreHead = false} = {}) => {
     })
 }
 
+const checkKeydownIsExistOperation = (keydownEventCode, operationObject) => {
+    return Object.keys(operationObject).some((operationItem) => {
+        return operationItem === keydownEventCode;
+    });
+}
+
 export {
     checkEqualPositions,
-    checkOnSnakeBody
+    checkOnSnakeBody,
+    checkKeydownIsExistOperation
 }
