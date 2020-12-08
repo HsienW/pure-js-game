@@ -3,11 +3,13 @@ const checkEqualPositions = (positionA, positionB) => {
 }
 
 // ignoreHead 用來忽略 bodyData 中拿到自己蛇頭的卡控
-const checkOnSnakeBody = (position, bodyData, {ignoreHead = false} = {}) => {
-    return bodyData.some((bodyItem, index) => {
-        if (ignoreHead && index === 0) return false
-        return checkEqualPositions(bodyItem, position)
-    })
+const checkOnSnakeBody = (position, snakeList, {ignoreHead = false} = {}) => {
+    return snakeList.filter((snakeItem) => {
+        return snakeItem.snakeBody.some((snakeBodyItem, index) => {
+            if (ignoreHead && index === 0) return false
+            return checkEqualPositions(snakeBodyItem, position);
+        })
+    });
 }
 
 const checkKeydownIsExistOperation = (keydownEventCode, operationObject) => {

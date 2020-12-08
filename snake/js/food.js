@@ -16,11 +16,13 @@ Food.prototype.createFoodPosition = function () {
     return newFoodPosition;
 }
 
-Food.prototype.updateFood = function (snake) {
+Food.prototype.updateFood = function (snakeList) {
     // 檢查蛇是否有吃到食物
-    if (checkOnSnakeBody(this.foodPosition, snake.snakeBody)) {
+    let isExpandSnake = checkOnSnakeBody(this.foodPosition, snakeList);
+    if (isExpandSnake.length !== 0) {
         // 有吃到的話就增長蛇身體, 並且重新產生食物
-        snake.expandSnakeBody(this.addBodyRate);
+        isExpandSnake[0].expandSnakeBody(this.addBodyRate);
+        isExpandSnake.length = 0;
         this.foodPosition = this.createFoodPosition();
     }
 }
@@ -39,7 +41,6 @@ const food = new Food(initFoodPosition, 1);
 export {
     food
 }
-
 
 
 // 吃到食物後, 蛇身體會增長的格子數
