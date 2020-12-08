@@ -1,4 +1,4 @@
-import {aGamerOperation, bGamerOperation} from './operation.js';
+import {aSnakeOperation, bSnakeOperation} from './operation.js';
 import {checkKeydownIsExistOperation} from './util.js';
 
 const Snake = function (speed, initBodyPosition, direction, operation) {
@@ -67,8 +67,8 @@ Snake.prototype.renderSnake = function (map, snakeGamerStyle) {
     })
 }
 
-const snakeA = new Snake(1, [{x: 11, y: 11}], {x: 0, y: 0}, aGamerOperation);
-const snakeB = new Snake(1, [{x: 31, y: 31}], {x: 0, y: 0}, bGamerOperation);
+const snakeA = new Snake(1, [{x: 11, y: 11}], {x: 0, y: 0}, aSnakeOperation);
+const snakeB = new Snake(1, [{x: 31, y: 31}], {x: 0, y: 0}, bSnakeOperation);
 
 export {
     snakeA,

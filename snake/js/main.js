@@ -17,8 +17,8 @@ const snakeList = [snakeA, snakeB];
 
 const draw = () => {
     gameMap.innerHTML = '';
-    snakeA.renderSnake(gameMap, 'snake-gamer-a');
-    snakeB.renderSnake(gameMap, 'snake-gamer-b');
+    snakeA.renderSnake(gameMap, 'a-snake-gamer');
+    snakeB.renderSnake(gameMap, 'b-snake-gamer');
     food.renderFood(gameMap);
 }
 

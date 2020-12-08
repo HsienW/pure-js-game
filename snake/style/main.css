@@ -17,12 +17,12 @@ body {
     grid-template-columns: repeat(41, 1fr);
 }
 
-.snake-gamer-a {
+.a-snake-gamer {
     background-color: #386994;
     border: .25vmin solid black;
 }
 
-.snake-gamer-b {
+.b-snake-gamer {
     background-color: #f55733;
     border: .25vmin solid black;
 }

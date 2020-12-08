@@ -22,7 +22,7 @@ Operation.prototype.doRight = function (direction) {
 
 const baseOperation = new Operation();
 
-const aGamerOperation = {
+const aSnakeOperation = {
     ArrowUp: function (direction) {
         return baseOperation.doUp(direction);
     },
@@ -37,7 +37,7 @@ const aGamerOperation = {
     }
 }
 
-const bGamerOperation = {
+const bSnakeOperation = {
     KeyW: function (direction) {
         return baseOperation.doUp(direction);
     },
@@ -53,8 +53,8 @@ const bGamerOperation = {
 }
 
 export {
-    aGamerOperation,
-    bGamerOperation
+    aSnakeOperation,
+    bSnakeOperation
 }
 
 // export {
