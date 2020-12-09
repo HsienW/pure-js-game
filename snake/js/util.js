@@ -1,8 +1,6 @@
+import {mapSize} from './map.js';
+
 // 亂數隨機產生在 mapSize * mapSize 範圍內的一組 x y 座標
-import {map} from './map.js';
-
-const mapSize = map.getMapSize();
-
 const getRandomPosition = () => {
     return {
         x: Math.floor(Math.random() * mapSize) + 1,
@@ -10,9 +8,9 @@ const getRandomPosition = () => {
     }
 }
 
-const checkOutsideMap = (position) => {
-    return (position.x < 1 || position.x > mapSize || position.y < 1 || position.y > mapSize);
-}
+// const checkOutsideMap = (position) => {
+//     return (position.x < 1 || position.x > mapSize || position.y < 1 || position.y > mapSize);
+// }
 
 const checkEqualPositions = (positionA, positionB) => {
     return positionA.x === positionB.x && positionA.y === positionB.y
@@ -36,7 +34,7 @@ const checkKeydownIsExistOperation = (keydownEventCode, operationObject) => {
 
 export {
     getRandomPosition,
-    checkOutsideMap,
+    // checkOutsideMap,
     checkEqualPositions,
     checkOnSnakeBody,
     checkKeydownIsExistOperation
