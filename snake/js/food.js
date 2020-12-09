@@ -22,9 +22,9 @@ Food.prototype.updateFood = function (snakeList) {
     if (isExpandSnake.length !== 0) {
         // 有吃到的話就增長蛇身體, 並且重新產生食物
         isExpandSnake[0].expandSnakeBody(this.addBodyRate);
-        isExpandSnake.length = 0;
         this.foodPosition = this.createFoodPosition();
     }
+    isExpandSnake.length = 0;
 }
 
 Food.prototype.renderFood = function (map) {
