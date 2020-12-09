@@ -1,19 +1,21 @@
-export const gameMap = document.getElementById('game-map');
-const mapSize = 41;
+// export const gameMap = document.getElementById('game-map');
+// const mapSize = 41;
 
-// 亂數隨機產生在 21 * 21 範圍內的一組 x y 座標
-const randomMapPosition = () => {
-    return {
-        x: Math.floor(Math.random() * mapSize) + 1,
-        y: Math.floor(Math.random() * mapSize) + 1
+const Map = function (elementId, mapSize) {
+    this.gameMap = document.getElementById(elementId);
+    this.mapSize = mapSize;
+    this.getMapSize = function () {
+        return this.mapSize;
     }
 }
 
-const outsideMap = (position) => {
-    return (position.x < 1 || position.x > mapSize || position.y < 1 || position.y > mapSize);
-}
+const map = new Map('game-map', 41);
 
 export {
-    randomMapPosition,
-    outsideMap
+    map
 }
+
+// export {
+//     randomMapPosition,
+//     outsideMap
+// }

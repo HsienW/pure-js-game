@@ -3,7 +3,7 @@
 // import {checkOnSnakeBody} from './util.js';
 import {snakeA, snakeB} from './snake.js';
 import {foodA, foodB} from './food.js';
-import {gameMap, outsideMap} from './map.js';
+import {map} from './map.js';
 
 let gameOver = false;
 let lastRenderTime = 2;
@@ -16,18 +16,18 @@ let lastRenderTime = 2;
 const snakeList = [snakeA, snakeB];
 
 const render = () => {
-    gameMap.innerHTML = '';
-    snakeA.renderSnake(gameMap, 'a-snake-body');
-    snakeB.renderSnake(gameMap, 'b-snake-body');
-    foodA.renderFood(gameMap);
-    foodB.renderFood(gameMap);
+    map.gameMap.innerHTML = '';
+    foodA.renderFood(map.gameMap);
+    foodB.renderFood(map.gameMap);
+    snakeA.renderSnake(map.gameMap, 'a-snake-body');
+    snakeB.renderSnake(map.gameMap, 'b-snake-body');
 }
 
 const update = () => {
-    snakeA.updateSnake();
-    snakeB.updateSnake();
     foodA.updateFood(snakeList);
     foodB.updateFood(snakeList);
+    snakeA.updateSnake();
+    snakeB.updateSnake();
     // checkGameOver();
 }
 
