@@ -35,11 +35,15 @@ Food.prototype.renderFood = function (map) {
     map.appendChild(foodElement);
 }
 
-const initFoodPosition = randomMapPosition();
-const food = new Food(initFoodPosition, 1);
+const foodAInitPosition = randomMapPosition();
+const foodBInitPosition = randomMapPosition();
+
+const foodA = new Food(foodAInitPosition, 1);
+const foodB = new Food(foodBInitPosition, 1);
 
 export {
-    food
+    foodA,
+    foodB
 }
 
 
