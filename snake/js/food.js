@@ -1,5 +1,4 @@
-import {randomMapPosition} from './map.js';
-import {checkOnSnakeBody} from './util.js';
+import {getRandomPosition, checkOnSnakeBody} from './util.js';
 // import {snakeA} from './snake.js';
 
 const Food = function (foodPosition, addBodyRate) {
@@ -11,7 +10,7 @@ const Food = function (foodPosition, addBodyRate) {
 Food.prototype.createFoodPosition = function () {
     let newFoodPosition;
     while (newFoodPosition === null || newFoodPosition === undefined) {
-        newFoodPosition = randomMapPosition();
+        newFoodPosition = getRandomPosition();
     }
     return newFoodPosition;
 }
@@ -35,8 +34,8 @@ Food.prototype.renderFood = function (map) {
     map.appendChild(foodElement);
 }
 
-const foodAInitPosition = randomMapPosition();
-const foodBInitPosition = randomMapPosition();
+const foodAInitPosition = getRandomPosition();
+const foodBInitPosition = getRandomPosition();
 
 const foodA = new Food(foodAInitPosition, 1);
 const foodB = new Food(foodBInitPosition, 1);
@@ -53,7 +52,7 @@ export {
 // const createFoodPosition = () => {
 //     let newFoodPosition;
 //     while (newFoodPosition === null || newFoodPosition === undefined) {
-//         newFoodPosition = randomMapPosition();
+//         newFoodPosition = getRandomPosition();
 //     }
 //     return newFoodPosition;
 // }
