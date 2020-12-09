@@ -1,22 +1,22 @@
 const Operation = function () {}
 
 Operation.prototype.doUp = function (direction) {
-    if (direction.y !== 0) return;
+    // if (direction.y !== 0) return;
     return {x: 0, y: -1};
 };
 
 Operation.prototype.doDown = function (direction) {
-    if (direction.y !== 0) return;
+    // if (direction.y !== 0) return;
     return {x: 0, y: 1};
 };
 
 Operation.prototype.doLeft = function (direction) {
-    if (direction.x !== 0) return;
+    // if (direction.x !== 0) return;
     return {x: -1, y: 0};
 };
 
 Operation.prototype.doRight = function (direction) {
-    if (direction.x !== 0) return;
+    // if (direction.x !== 0) return;
     return {x: 1, y: 0};
 };
 
