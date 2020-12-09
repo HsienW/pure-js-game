@@ -1,6 +1,3 @@
-// export const gameMap = document.getElementById('game-map');
-// const mapSize = 41;
-
 const Map = function (elementId, mapSize) {
     this.gameMap = document.getElementById(elementId);
     this.mapSize = mapSize;
@@ -10,12 +7,9 @@ const Map = function (elementId, mapSize) {
 }
 
 const map = new Map('game-map', 41);
+const mapSize = map.getMapSize();
 
 export {
-    map
+    map,
+    mapSize
 }
-
-// export {
-//     randomMapPosition,
-//     outsideMap
-// }

@@ -1,3 +1,5 @@
+/** Strategy Pattern **/
+
 const Operation = function () {}
 
 Operation.prototype.doUp = function (direction) {
