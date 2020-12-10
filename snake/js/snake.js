@@ -24,9 +24,9 @@ Snake.prototype.getDirection = function () {
     return this.snakeDirection;
 }
 
-Snake.prototype.snakeBodyIntersection = function (checkOnSnakeBody, ignoreHead) {
-    return checkOnSnakeBody(this.snakeBody[0], this.snakeBody, ignoreHead);
-}
+// Snake.prototype.snakeBodyIntersection = function (checkOnSnakeBody, ignoreHead) {
+//     return checkOnSnakeBody(this.snakeBody[0], this.snakeBody, ignoreHead);
+// }
 
 Snake.prototype.expandSnakeBody = function (addRate) {
     this.newSnakeBody += addRate;

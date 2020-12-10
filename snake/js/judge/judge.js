@@ -24,12 +24,27 @@ Judge.prototype.passJudge = function (...args) {
     return result;
 }
 
-const snakeJudgeHandler= (snake) => {
+
+// const httpErrorHandler = (error) => {
+//     const chainRequest400 = new Chain(response400);
+//     const chainRequest401 = new Chain(response401);
+//     const chainRequest403 = new Chain(response403);
+//     const chainRequest404 = new Chain(response404);
+//
+//     chainRequest400
+//         .setSuccessor(chainRequest401)
+//         .setSuccessor(chainRequest403)
+//         .setSuccessor(chainRequest404);
+//
+//     chainRequest400.passRequest(error);
+// };
+
+const snakeJudgeHandler= (position) => {
     const snakeOutsideMapRule = new Judge(outsideMapRule);
 
     // snakeOutsideMapRule.setNextJudgeHandler(bodyIntersectionRule);
 
-    snakeOutsideMapRule.passJudge(snake);
+    snakeOutsideMapRule.passJudge(position);
 };
 
 export {

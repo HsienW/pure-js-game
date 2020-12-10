@@ -16,6 +16,7 @@ const checkEqualPositions = (positionA, positionB) => {
     return positionA.x === positionB.x && positionA.y === positionB.y
 }
 
+// this.snakeBody[0], this.snakeBody, ignoreHead
 // ignoreHead 用來忽略 bodyData 中拿到自己蛇頭的卡控
 const checkOnSnakeBody = (position, snakeList, {ignoreHead = false} = {}) => {
     return snakeList.filter((snakeItem) => {
