@@ -4,6 +4,7 @@
 import {snakeA, snakeB} from './snake.js';
 import {foodA, foodB} from './food.js';
 import {map} from './map.js';
+import {snakeJudgeHandler} from './judge/judge.js';
 
 let gameOver = false;
 let lastRenderTime = 2;
@@ -28,6 +29,8 @@ const update = () => {
     foodB.updateFood(snakeList);
     snakeA.updateSnake();
     snakeB.updateSnake();
+    console.log(snakeJudgeHandler(snakeA.getSnakeHead()));
+    snakeJudgeHandler(snakeB);
     // checkGameOver();
 }
 
