@@ -3,6 +3,7 @@ import {checkKeydownIsExistOperation} from './util.js';
 
 const Snake = function (speed, initBodyPosition, direction, operation) {
     this.newSnakeBody = 0;
+    this.snakeGameOver = false;
     this.snakeSpeed = speed;
     this.snakeBody = initBodyPosition;
     this.snakeDirection = direction;
@@ -16,11 +17,15 @@ const Snake = function (speed, initBodyPosition, direction, operation) {
     }
 }
 
+Snake.prototype.checkSnakeGameOver = function (judgeHandler, judgeCondition) {
+    return judgeHandler(judgeCondition);
+}
+
 Snake.prototype.getSnakeHead = function () {
     return this.snakeBody[0];
 }
 
-Snake.prototype.getDirection = function () {
+Snake.prototype.getSnakeDirection = function () {
     return this.snakeDirection;
 }
 
@@ -43,7 +48,7 @@ Snake.prototype.addSnakeBody = function () {
 Snake.prototype.updateSnake = function () {
     this.addSnakeBody();
     // 取得蛇頭位子的 x y 座標
-    const currentDirection = this.getDirection();
+    const currentDirection = this.getSnakeDirection();
 
     // 因為蛇頭會往前移一格, 所以身體也要跟著移一格
     for (let i = this.snakeBody.length - 2; i >= 0; i--) {
