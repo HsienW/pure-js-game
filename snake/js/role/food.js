@@ -44,39 +44,3 @@ export {
     foodA,
     foodB
 }
-
-
-// 吃到食物後, 蛇身體會增長的格子數
-// const addBodyRate = 1;
-//
-// const createFoodPosition = () => {
-//     let newFoodPosition;
-//     while (newFoodPosition === null || newFoodPosition === undefined) {
-//         newFoodPosition = getRandomPosition();
-//     }
-//     return newFoodPosition;
-// }
-//
-// let food = createFoodPosition();
-//
-// const updateFood = () => {
-//     // 檢查蛇是否有吃到食物
-//     if (checkOnSnakeBody(food, snakeA.snakeBody)) {
-//         // 有吃到的話就增長蛇身體, 並且重新產生食物
-//         snakeA.expandSnakeBody(addBodyRate);
-//         food = createFoodPosition();
-//     }
-// }
-//
-// const renderFood = (map) => {
-//     const foodElement = document.createElement('div');
-//     foodElement.style.gridRowStart = food.y;
-//     foodElement.style.gridColumnStart = food.x;
-//     foodElement.classList.add('food');
-//     map.appendChild(foodElement);
-// }
-//
-// export {
-//     updateFood,
-//     renderFood
-// }
