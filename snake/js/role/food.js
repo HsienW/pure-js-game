@@ -1,4 +1,4 @@
-import {getRandomPosition, checkOnSnakeBody} from './util.js';
+import {getRandomPosition, checkOnSnakeBody} from '../common/util.js';
 // import {snakeA} from './snake.js';
 
 const Food = function (foodPosition, addBodyRate) {
