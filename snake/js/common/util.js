@@ -1,4 +1,4 @@
-import {mapSize} from './map.js';
+import {mapSize} from '../role/map.js';
 
 // 亂數隨機產生在 mapSize * mapSize 範圍內的一組 x y 座標
 const getRandomPosition = () => {

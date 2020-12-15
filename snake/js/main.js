@@ -1,9 +1,9 @@
 // import {getDirection} from './operation.js';
 // import {snakeSpeed, updateSnake, renderSnake, getSnakeHead, snakeBodyIntersection} from './snake.js';
 // import {checkOnSnakeBody} from './util.js';
-import {snakeA, snakeB} from './snake.js';
-import {foodA, foodB} from './food.js';
-import {map} from './map.js';
+import {snakeA, snakeB} from './role/snake.js';
+import {foodA, foodB} from './role/food.js';
+import {map} from './role/map.js';
 import {snakeJudgeHandler} from './judge/judge.js';
 
 let gameOver = false;

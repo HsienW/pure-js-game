@@ -1,5 +1,5 @@
-import {aSnakeOperation, bSnakeOperation} from './operation.js';
-import {checkKeydownIsExistOperation} from './util.js';
+import {aSnakeOperation, bSnakeOperation} from '../behavior/operation.js';
+import {checkKeydownIsExistOperation} from '../common/util.js';
 
 const Snake = function (speed, initBodyPosition, direction, operation) {
     this.newSnakeBody = 0;
