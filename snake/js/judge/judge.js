@@ -13,6 +13,13 @@ Judge.prototype.receiveSnakeWin = function (snake) {
 
 Judge.prototype.receiveSnakeLose = function (snake) {
 };
+
+const snakeJudge = new Judge();
+
+export {
+    snakeJudge
+}
+
 //
 // Judge.prototype.setNextJudgeHandler = function (nextHandler) {
 //     this.nextJudgeHandler = nextHandler;
