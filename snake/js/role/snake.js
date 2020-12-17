@@ -1,6 +1,6 @@
 import {aSnakeOperation, bSnakeOperation} from '../behavior/operation.js';
 import {checkKeydownIsExistOperation} from '../common/util.js';
-import {snakeJudge} from '../judge/judge.js';
+import {gameJudge} from '../judge/judge.js';
 
 const Snake = function (snakeName, snakeEnemies, initBodyPosition, direction, operation, snakeStyleName) {
     this.newSnakeBody = 0;
@@ -96,7 +96,8 @@ Snake.prototype.renderSnake = function (map) {
 
 const snakeFactory = function (snakeName, snakeEnemies, initBodyPosition, direction, operation, snakeStyleName) {
     let newSnake = new Snake(snakeName, snakeEnemies, initBodyPosition, direction, operation, snakeStyleName);
-    snakeJudge.addSnake(newSnake);
+    gameJudge.addSnake(newSnake);
+    return newSnake;
 }
 
 const snakeA = new Snake(['snakeA', {x: 31, y: 31}], {x: 0, y: 0}, aSnakeOperation, 'a-snake-body');
