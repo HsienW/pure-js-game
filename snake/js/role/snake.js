@@ -1,9 +1,12 @@
 import {aSnakeOperation, bSnakeOperation} from '../behavior/operation.js';
 import {checkKeydownIsExistOperation} from '../common/util.js';
 
-const Snake = function (initBodyPosition, direction, operation, snakeStyleName) {
+const Snake = function (snakeName, snakeEnemies, initBodyPosition, direction, operation, snakeStyleName) {
     this.newSnakeBody = 0;
+    this.snakeGameWin = false;
     this.snakeGameOver = false;
+    this.snakeName = false;
+    this.snakeEnemies = snakeEnemies;
     this.snakeBody = initBodyPosition;
     this.snakeDirection = direction;
     this.snakeOperation = operation;
@@ -19,10 +22,6 @@ const Snake = function (initBodyPosition, direction, operation, snakeStyleName) 
 
 Snake.prototype.snakeSpeed = 1;
 
-Snake.prototype.checkSnakeGameOver = function (judgeHandler, judgeCondition) {
-    return judgeHandler(judgeCondition);
-}
-
 Snake.prototype.getSnakeHead = function () {
     return this.snakeBody[0];
 }
@@ -30,6 +29,22 @@ Snake.prototype.getSnakeHead = function () {
 Snake.prototype.getSnakeDirection = function () {
     return this.snakeDirection;
 }
+
+Snake.prototype.snakeWin = function (judge) {
+    this.snakeGameWin = true;
+    this.snakeGameOver = true;
+    judge.receiveSnakeWin(this);
+}
+
+Snake.prototype.snakeLose = function (judge) {
+    this.snakeGameWin = false;
+    this.snakeGameOver = true;
+    judge.receiveSnakeLose(this);
+}
+
+// Snake.prototype.checkSnakeGameOver = function (judgeHandler, judgeCondition) {
+//     return judgeHandler(judgeCondition);
+// }
 
 // Snake.prototype.snakeBodyIntersection = function (checkOnSnakeBody, ignoreHead) {
 //     return checkOnSnakeBody(this.snakeBody[0], this.snakeBody, ignoreHead);
@@ -78,8 +93,8 @@ Snake.prototype.renderSnake = function (map) {
     })
 }
 
-const snakeA = new Snake([{x: 31, y: 31}], {x: 0, y: 0}, aSnakeOperation, 'a-snake-body');
-const snakeB = new Snake([{x: 11, y: 11}], {x: 0, y: 0}, bSnakeOperation, 'b-snake-body');
+const snakeA = new Snake(['snakeA', {x: 31, y: 31}], {x: 0, y: 0}, aSnakeOperation, 'a-snake-body');
+const snakeB = new Snake(['snakeB', {x: 11, y: 11}], {x: 0, y: 0}, bSnakeOperation, 'b-snake-body');
 
 export {
     Snake,

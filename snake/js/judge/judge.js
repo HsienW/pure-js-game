@@ -1,11 +1,18 @@
-/** Chain of Responsibility Pattern **/
+/** Mediator Pattern **/
 
-// import {outsideMapRule} from './judge-rules.js';
-//
-// const Judge = function (currentJudgeHandler) {
-//     this.currentJudgeHandler = currentJudgeHandler;
-//     this.nextJudgeHandler = null;
-// }
+const Judge = function () {
+    this.allSnake = {};
+}
+
+Judge.prototype.addSnake = function (snake) {
+    this.allSnake[snake.snakeName] = snake || {};
+};
+
+Judge.prototype.receiveSnakeWin = function (snake) {
+};
+
+Judge.prototype.receiveSnakeLose = function (snake) {
+};
 //
 // Judge.prototype.setNextJudgeHandler = function (nextHandler) {
 //     this.nextJudgeHandler = nextHandler;
