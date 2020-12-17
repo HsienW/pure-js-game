@@ -14,10 +14,10 @@ Judge.prototype.receiveSnakeWin = function (snake) {
 Judge.prototype.receiveSnakeLose = function (snake) {
 };
 
-const snakeJudge = new Judge();
+const gameJudge = new Judge();
 
 export {
-    snakeJudge
+    gameJudge
 }
 
 //
