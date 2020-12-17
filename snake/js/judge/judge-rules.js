@@ -1,14 +1,14 @@
-import {mapSize} from '../role/map.js';
+// import {mapSize} from '../role/map.js';
 
-const outsideMapRule = (position) => {
-    return (position.x < 1 || position.x > mapSize || position.y < 1 || position.y > mapSize) ? 'game-over' : 'next';
-}
-
-// const bodyCollideRule = (checkOnSnakeBody, ignoreHead) => {
-//     return checkOnSnakeBody(this.snakeBody[0], this.snakeBody, ignoreHead);
+// const outsideMapRule = (position) => {
+//     return (position.x < 1 || position.x > mapSize || position.y < 1 || position.y > mapSize) ? 'game-over' : 'next';
 // }
-
-export {
-    outsideMapRule,
-    // bodyIntersectionRule
-}
+//
+// // const bodyCollideRule = (checkOnSnakeBody, ignoreHead) => {
+// //     return checkOnSnakeBody(this.snakeBody[0], this.snakeBody, ignoreHead);
+// // }
+//
+// export {
+//     outsideMapRule,
+//     // bodyIntersectionRule
+// }

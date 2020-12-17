@@ -47,6 +47,10 @@ Snake.prototype.addSnakeBody = function () {
     this.newSnakeBody = 0;
 }
 
+Snake.prototype.clearSnakeBody = function () {
+    this.snakeBody = [{x: -1, y: -1}];
+}
+
 Snake.prototype.updateSnake = function () {
     this.addSnakeBody();
     // 取得蛇頭位子的 x y 座標

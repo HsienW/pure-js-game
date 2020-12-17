@@ -20,13 +20,15 @@ let lastRenderTime = 2;
 //     this.snakeList = snakeList;
 // }
 //
-// Main.prototype.checkGameOver = function () {
+// Main.prototype.initAnimationFrame = function () {
+//     window.requestAnimationFrame(this.animationControl);
 // }
 //
-// Main.prototype.renderRole = function () {
-//     this.map.gameMap.innerHTML = '';
-//     this.foodList.forEach(foodItem => foodItem.renderFood(this.map.gameMap));
-//     this.snakeList.forEach(snakeItem => snakeItem.renderSnake(this.map.gameMap));
+// Main.prototype.initRoleListener = function () {
+//     this.snakeList.forEach(snakeItem => snakeItem.initListenerOperation());
+// }
+//
+// Main.prototype.checkGameOver = function () {
 // }
 //
 // Main.prototype.updateRole = function () {
@@ -35,17 +37,22 @@ let lastRenderTime = 2;
 //     this.checkGameOver();
 // }
 //
-// Main.prototype.initRoleListener = function () {
-//     this.snakeList.forEach(snakeItem => snakeItem.initListenerOperation());
+// Main.prototype.renderRole = function () {
+//     this.map.gameMap.innerHTML = '';
+//     this.foodList.forEach(foodItem => foodItem.renderFood(this.map.gameMap));
+//     this.snakeList.forEach(snakeItem => snakeItem.renderSnake(this.map.gameMap));
 // }
 //
-// Main.prototype.animationControl = function (currentTime) {
-//     if (this.allGameOver) {
-//         if (confirm('Is Game Over. Press ok to restart!')) {}
-//         return;
-//     }
+// Main.prototype.animationControl = function () {
 //
-//     window.requestAnimationFrame(main);
+//     console.log(this);
+//
+//     // if (this.allGameOver) {
+//     //     if (confirm('Is Game Over. Press ok to restart!')) {}
+//     //     return;
+//     // }
+//
+//     window.requestAnimationFrame(this.animationControl);
 //
 //     const secondRender = (this.currentRenderTime - this.lastRenderTime) / 1000;
 //     if (secondRender < 1 / Snake.prototype.snakeSpeed) {
@@ -53,14 +60,17 @@ let lastRenderTime = 2;
 //     }
 //
 //     this.lastRenderTime = this.currentRenderTime;
-//     this.renderRole()
+//     this.renderRole();
 //     this.updateRole();
 // }
 //
 // const mainAnimationControl = new Main(1, 2, map, foodList, snakeList);
 //
-// mainAnimationControl.initRoleListener()
-// window.requestAnimationFrame(mainAnimationControl.animationControl);
+// mainAnimationControl.initRoleListener();
+// mainAnimationControl.initAnimationFrame();
+
+
+
 
 
 
@@ -92,6 +102,7 @@ const update = () => {
 const main = (currentTime) => {
 
     if (gameOver) {
+        snakeA.clearSnakeBody();
         if (confirm('Is Game Over. Press ok to restart!')) {}
         return;
     }
@@ -104,7 +115,7 @@ const main = (currentTime) => {
     }
 
     lastRenderTime = currentTime;
-    render()
+    render();
     update();
 }
 
