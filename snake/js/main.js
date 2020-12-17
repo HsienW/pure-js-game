@@ -76,8 +76,9 @@ let lastRenderTime = 2;
 
 // 取當前的蛇頭座標是否超出邊界 & 蛇頭是否撞到自己的身體
 const checkGameOver = () => {
-    gameOver = snakeA.checkSnakeGameOver(snakeJudgeHandler, snakeA.getSnakeHead())
-        || snakeB.checkSnakeGameOver(snakeJudgeHandler, snakeB.getSnakeHead())
+    // gameOver = snakeA.checkSnakeGameOver(snakeJudgeHandler, snakeA.getSnakeHead())
+    //     || snakeB.checkSnakeGameOver(snakeJudgeHandler, snakeB.getSnakeHead())
+
     // gameOver = outsideMap(snakeA.getSnakeHead()) || snakeA.snakeBodyIntersection(checkOnSnakeBody,{ ignoreHead: true });
 }
 
