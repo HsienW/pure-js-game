@@ -1,5 +1,7 @@
 /** Mediator Pattern **/
 
+import {ruleCheckerHandler} from '../checker/checker.js';
+
 const Judge = function () {
     this.allSnake = {};
 }
@@ -8,11 +10,19 @@ Judge.prototype.addSnake = function (snake) {
     this.allSnake[snake.snakeName] = snake || {};
 };
 
-Judge.prototype.receiveSnakeWin = function (snake) {
+
+Judge.prototype.checkSnakeSelfGameOver = function (snake) {
+    const snakeHeadPosition = snake.getSnakeHead();
+    return ruleCheckerHandler(snakeHeadPosition);
 };
 
-Judge.prototype.receiveSnakeLose = function (snake) {
-};
+// Judge.prototype.receiveSnakeWin = function (snake) {
+// };
+//
+// Judge.prototype.receiveSnakeLose = function (snake) {
+//     console.log('查看查看查看查看查看查看查看查看');
+//     console.log(snake);
+// };
 
 const gameJudge = new Judge();
 
