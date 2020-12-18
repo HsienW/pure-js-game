@@ -27,9 +27,9 @@ Checker.prototype.passCheck = function (...args) {
 const ruleCheckerHandler= (position) => {
     const checkOutsideMapRule = new Checker(outsideMapRule);
 
-    // snakeOutsideMapRule.setNextJudgeHandler(bodyIntersectionRule);
+    // snakeOutsideMapRule.setNextCheckHandler(bodyIntersectionRule);
 
-    return checkOutsideMapRule.passJudge(position);
+    return checkOutsideMapRule.passCheck(position);
 };
 
 export {
