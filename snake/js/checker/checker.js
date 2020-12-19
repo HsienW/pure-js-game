@@ -1,6 +1,7 @@
 /** Chain of Responsibility Pattern **/
 
-import {outsideMapRule} from './checker-rules.js';
+import {eatFoodRule} from './check-snake-expand-rules.js';
+import {outsideMapRule} from './check-snake-game-over-rules.js';
 
 const Checker = function (currentJudgeHandler) {
     this.currentCheckHandler = currentJudgeHandler;
@@ -24,14 +25,19 @@ Checker.prototype.passCheck = function (...args) {
     return result;
 }
 
-const ruleCheckerHandler= (position) => {
+const expandRuleChecker = function (foodPosition, snakeList) {
+    const checkEatFoodRule = new Checker(eatFoodRule);
+    return checkEatFoodRule.passCheck(foodPosition, snakeList);
+};
+
+const gameOverRuleChecker= function (position) {
     const checkOutsideMapRule = new Checker(outsideMapRule);
-
     // snakeOutsideMapRule.setNextCheckHandler(bodyIntersectionRule);
-
     return checkOutsideMapRule.passCheck(position);
 };
 
+
 export {
-    ruleCheckerHandler
+    expandRuleChecker,
+    gameOverRuleChecker
 }

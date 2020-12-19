@@ -15,6 +15,21 @@ Food.prototype.createFoodPosition = function () {
     return newFoodPosition;
 }
 
+Food.prototype.getFoodPosition = function () {
+    return this.foodPosition;
+}
+
+// Food.prototype.updateFood = function (snakeList) {
+//     // 檢查蛇是否有吃到食物
+//     let isExpandSnake = checkOnSnakeBody(this.foodPosition, snakeList);
+//     if (isExpandSnake.length !== 0) {
+//         // 有吃到的話就增長蛇身體, 並且重新產生食物
+//         isExpandSnake[0].expandSnakeBody(this.addBodyRate);
+//         this.foodPosition = this.createFoodPosition();
+//     }
+//     isExpandSnake.length = 0;
+// }
+
 Food.prototype.updateFood = function (snakeList) {
     // 檢查蛇是否有吃到食物
     let isExpandSnake = checkOnSnakeBody(this.foodPosition, snakeList);
