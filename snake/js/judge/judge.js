@@ -1,6 +1,6 @@
 /** Mediator Pattern **/
 
-import {gameOverRuleChecker} from '../checker/checker.js';
+import {expandRuleChecker, gameOverRuleChecker} from '../checker/checker.js';
 
 const Judge = function () {
     this.allSnake = [];
@@ -14,6 +14,10 @@ Judge.prototype.addSnake = function (snake) {
 
 Judge.prototype.getAllSnake = function () {
     return this.allSnake;
+};
+
+Judge.prototype.checkSnakeSelfExpand = function (foodPosition, snakeList) {
+    return expandRuleChecker(foodPosition, snakeList);
 };
 
 Judge.prototype.checkSnakeSelfGameOver = function (snake) {
