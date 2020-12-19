@@ -17,7 +17,18 @@ Judge.prototype.getAllSnake = function () {
 };
 
 Judge.prototype.checkSnakeSelfExpand = function (foodPosition, snakeList) {
-    return expandRuleChecker(foodPosition, snakeList);
+    const isExpandSnake = expandRuleChecker(foodPosition, snakeList);
+    // 執行正確的蛇身狀態改變
+    // if(isExpandSnake.length !== 0) {
+    //     isExpandSnake[0].expandSnakeBody(this.addBodyRate);
+    // }
+    // return expandRuleChecker(foodPosition, snakeList);
+
+//     if (isExpandSnake.length !== 0) {
+// //         // 有吃到的話就增長蛇身體, 並且重新產生食物
+// //         isExpandSnake[0].expandSnakeBody(this.addBodyRate);
+// //         this.foodPosition = this.createFoodPosition();
+// //     }
 };
 
 Judge.prototype.checkSnakeSelfGameOver = function (snake) {
