@@ -8,10 +8,6 @@ const getRandomPosition = () => {
     }
 }
 
-// const checkOutsideMap = (position) => {
-//     return (position.x < 1 || position.x > mapSize || position.y < 1 || position.y > mapSize);
-// }
-
 const checkEqualPositions = (positionA, positionB) => {
     return positionA.x === positionB.x && positionA.y === positionB.y
 }
@@ -35,7 +31,6 @@ const checkKeydownIsExistOperation = (keydownEventCode, operationObject) => {
 
 export {
     getRandomPosition,
-    // checkOutsideMap,
     checkEqualPositions,
     checkOnSnakeBody,
     checkKeydownIsExistOperation

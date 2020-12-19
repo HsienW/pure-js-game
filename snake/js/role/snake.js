@@ -2,10 +2,11 @@ import {aSnakeOperation, bSnakeOperation} from '../behavior/operation.js';
 import {checkKeydownIsExistOperation} from '../common/util.js';
 import {gameJudge} from '../judge/judge.js';
 
-const Snake = function (snakeName, initBodyPosition, direction, operation, snakeStyleName) {
+const Snake = function (snakeSpeed, snakeName, initBodyPosition, direction, operation, snakeStyleName) {
     this.newSnakeBody = 0;
     this.snakeGameWin = false;
     this.snakeGameOver = false;
+    this.snakeSpeed = snakeSpeed;
     this.snakeName = snakeName;
     // this.snakeEnemies = snakeEnemies;
     this.snakeBody = initBodyPosition;
@@ -20,8 +21,6 @@ const Snake = function (snakeName, initBodyPosition, direction, operation, snake
         });
     }
 }
-
-Snake.prototype.snakeSpeed = 1;
 
 Snake.prototype.getSnakeHead = function () {
     return this.snakeBody[0];
@@ -98,14 +97,14 @@ Snake.prototype.renderSnake = function (map) {
     })
 }
 
-const snakeFactory = function (snakeName, initBodyPosition, direction, operation, snakeStyleName) {
-    let newSnake = new Snake(snakeName, initBodyPosition, direction, operation, snakeStyleName);
+const snakeFactory = function (snakeSpeed, snakeName, initBodyPosition, direction, operation, snakeStyleName) {
+    let newSnake = new Snake(snakeSpeed, snakeName, initBodyPosition, direction, operation, snakeStyleName);
     gameJudge.addSnake(newSnake);
     return newSnake;
 }
 
-const snakeA = snakeFactory('snakeA', [{x: 31, y: 31}], {x: 0, y: 0}, aSnakeOperation, 'a-snake-body');
-const snakeB = snakeFactory('snakeB', [{x: 11, y: 11}], {x: 0, y: 0}, bSnakeOperation, 'b-snake-body');
+const snakeA = snakeFactory(1, 'snakeA', [{x: 31, y: 31}], {x: 0, y: 0}, aSnakeOperation, 'a-snake-body');
+const snakeB = snakeFactory(1, 'snakeB', [{x: 11, y: 11}], {x: 0, y: 0}, bSnakeOperation, 'b-snake-body');
 
 export {
     snakeA,
