@@ -5,6 +5,7 @@ import {snakeA, snakeB} from './role/snake.js';
 import {foodA, foodB} from './role/food.js';
 import {map} from './role/map.js';
 import {gameJudge} from './judge/judge.js';
+import {getRandomPosition} from "./common/util";
 
 const foodList = [foodA, foodB];
 const snakeList = [snakeA, snakeB];
@@ -91,10 +92,10 @@ const render = () => {
 }
 
 const update = () => {
-    foodA.updateFood(snakeList);
-    foodB.updateFood(snakeList);
-    snakeA.updateSnake();
-    snakeB.updateSnake();
+    foodA.updateFoodPosition(snakeList);
+    foodB.updateFoodPosition(snakeList);
+    snakeA.updateSnakePosition();
+    snakeB.updateSnakePosition();
     // snakeA.checkSnakeGameOver();
     // snakeB.checkSnakeGameOver();
     console.log(snakeA.checkSelf(gameJudge));

@@ -1,5 +1,5 @@
 import {aSnakeOperation, bSnakeOperation} from '../behavior/operation.js';
-import {checkKeydownIsExistOperation} from '../common/util.js';
+import {checkKeydownIsExistOperation, getRandomPosition} from '../common/util.js';
 import {gameJudge} from '../judge/judge.js';
 
 const Snake = function (snakeSpeed, snakeName, initBodyPosition, direction, operation, snakeStyleName) {
@@ -70,7 +70,7 @@ Snake.prototype.clearSnakeBody = function () {
     this.snakeBody = [{x: -1, y: -1}];
 }
 
-Snake.prototype.updateSnake = function () {
+Snake.prototype.updateSnakePosition = function () {
     this.addSnakeBody();
     // 取得蛇頭位子的 x y 座標
     const currentDirection = this.getSnakeDirection();

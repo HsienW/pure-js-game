@@ -12,6 +12,15 @@ const checkEqualPositions = (positionA, positionB) => {
     return positionA.x === positionB.x && positionA.y === positionB.y
 }
 
+// const checkFoodOnSnakeBody = (food, snakeList) => {
+// 回傳吃到的蛇跟那顆食物
+//     return snakeList.filter((snakeItem) => {
+//         return snakeItem.snakeBody.some((snakeBodyItem) => {
+//             return checkEqualPositions(snakeBodyItem, food);
+//         })
+//     });
+// }
+
 // this.snakeBody[0], this.snakeBody, ignoreHead
 // ignoreHead 用來忽略 bodyData 中拿到自己蛇頭的卡控
 const checkOnSnakeBody = (position, snakeList, {ignoreHead = false} = {}) => {
