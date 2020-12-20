@@ -30,7 +30,7 @@ const expandRuleChecker = function (allFood, allSnake) {
     return checkEatFoodRule.passCheck(allFood, allSnake);
 };
 
-const gameOverRuleChecker= function (position) {
+const gameOverRuleChecker = function (position) {
     const checkOutsideMapRule = new Checker(outsideMapRule);
     // snakeOutsideMapRule.setNextCheckHandler(bodyIntersectionRule);
     return checkOutsideMapRule.passCheck(position);
