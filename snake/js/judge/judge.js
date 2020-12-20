@@ -53,7 +53,7 @@ Judge.prototype.checkSnakeSelfGameOver = function (allSnake) {
     }
 };
 
-Judge.prototype.doRenderData = function (data, renderMethodName, map) {
+Judge.prototype.callRenderMethod = function (data, renderMethodName, map) {
     for (let i = 0; i > data.length; i++) {
         data[i][renderMethodName](map);
     }
@@ -71,8 +71,8 @@ Judge.prototype.doGameRender = function () {
     let gameMap = map.gameMap;
     let gameFoodsData = this.getAllFood();
     let gameSnakesData = this.getAllSnake();
-    this.doRenderData(gameFoodsData, 'renderFood', gameMap);
-    this.doRenderData(gameSnakesData, 'renderSnake', gameMap);
+    this.callRenderMethod(gameFoodsData, 'renderFood', gameMap);
+    this.callRenderMethod(gameSnakesData, 'renderSnake', gameMap);
 };
 
 const gameJudge = new Judge();
