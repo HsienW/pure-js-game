@@ -15,8 +15,8 @@ Food.prototype.createFoodPosition = function () {
     return newFoodPosition;
 }
 
-Food.prototype.getFoodPosition = function () {
-    return this.foodPosition;
+Food.prototype.getFoodAddBodyRate = function () {
+    return this.addBodyRate;
 }
 
 // Food.prototype.updateFoodPosition = function () {

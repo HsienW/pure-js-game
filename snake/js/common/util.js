@@ -12,19 +12,24 @@ const checkEqualPositions = (positionA, positionB) => {
     return positionA.x === positionB.x && positionA.y === positionB.y
 }
 
-// const checkFoodOnSnakeBody = (food, snakeList) => {
+const checkFoodOnSnakeBody = (allFood, allSnake) => {
 // 回傳吃到的蛇跟那顆食物
-//     return snakeList.filter((snakeItem) => {
-//         return snakeItem.snakeBody.some((snakeBodyItem) => {
-//             return checkEqualPositions(snakeBodyItem, food);
-//         })
-//     });
-// }
+    return allSnake.filter((snakeItem) => {
+        return allFood.some((foodItem) => {
+            if (checkEqualPositions(snakeItem, foodItem)) {
+                return {
+                    snake: snakeItem,
+                    food: foodItem
+                }
+            }
+        });
+    });
+}
 
 // this.snakeBody[0], this.snakeBody, ignoreHead
 // ignoreHead 用來忽略 bodyData 中拿到自己蛇頭的卡控
-const checkOnSnakeBody = (position, snakeList, {ignoreHead = false} = {}) => {
-    return snakeList.filter((snakeItem) => {
+const checkOnSnakeBody = (position, allSnake, {ignoreHead = false} = {}) => {
+    return allSnake.filter((snakeItem) => {
         return snakeItem.snakeBody.some((snakeBodyItem, index) => {
             if (ignoreHead && index === 0) return false
             return checkEqualPositions(snakeBodyItem, position);
@@ -42,5 +47,6 @@ export {
     getRandomPosition,
     checkEqualPositions,
     checkOnSnakeBody,
+    checkFoodOnSnakeBody,
     checkKeydownIsExistOperation
 }
