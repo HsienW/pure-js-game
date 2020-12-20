@@ -1,8 +1,8 @@
-import {checkOnSnakeBody} from '../common/util.js';
+import {checkFoodOnSnakeBody} from '../common/util.js';
 
-const eatFoodRule = function (foodPosition, snakeList) {
-    const eatFoodSnake = checkOnSnakeBody(foodPosition, snakeList);
-    return eatFoodSnake ? eatFoodSnake : 'next';
+const eatFoodRule = function (allFood, allSnake) {
+    const eatFoodInfo = checkFoodOnSnakeBody(allFood, allSnake);
+    return eatFoodInfo ? eatFoodInfo : 'next';
 }
 
 export {

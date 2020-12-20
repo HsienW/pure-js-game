@@ -25,9 +25,9 @@ Checker.prototype.passCheck = function (...args) {
     return result;
 }
 
-const expandRuleChecker = function (foodPosition, snakeList) {
+const expandRuleChecker = function (allFood, allSnake) {
     const checkEatFoodRule = new Checker(eatFoodRule);
-    return checkEatFoodRule.passCheck(foodPosition, snakeList);
+    return checkEatFoodRule.passCheck(allFood, allSnake);
 };
 
 const gameOverRuleChecker= function (position) {
@@ -35,7 +35,6 @@ const gameOverRuleChecker= function (position) {
     // snakeOutsideMapRule.setNextCheckHandler(bodyIntersectionRule);
     return checkOutsideMapRule.passCheck(position);
 };
-
 
 export {
     expandRuleChecker,
