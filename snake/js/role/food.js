@@ -1,4 +1,5 @@
 import {getRandomPosition, checkOnSnakeBody} from '../common/util.js';
+import {gameJudge} from "../judge/judge";
 // import {snakeA} from './snake.js';
 
 const Food = function (foodPosition, addBodyRate) {
@@ -47,7 +48,9 @@ const foodAInitPosition = getRandomPosition();
 const foodBInitPosition = getRandomPosition();
 
 const snakeFactory = function (foodPosition, addBodyRate) {
-    return new Food(foodPosition, addBodyRate);
+    const newFood = new Food(foodPosition, addBodyRate);
+    gameJudge.addFood(newFood);
+    return newFood;
 }
 
 const foodA = snakeFactory(foodAInitPosition, 1);
