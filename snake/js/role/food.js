@@ -1,5 +1,6 @@
 import {getRandomPosition, checkOnSnakeBody} from '../common/util.js';
 import {gameJudge} from '../judge/judge.js';
+import {map} from './map.js';
 
 const Food = function (foodPosition, addBodyRate) {
     this.foodPosition = foodPosition;
@@ -39,12 +40,12 @@ Food.prototype.updateFoodPosition = function () {
 //     isExpandSnake.length = 0;
 // }
 
-Food.prototype.renderFood = function (map) {
+Food.prototype.renderFood = function () {
     const foodElement = document.createElement('div');
     foodElement.style.gridRowStart = this.foodPosition.y;
     foodElement.style.gridColumnStart = this.foodPosition.x;
     foodElement.classList.add('food');
-    map.appendChild(foodElement);
+    map.gameMap.appendChild(foodElement);
 }
 
 const foodAInitPosition = getRandomPosition();
