@@ -13,10 +13,12 @@ const checkEqualPositions = (positionA, positionB) => {
 }
 
 const checkFoodOnSnakeBody = (allFood, allSnake) => {
-// 回傳吃到的蛇跟那顆食物
+    // 回傳吃到的蛇跟那顆食物
     return allSnake.filter((snakeItem) => {
         return allFood.some((foodItem) => {
-            if (checkEqualPositions(snakeItem, foodItem)) {
+            let snakeItemHeadPosition  = snakeItem.getSnakeHeadPosition();
+            let foodItemPosition  = foodItem.getFoodPosition();
+            if (checkEqualPositions(snakeItemHeadPosition, foodItemPosition)) {
                 return {
                     snake: snakeItem,
                     food: foodItem

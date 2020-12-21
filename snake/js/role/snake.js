@@ -22,7 +22,7 @@ const Snake = function (snakeSpeed, snakeName, initBodyPosition, direction, oper
     }
 }
 
-Snake.prototype.getSnakeHead = function () {
+Snake.prototype.getSnakeHeadPosition = function () {
     return this.snakeBody[0];
 }
 
@@ -88,6 +88,7 @@ Snake.prototype.updateSnakePosition = function () {
 }
 
 Snake.prototype.renderSnake = function (map) {
+    console.log('renderSnake-renderSnake-renderSnake');
     this.snakeBody.forEach((bodyItem) => {
         const snakeElement = document.createElement('div');
         snakeElement.style.gridRowStart = bodyItem.y;
