@@ -14,18 +14,21 @@ const checkEqualPositions = (positionA, positionB) => {
 
 const checkFoodOnSnakeBody = (allFood, allSnake) => {
     // 回傳吃到的蛇跟那顆食物
-    return allSnake.filter((snakeItem) => {
-        return allFood.some((foodItem) => {
-            let snakeItemHeadPosition  = snakeItem.getSnakeHeadPosition();
-            let foodItemPosition  = foodItem.getFoodPosition();
+    let result = [];
+
+    allSnake.forEach((snakeItem) => {
+        allFood.forEach((foodItem) => {
+            let snakeItemHeadPosition = snakeItem.getSnakeHeadPosition();
+            let foodItemPosition = foodItem.getFoodPosition();
             if (checkEqualPositions(snakeItemHeadPosition, foodItemPosition)) {
-                return {
+                result.push({
                     snake: snakeItem,
                     food: foodItem
-                }
+                })
             }
         });
     });
+    return result;
 }
 
 // this.snakeBody[0], this.snakeBody, ignoreHead
