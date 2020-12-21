@@ -25,7 +25,6 @@ Judge.prototype.addSnake = function (snake) {
     // this.allSnake[snake.snakeName] = snake || {};
 };
 
-
 Judge.prototype.callRoleMethod = function (roleData, methodName) {
     for (let i = 0; i < roleData.length; i++) {
         roleData[i][methodName]();
