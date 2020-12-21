@@ -1,6 +1,7 @@
 import {aSnakeOperation, bSnakeOperation} from '../behavior/operation.js';
 import {checkKeydownIsExistOperation, getRandomPosition} from '../common/util.js';
 import {gameJudge} from '../judge/judge.js';
+import {map} from './map.js';
 
 const Snake = function (snakeSpeed, snakeName, initBodyPosition, direction, operation, snakeStyleName) {
     this.newSnakeBody = 0;
@@ -22,7 +23,7 @@ const Snake = function (snakeSpeed, snakeName, initBodyPosition, direction, oper
     }
 }
 
-Snake.prototype.getSnakeHead = function () {
+Snake.prototype.getSnakeHeadPosition = function () {
     return this.snakeBody[0];
 }
 
@@ -87,13 +88,13 @@ Snake.prototype.updateSnakePosition = function () {
     this.snakeBody[0].y += currentDirection.y;
 }
 
-Snake.prototype.renderSnake = function (map) {
+Snake.prototype.renderSnake = function () {
     this.snakeBody.forEach((bodyItem) => {
         const snakeElement = document.createElement('div');
         snakeElement.style.gridRowStart = bodyItem.y;
         snakeElement.style.gridColumnStart = bodyItem.x;
         snakeElement.classList.add(this.snakeStyleName);
-        map.appendChild(snakeElement);
+        map.gameMap.appendChild(snakeElement);
     })
 }
 
