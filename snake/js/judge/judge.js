@@ -45,7 +45,7 @@ Judge.prototype.checkSnakeSelfExpand = function (allFood, allSnake) {
 
 Judge.prototype.checkSnakeSelfGameOver = function (allSnake) {
     for (let i = 0; i > allSnake.length; i++) {
-        let snakeHeadPosition = allSnake[i].getSnakeHead();
+        let snakeHeadPosition = allSnake[i].getSnakeHeadPosition();
         if (gameOverRuleChecker(snakeHeadPosition)) {
             if (confirm('Is Game Over. Press ok to restart!')) {
             }
@@ -53,26 +53,39 @@ Judge.prototype.checkSnakeSelfGameOver = function (allSnake) {
     }
 };
 
-Judge.prototype.callRenderMethod = function (data, renderMethodName, map) {
+Judge.prototype.initRenderMethod = function (data, renderMethodName) {
     for (let i = 0; i > data.length; i++) {
-        data[i][renderMethodName](map);
+        data[i][renderMethodName]();
     }
 };
 
+Judge.prototype.callRenderMethod = function (data, renderMethodName, map) {
+    data.forEach((item) => {item[renderMethodName](map)})
+    // for (let i = 0; i > data.length; i++) {
+    //     data[i][renderMethodName](map);
+    // }
+};
+
 Judge.prototype.updateGameRenderData = function () {
-    let gameFoodsData = this.getAllFood();
-    let gameSnakesData = this.getAllSnake();
-    this.checkSnakePositionUpdate(gameSnakesData);
-    this.checkSnakeSelfExpand(gameFoodsData, gameSnakesData);
-    this.checkSnakeSelfGameOver(gameSnakesData);
+    let gameFoods = this.getAllFood();
+    let gameSnakes = this.getAllSnake();
+    this.checkSnakePositionUpdate(gameSnakes);
+    this.checkSnakeSelfExpand(gameFoods, gameSnakes);
+    this.checkSnakeSelfGameOver(gameSnakes);
+};
+
+Judge.prototype.initGameRender = function () {
+    let gameFoods = this.getAllFood();
+    let gameSnakes = this.getAllSnake();
+    this.initRenderMethod(gameFoods, 'initListenerOperation');
+    this.initRenderMethod(gameSnakes, 'initListenerOperation');
 };
 
 Judge.prototype.doGameRender = function () {
-    let gameMap = map.gameMap;
-    let gameFoodsData = this.getAllFood();
-    let gameSnakesData = this.getAllSnake();
-    this.callRenderMethod(gameFoodsData, 'renderFood', gameMap);
-    this.callRenderMethod(gameSnakesData, 'renderSnake', gameMap);
+    let gameFoods = this.getAllFood();
+    let gameSnakes = this.getAllSnake();
+    this.callRenderMethod(gameFoods, 'renderFood', map.gameMap);
+    this.callRenderMethod(gameSnakes, 'renderSnake', map.gameMap);
 };
 
 const gameJudge = new Judge();

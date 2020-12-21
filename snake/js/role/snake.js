@@ -22,7 +22,7 @@ const Snake = function (snakeSpeed, snakeName, initBodyPosition, direction, oper
     }
 }
 
-Snake.prototype.getSnakeHead = function () {
+Snake.prototype.getSnakeHeadPosition = function () {
     return this.snakeBody[0];
 }
 
