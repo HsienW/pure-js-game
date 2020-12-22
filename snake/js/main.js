@@ -1,87 +1,27 @@
 // import {getDirection} from './operation.js';
 // import {snakeSpeed, updateSnake, renderSnake, getSnakeHead, snakeBodyIntersection} from './snake.js';
-// import {checkOnSnakeBody} from './util.js';
-import {snakeA, snakeB} from './role/snake.js';
-import {foodA, foodB} from './role/food.js';
+// import {checkOnSnakeBody} from './common/util.js';
+// import {snakeA, snakeB} from './role/snake.js';
+// import {foodA, foodB} from './role/food.js';
 import {map} from './role/map.js';
 import {gameJudge} from './judge/judge.js';
 
-const foodList = [foodA, foodB];
-const snakeList = [snakeA, snakeB];
+// const foodList = [foodA, foodB];
+// const snakeList = [snakeA, snakeB];
 let snakeSpeed = 1;
 let gameOver = false;
 let lastRenderTime = 2;
 
-// const Main = function (currentRenderTime, lastRenderTime, map, foodList, snakeList) {
-//     this.allGameOver = false;
-//     this.currentRenderTime = currentRenderTime;
-//     this.lastRenderTime = lastRenderTime;
-//     this.map = map;
-//     this.foodList = foodList;
-//     this.snakeList = snakeList;
-// }
-//
-// Main.prototype.initAnimationFrame = function () {
-//     window.requestAnimationFrame(this.animationControl);
-// }
-//
-// Main.prototype.initRoleListener = function () {
-//     this.snakeList.forEach(snakeItem => snakeItem.initListenerOperation());
-// }
-//
-// Main.prototype.checkGameOver = function () {
-// }
-//
-// Main.prototype.updateRole = function () {
-//     this.foodList.forEach(foodItem => foodItem.updateFood(this.snakeList));
-//     this.snakeList.forEach(snakeItem => snakeItem.updateSnake());
-//     this.checkGameOver();
-// }
-//
-// Main.prototype.renderRole = function () {
-//     this.map.gameMap.innerHTML = '';
-//     this.foodList.forEach(foodItem => foodItem.renderFood(this.map.gameMap));
-//     this.snakeList.forEach(snakeItem => snakeItem.renderSnake(this.map.gameMap));
-// }
-//
-// Main.prototype.animationControl = function () {
-//
-//     console.log(this);
-//
-//     // if (this.allGameOver) {
-//     //     if (confirm('Is Game Over. Press ok to restart!')) {}
-//     //     return;
-//     // }
-//
-//     window.requestAnimationFrame(this.animationControl);
-//
-//     const secondRender = (this.currentRenderTime - this.lastRenderTime) / 1000;
-//     if (secondRender < 1 / Snake.prototype.snakeSpeed) {
-//         return;
-//     }
-//
-//     this.lastRenderTime = this.currentRenderTime;
-//     this.renderRole();
-//     this.updateRole();
-// }
-//
-// const mainAnimationControl = new Main(1, 2, map, foodList, snakeList);
-//
-// mainAnimationControl.initRoleListener();
-// mainAnimationControl.initAnimationFrame();
-
-
-
-
-
-
 // 取當前的蛇頭座標是否超出邊界 & 蛇頭是否撞到自己的身體
-const checkGameOver = () => {
-    // gameOver = snakeA.checkSnakeGameOver(snakeJudgeHandler, snakeA.getSnakeHead())
-    //     || snakeB.checkSnakeGameOver(snakeJudgeHandler, snakeB.getSnakeHead())
-
-    // gameOver = outsideMap(snakeA.getSnakeHead()) || snakeA.snakeBodyIntersection(checkOnSnakeBody,{ ignoreHead: true });
-}
+// const checkGameOver = () => {
+//
+//     // gameOver = snakeA.checkSnakeGameOver(snakeJudgeHandler, snakeA.getSnakeHead())
+//     //     || snakeB.checkSnakeGameOver(snakeJudgeHandler, snakeB.getSnakeHead())
+//
+//     // gameOver = snakeA.snakeBodyIntersection(checkOnSnakeBody,{ ignoreHead: false });
+//     // console.log('查看查看查看查看查看查看查看查看');
+//     // console.log(gameOver);
+// }
 
 const update = () => {
     gameJudge.updateGameRenderData();
@@ -107,7 +47,7 @@ const render = () => {
 
 const main = (currentTime) => {
     // if (gameOver) {
-    //     snakeA.clearSnakeBody();
+    //     // snakeA.clearSnakeBody();
     //     if (confirm('Is Game Over. Press ok to restart!')) {}
     //     return;
     // }

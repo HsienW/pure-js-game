@@ -15,7 +15,6 @@ const checkEqualPositions = (positionA, positionB) => {
 const checkFoodOnSnakeBody = (allFood, allSnake) => {
     // 回傳吃到的蛇跟那顆食物
     let result = [];
-
     allSnake.forEach((snakeItem) => {
         allFood.forEach((foodItem) => {
             let snakeItemHeadPosition = snakeItem.getSnakeHeadPosition();
@@ -31,16 +30,23 @@ const checkFoodOnSnakeBody = (allFood, allSnake) => {
     return result;
 }
 
-// this.snakeBody[0], this.snakeBody, ignoreHead
-// ignoreHead 用來忽略 bodyData 中拿到自己蛇頭的卡控
-const checkOnSnakeBody = (position, allSnake, {ignoreHead = false} = {}) => {
-    return allSnake.filter((snakeItem) => {
-        return snakeItem.snakeBody.some((snakeBodyItem, index) => {
-            if (ignoreHead && index === 0) return false
-            return checkEqualPositions(snakeBodyItem, position);
-        })
-    });
+const checkPositionOnSnakeBody = (position, snakeBody) => {
+    // 回傳撞到自己的蛇
+    return snakeBody.filter((bodyItem, index) => {
+        if (index === 0) return false
+        return checkEqualPositions(position, bodyItem)
+    })
 }
+
+// // ignoreHead 用來忽略 bodyData 中拿到自己蛇頭的卡控
+// const checkOnSnakeBody = (position, allSnake, {ignoreHead = false} = {}) => {
+//     let result = allSnake.filter((snakeItem) => {
+//         return snakeItem.snakeBody.filter((snakeBodyItem, index) => {
+//             if (ignoreHead && index === 0) return false
+//             return checkEqualPositions(snakeBodyItem, position);
+//         })
+//     });
+// }
 
 const checkKeydownIsExistOperation = (keydownEventCode, operationObject) => {
     return Object.keys(operationObject).some((operationItem) => {
@@ -51,7 +57,8 @@ const checkKeydownIsExistOperation = (keydownEventCode, operationObject) => {
 export {
     getRandomPosition,
     checkEqualPositions,
-    checkOnSnakeBody,
+    checkPositionOnSnakeBody,
+    // checkOnSnakeBody,
     checkFoodOnSnakeBody,
-    checkKeydownIsExistOperation
+    checkKeydownIsExistOperation,
 }

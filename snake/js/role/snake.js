@@ -5,8 +5,8 @@ import {map} from './map.js';
 
 const Snake = function (snakeSpeed, snakeName, initBodyPosition, direction, operation, snakeStyleName) {
     this.newSnakeBody = 0;
-    this.snakeGameWin = false;
-    this.snakeGameOver = false;
+    this.snakeWin = false;
+    this.snakeDead = false;
     this.snakeSpeed = snakeSpeed;
     this.snakeName = snakeName;
     // this.snakeEnemies = snakeEnemies;
@@ -27,13 +27,18 @@ Snake.prototype.getSnakeHeadPosition = function () {
     return this.snakeBody[0];
 }
 
+Snake.prototype.getSnakeBody = function () {
+    return this.snakeBody;
+}
+
 Snake.prototype.getSnakeDirection = function () {
     return this.snakeDirection;
 }
 
-Snake.prototype.checkSelf = function (judge) {
-    return judge.checkSnakeSelfGameOver(this);
-}
+
+// Snake.prototype.checkSelf = function (judge) {
+//     return judge.checkSnakeSelfGameOver(this);
+// }
 
 // Snake.prototype.snakeWin = function (judge) {
 //     this.snakeGameWin = true;

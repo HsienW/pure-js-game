@@ -8,14 +8,6 @@ const Judge = function () {
     // this.allSnake = {};
 }
 
-Judge.prototype.getAllFood = function () {
-    return this.allFood;
-};
-
-Judge.prototype.getAllSnake = function () {
-    return this.allSnake;
-};
-
 Judge.prototype.addFood = function (food) {
     this.allFood.push(food);
 };
@@ -23,6 +15,14 @@ Judge.prototype.addFood = function (food) {
 Judge.prototype.addSnake = function (snake) {
     this.allSnake.push(snake);
     // this.allSnake[snake.snakeName] = snake || {};
+};
+
+Judge.prototype.getAllFood = function () {
+    return this.allFood;
+};
+
+Judge.prototype.getAllSnake = function () {
+    return this.allSnake;
 };
 
 Judge.prototype.callRoleMethod = function (roleData, methodName) {
@@ -43,13 +43,24 @@ Judge.prototype.checkSnakeSelfExpand = function (allFood, allSnake) {
 };
 
 Judge.prototype.checkSnakeSelfGameOver = function (allSnake) {
-    for (let i = 0; i < allSnake.length; i++) {
-        let snakeHeadPosition = allSnake[i].getSnakeHeadPosition();
-        if (gameOverRuleChecker(snakeHeadPosition)) {
-            if (confirm('Is Game Over. Press ok to restart!')) {
-            }
-        }
-    }
+    // for (let i = 0; i < allSnake.length; i++) {
+    //     let snakeHeadPosition = allSnake[i].getSnakeHeadPosition();
+    //     let snakeBody = allSnake[i].getSnakeBody();
+    //
+    //     console.log('檢查自撞檢查自撞檢查自撞檢查自撞檢查自撞');
+    //     console.log(gameOverRuleChecker(snakeHeadPosition, snakeBody));
+    //     if (gameOverRuleChecker(snakeHeadPosition, snakeBody)) {
+    //     }
+    // }
+
+
+    // for (let i = 0; i < allSnake.length; i++) {
+    //     let snakeHeadPosition = allSnake[i].getSnakeHeadPosition();
+    //     if (gameOverRuleChecker(snakeHeadPosition)) {
+    //         if (confirm('Is Game Over. Press ok to restart!')) {
+    //         }
+    //     }
+    // }
 };
 
 Judge.prototype.updateGameRenderData = function () {
@@ -57,7 +68,7 @@ Judge.prototype.updateGameRenderData = function () {
     let gameSnakes = this.getAllSnake();
     this.callRoleMethod(gameSnakes, 'updateSnakePosition')
     this.checkSnakeSelfExpand(gameFoods, gameSnakes);
-    this.checkSnakeSelfGameOver(gameSnakes);
+    // this.checkSnakeSelfGameOver(gameSnakes);
 };
 
 Judge.prototype.initGameRender = function () {
