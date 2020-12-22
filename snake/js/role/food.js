@@ -1,4 +1,4 @@
-import {getRandomPosition, checkOnSnakeBody} from '../common/util.js';
+import {getRandomPosition} from '../common/util.js';
 import {gameJudge} from '../judge/judge.js';
 import {map} from './map.js';
 

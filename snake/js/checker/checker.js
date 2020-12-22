@@ -1,7 +1,7 @@
 /** Chain of Responsibility Pattern **/
 
 import {eatFoodRule} from './check-snake-expand-rules.js';
-import {outsideMapRule} from './check-snake-game-over-rules.js';
+import {outsideMapRule, bodyCollideRule} from './check-snake-game-over-rules.js';
 
 const Checker = function (currentJudgeHandler) {
     this.currentCheckHandler = currentJudgeHandler;
@@ -25,15 +25,21 @@ Checker.prototype.passCheck = function (...args) {
     return result;
 }
 
+// 檢查蛇是否需要增長身體規則
 const expandRuleChecker = function (allFood, allSnake) {
     const checkEatFoodRule = new Checker(eatFoodRule);
+
     return checkEatFoodRule.passCheck(allFood, allSnake);
 };
 
-const gameOverRuleChecker = function (position) {
+// 檢查蛇是否觸發遊戲結束規則
+const gameOverRuleChecker = function (position, snakeBody) {
     const checkOutsideMapRule = new Checker(outsideMapRule);
-    // snakeOutsideMapRule.setNextCheckHandler(bodyIntersectionRule);
-    return checkOutsideMapRule.passCheck(position);
+    const checkBodyCollideRule = new Checker(bodyCollideRule);
+
+    checkOutsideMapRule.setNextCheckHandler(checkBodyCollideRule);
+
+    return checkOutsideMapRule.passCheck(position, snakeBody);
 };
 
 export {
