@@ -1,8 +1,8 @@
 // import {getDirection} from './operation.js';
 // import {snakeSpeed, updateSnake, renderSnake, getSnakeHead, snakeBodyIntersection} from './snake.js';
 // import {checkOnSnakeBody} from './common/util.js';
-// import {snakeA, snakeB} from './role/snake.js';
-// import {foodA, foodB} from './role/food.js';
+import {snakeA, snakeB} from './role/snake.js';
+import {foodA, foodB} from './role/food.js';
 import {map} from './role/map.js';
 import {gameJudge} from './judge/judge.js';
 
