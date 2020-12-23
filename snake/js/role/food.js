@@ -2,8 +2,9 @@ import {getRandomPosition} from '../common/util.js';
 import {gameJudge} from '../judge/judge.js';
 import {map} from './map.js';
 
-const Food = function (foodPosition, addBodyRate) {
+const Food = function (foodPosition, foodType, addBodyRate) {
     this.foodPosition = foodPosition;
+    this.foodType = foodType;
     // 吃到食物後, 蛇身體會增長的格子數
     this.addBodyRate = addBodyRate;
 }
