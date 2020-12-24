@@ -1,5 +1,6 @@
 import {aSnakeOperation, bSnakeOperation} from '../behavior/operation.js';
-import {checkKeydownIsExistOperation, getRandomPosition} from '../common/util.js';
+import {checkFoodOnSnakeBody, checkKeydownIsExistOperation} from '../common/util.js';
+import {gameOverRuleChecker} from '../checker/checker.js';
 import {gameJudge} from '../judge/judge.js';
 import {map} from './map.js';
 
@@ -17,7 +18,7 @@ const Snake = function (snakeSpeed, snakeTeam, snakeName, initBodyPosition, dire
     this.snakeStyleName = snakeStyleName;
     this.initListenerOperation = function () {
         window.addEventListener('keydown', event => {
-            if(checkKeydownIsExistOperation(event.code, this.snakeOperation)) {
+            if (checkKeydownIsExistOperation(event.code, this.snakeOperation)) {
                 this.snakeDirection = this.snakeOperation[event.code](this.snakeDirection);
             }
         });
@@ -36,30 +37,22 @@ Snake.prototype.getSnakeDirection = function () {
     return this.snakeDirection;
 }
 
+Snake.prototype.snakeWin = function () {
+    this.snakeWin = true;
+}
 
-// Snake.prototype.checkSelf = function (judge) {
-//     return judge.checkSnakeSelfGameOver(this);
-// }
+Snake.prototype.snakeLose = function () {
+    this.snakeWin = false;
+}
 
-// Snake.prototype.snakeWin = function (judge) {
-//     this.snakeGameWin = true;
-//     this.snakeGameOver = true;
-//     judge.receiveSnakeWin(this);
-// }
-//
-// Snake.prototype.snakeLose = function (judge) {
-//     this.snakeGameWin = false;
-//     this.snakeGameOver = true;
-//     judge.receiveSnakeLose(this);
-// }
-
-// Snake.prototype.checkSnakeGameOver = function (judgeHandler, judgeCondition) {
-//     return judgeHandler(judgeCondition);
-// }
-
-// Snake.prototype.snakeBodyIntersection = function (checkOnSnakeBody, ignoreHead) {
-//     return checkOnSnakeBody(this.snakeBody[0], this.snakeBody, ignoreHead);
-// }
+Snake.prototype.checkSnakeDead = function () {
+    let snakeHeadPosition = this.getSnakeHeadPosition();
+    let snakeBody = this.getSnakeBody();
+    if (gameOverRuleChecker(snakeHeadPosition, snakeBody) === 'game-over') {
+        this.snakeDead = true;
+        gameJudge.noticeJudgeAction('snakeDead', this);
+    }
+}
 
 Snake.prototype.expandSnakeBody = function (addRate) {
     this.newSnakeBody += addRate;
@@ -106,7 +99,7 @@ Snake.prototype.renderSnake = function () {
 
 const snakeFactory = function (snakeSpeed, snakeTeam, snakeName, initBodyPosition, direction, operation, snakeStyleName) {
     let newSnake = new Snake(snakeSpeed, snakeTeam, snakeName, initBodyPosition, direction, operation, snakeStyleName);
-    gameJudge.addSnake(newSnake);
+    gameJudge.noticeJudgeAction('addSnake', newSnake);
     return newSnake;
 }
 
