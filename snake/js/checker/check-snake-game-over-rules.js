@@ -7,7 +7,7 @@ const outsideMapRule = function (position) {
 
 const bodyCollideRule = function (position, snakeBody) {
     const bodyCollideItem = checkPositionOnSnakeBody(position, snakeBody);
-    return bodyCollideItem ? bodyCollideItem : 'next';
+    return bodyCollideItem ? 'game-over' : 'next';
 }
 
 export {

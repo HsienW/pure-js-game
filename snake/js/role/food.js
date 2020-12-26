@@ -1,4 +1,4 @@
-import {getRandomPosition} from '../common/util.js';
+import {getRandomPosition, checkFoodOnSnakeBody} from '../common/util.js';
 import {gameJudge} from '../judge/judge.js';
 import {map} from './map.js';
 
@@ -25,21 +25,22 @@ Food.prototype.getFoodAddBodyRate = function () {
     return this.addBodyRate;
 }
 
-Food.prototype.updateFoodPosition = function () {
-    this.foodPosition = this.createFoodPosition();
-}
-
-// Food.prototype.updateFoodPosition = function (snakeList) {
-//     // todo this ExpandSnake should move to judge
-//     // 檢查蛇是否有吃到食物
-//     let isExpandSnake = checkOnSnakeBody(this.foodPosition, snakeList);
-//     if (isExpandSnake.length !== 0) {
-//         // 有吃到的話就增長蛇身體, 並且重新產生食物
-//         isExpandSnake[0].expandSnakeBody(this.addBodyRate);
-//         this.foodPosition = this.createFoodPosition();
-//     }
-//     isExpandSnake.length = 0;
+// Food.prototype.updateFoodPosition = function () {
+//     this.foodPosition = this.createFoodPosition();
 // }
+
+Food.prototype.updateFoodPosition = function (allSnake) {
+    // 檢查蛇是否有吃到食物
+    let eatFoodSnakes = checkFoodOnSnakeBody(this, allSnake);
+    if (eatFoodSnakes.length !== 0) {
+        gameJudge.noticeJudgeAction('snakeEatFood', this, eatFoodSnakes);
+        this.foodPosition = this.createFoodPosition();
+        // 有吃到的話就增長蛇身體, 並且重新產生食物
+        // isExpandSnake[0].expandSnakeBody(this.addBodyRate);
+        // this.foodPosition = this.createFoodPosition();
+    }
+    eatFoodSnakes.length = 0;
+}
 
 Food.prototype.renderFood = function () {
     const foodElement = document.createElement('div');
