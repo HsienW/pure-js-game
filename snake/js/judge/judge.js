@@ -179,11 +179,18 @@ const gameJudge = (function () {
         }
     };
     //處理呼叫參數的介面
+    const getJudgeData = function () {
+        let action = Array.prototype.shift.call(arguments);
+        return operations[action].apply(this);
+    }
+
     const noticeJudgeAction = function () {
         let action = Array.prototype.shift.call(arguments);
         operations[action].apply(this, arguments);
     }
+
     return {
+        getJudgeData: getJudgeData,
         noticeJudgeAction: noticeJudgeAction
     };
 })();
