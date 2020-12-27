@@ -6,10 +6,8 @@ import {foodA, foodB} from './role/food.js';
 import {map} from './role/map.js';
 import {gameJudge} from './judge/judge.js';
 
-// const foodList = [foodA, foodB];
-// const snakeList = [snakeA, snakeB];
-let snakeSpeed = 1;
-let gameOver = false;
+const snakeList = Array.prototype.concat(...Object.values(gameJudge.getJudgeData('getAllSnake')));
+const snakeSpeed = 1;
 let lastRenderTime = 2;
 
 // 取當前的蛇頭座標是否超出邊界 & 蛇頭是否撞到自己的身體
@@ -24,11 +22,13 @@ let lastRenderTime = 2;
 // }
 
 const update = () => {
-    gameJudge.updateGameRenderData();
-    // foodA.updateFoodPosition(snakeList);
-    // foodB.updateFoodPosition(snakeList);
-    // snakeA.updateSnakePosition();
-    // snakeB.updateSnakePosition();
+    // gameJudge.updateGameRenderData();
+    foodA.updateFoodPosition(snakeList);
+    foodB.updateFoodPosition(snakeList);
+    snakeA.updateSnakePosition();
+    snakeB.updateSnakePosition();
+    snakeA.checkSnakeDead();
+    snakeB.checkSnakeDead();
     // snakeA.checkSnakeGameOver();
     // snakeB.checkSnakeGameOver();
     // console.log(snakeA.checkSelf(gameJudge));
@@ -38,11 +38,11 @@ const update = () => {
 
 const render = () => {
     map.gameMap.innerHTML = '';
-    gameJudge.doGameRender();
-    // foodA.renderFood(map.gameMap);
-    // foodB.renderFood(map.gameMap);
-    // snakeA.renderSnake(map.gameMap);
-    // snakeB.renderSnake(map.gameMap);
+    // gameJudge.doGameRender();
+    foodA.renderFood(map.gameMap);
+    foodB.renderFood(map.gameMap);
+    snakeA.renderSnake(map.gameMap);
+    snakeB.renderSnake(map.gameMap);
 }
 
 const main = (currentTime) => {
@@ -64,7 +64,7 @@ const main = (currentTime) => {
     update();
 }
 
-gameJudge.initGameRender();
-// snakeA.initListenerOperation();
-// snakeB.initListenerOperation();
+// gameJudge.initGameRender();
+snakeA.initListenerOperation();
+snakeB.initListenerOperation();
 window.requestAnimationFrame(main);

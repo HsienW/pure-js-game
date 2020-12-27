@@ -53,14 +53,14 @@ Food.prototype.renderFood = function () {
 const foodAInitPosition = getRandomPosition();
 const foodBInitPosition = getRandomPosition();
 
-const snakeFactory = function (foodPosition, addBodyRate) {
-    const newFood = new Food(foodPosition, addBodyRate);
-    gameJudge.addFood(newFood);
+const snakeFactory = function (foodPosition, foodType, addBodyRate) {
+    const newFood = new Food(foodPosition, foodType, addBodyRate);
+    gameJudge.noticeJudgeAction('addFood', newFood);
     return newFood;
 }
 
-const foodA = snakeFactory(foodAInitPosition, 1);
-const foodB = snakeFactory(foodBInitPosition, 1);
+const foodA = snakeFactory(foodAInitPosition, 'general', 1);
+const foodB = snakeFactory(foodBInitPosition, 'general', 1);
 
 export {
     foodA,
