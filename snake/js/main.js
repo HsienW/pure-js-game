@@ -17,8 +17,6 @@ let lastRenderTime = 2;
 //     //     || snakeB.checkSnakeGameOver(snakeJudgeHandler, snakeB.getSnakeHead())
 //
 //     // gameOver = snakeA.snakeBodyIntersection(checkOnSnakeBody,{ ignoreHead: false });
-//     // console.log('查看查看查看查看查看查看查看查看');
-//     // console.log(gameOver);
 // }
 
 const update = () => {
