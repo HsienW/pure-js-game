@@ -1,6 +1,6 @@
 /** Mediator Pattern **/
 
-import {expandRuleChecker, gameOverRuleChecker} from '../checker/checker.js';
+// import {expandRuleChecker, gameOverRuleChecker} from '../checker/checker.js';
 
 // const Judge = function () {
 //     this.allFood = [];
@@ -87,62 +87,20 @@ const gameJudge = (function () {
         allFood[foodType] = allFood[foodType] || [];
         allFood[foodType].push(food);
     };
+
     operations.addSnake = function (snake) {
         let snakeTeam = snake.snakeTeam;
         allSnake[snakeTeam] = allSnake[snakeTeam] || [];
         allSnake[snakeTeam].push(snake);
     };
+
     operations.getAllFood = function () {
         return allFood;
     };
+
     operations.getAllSnake = function () {
         return allSnake;
     };
-    // operations.callRoleMethod = function (roleData, methodName) {
-    //     for (let i = 0; i < roleData.length; i++) {
-    //         roleData[i][methodName]();
-    //     }
-    // };
-    // operations.checkSnakeSelfExpand = function (allFood, allSnake) {
-    //     const isEatFoodInfo = expandRuleChecker(allFood, allSnake);
-    //     // 執行正確的蛇身狀態改變
-    //     if (isEatFoodInfo.length !== 0) {
-    //         let addBodyRate = isEatFoodInfo[0]['food'].getFoodAddBodyRate();
-    //         isEatFoodInfo[0]['snake'].expandSnakeBody(addBodyRate);
-    //         isEatFoodInfo[0]['food'].updateFoodPosition();
-    //     }
-    //     isEatFoodInfo.length = 0;
-    // };
-    // operations.checkSnakeSelfGameOver = function (allSnake) {
-    //     for (let i = 0; i < allSnake.length; i++) {
-    //         let snakeHeadPosition = allSnake[i].getSnakeHeadPosition();
-    //         let snakeBody = allSnake[i].getSnakeBody();
-    //         if (gameOverRuleChecker(snakeHeadPosition, snakeBody)) {
-    //         }
-    //     }
-    // };
-    // operations.initGameRender = function () {
-    //     let gameSnakes = this.getAllSnake();
-    //     this.callRoleMethod(gameSnakes, 'initListenerOperation');
-    // };
-    // operations.updateGameRenderData = function () {
-    //     let gameFoods = this.getAllFood();
-    //     let gameSnakes = this.getAllSnake();
-    //     this.callRoleMethod(gameSnakes, 'updateSnakePosition')
-    //     this.checkSnakeSelfExpand(gameFoods, gameSnakes);
-    //     this.checkSnakeSelfGameOver(gameSnakes);
-    // };
-    // operations.doGameRender = function () {
-    //     let gameFoods = this.getAllFood();
-    //     let gameSnakes = this.getAllSnake();
-    //     this.callRoleMethod(gameFoods, 'renderFood');
-    //     this.callRoleMethod(gameSnakes, 'renderSnake');
-    // };
-
-
-    // let snakeTeam = snake.snakeTeam;
-    // allSnake[snakeTeam] = allSnake[snakeTeam] || [];
-    // allSnake[snakeTeam].push(snake);
 
     operations.snakeEatFood = function (food, eatFoodSnakes) {
         let snakeAddBodyRate = food.getFoodAddBodyRate();
@@ -156,28 +114,36 @@ const gameJudge = (function () {
         let sameTeamAllSnake = allSnake[snakeTeam];
         let isAllDead = false;
 
-        sameTeamAllSnake.some(function (teamMember) {
-            if (teamMember.snakeDead) {
-                isAllDead = true;
-                return false;
+        sameTeamAllSnake.forEach(function (teamMember) {
+            // 若有任何一個 team member 的死亡狀態不為 true, 表示該隊還有人活著, isAllDead 為 false
+            if (!teamMember.snakeDead) {
+                isAllDead = false;
+                return
             }
+            // 若有全部 team member 的死亡狀態為 true, 則 isAllDead 為 true
+            isAllDead = true;
         });
 
         if (isAllDead) {
-            sameTeamAllSnake.forEach(function (teamMember) {
-                teamMember['snakeTeamLose']();
-            });
+            operations.snakeTeamWin(snakeTeam, sameTeamAllSnake);
+        }
+    }
 
-            for (let team in allSnake) {
-                if (team !== snakeTeam) {
-                    let otherTeamSnakes = allSnake[team];
-                    otherTeamSnakes.forEach(function (otherSnake) {
-                        otherSnake['snakeTeamWin']();
-                    });
-                }
+    operations.snakeTeamWin = function (snakeTeam, sameTeamAllSnake) {
+        sameTeamAllSnake.forEach(function (teamMember) {
+            teamMember['snakeTeamLose']();
+        });
+
+        for (let team in allSnake) {
+            if (team !== snakeTeam) {
+                let otherTeamSnakes = allSnake[team];
+                otherTeamSnakes.forEach(function (otherSnake) {
+                    otherSnake['snakeTeamWin']();
+                });
             }
         }
     };
+
     //處理呼叫參數的介面
     const getJudgeData = function () {
         let action = Array.prototype.shift.call(arguments);
