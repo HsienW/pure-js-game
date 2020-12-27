@@ -30,9 +30,10 @@ const checkEqualPositions = (positionA, positionB) => {
 //     return result;
 // }
 
+// ignoreHead 用來忽略 bodyData 中拿到自己蛇頭的卡控
 const checkPositionOnSnakeBody = (position, snakeBody) => {
     // 回傳撞到自己的蛇
-    return snakeBody.filter((bodyItem, index) => {
+    return snakeBody.some((bodyItem, index) => {
         if (index === 0) return false
         return checkEqualPositions(position, bodyItem)
     })
