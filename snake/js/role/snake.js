@@ -11,7 +11,6 @@ const Snake = function (snakeSpeed, snakeTeam, snakeName, initBodyPosition, dire
     this.snakeSpeed = snakeSpeed;
     this.snakeTeam = snakeTeam;
     this.snakeName = snakeName;
-    // this.snakeEnemies = snakeEnemies;
     this.snakeBody = initBodyPosition;
     this.snakeDirection = direction;
     this.snakeOperation = operation;
@@ -37,11 +36,11 @@ Snake.prototype.getSnakeDirection = function () {
     return this.snakeDirection;
 }
 
-Snake.prototype.snakeWin = function () {
+Snake.prototype.snakeTeamWin = function () {
     this.snakeWin = true;
 }
 
-Snake.prototype.snakeLose = function () {
+Snake.prototype.snakeTeamLose = function () {
     this.snakeWin = false;
 }
 

@@ -164,15 +164,15 @@ const gameJudge = (function () {
         });
 
         if (isAllDead) {
-            snakeTeam.forEach(function (teamMember) {
-                teamMember['snakeLose']();
+            sameTeamAllSnake.forEach(function (teamMember) {
+                teamMember['snakeTeamLose']();
             });
 
             for (let team in allSnake) {
                 if (team !== snakeTeam) {
                     let otherTeamSnakes = allSnake[team];
-                    otherTeamSnakes.forEach(function (enemySnake) {
-                        enemySnake['snakeWin']();
+                    otherTeamSnakes.forEach(function (otherSnake) {
+                        otherSnake['snakeTeamWin']();
                     });
                 }
             }
