@@ -5,6 +5,7 @@ import {snakeA, snakeB} from './role/snake.js';
 import {foodA, foodB} from './role/food.js';
 import {map} from './role/map.js';
 import {gameJudge} from './judge/judge.js';
+import {noticeConfirm} from '../js/common/notice.js';
 
 const snakeList = Array.prototype.concat(...Object.values(gameJudge.getJudgeData('getAllSnake')));
 const snakeSpeed = 1;
@@ -46,7 +47,7 @@ const render = () => {
 const main = (currentTime) => {
     // if (gameOver) {
     //     // snakeA.clearSnakeBody();
-    //     if (confirm('Is Game Over. Press ok to restart!')) {}
+    //     noticeConfirm('Is Game Over. Press ok to restart!');
     //     return;
     // }
 
