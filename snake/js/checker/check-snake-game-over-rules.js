@@ -1,13 +1,13 @@
-import {mapSize} from '../role/map.js';
-import {checkPositionOnSnakeBody} from '../common/util.js';
+import {checkPositionOutsideMap, checkPositionOnSnakeBody} from '../common/util.js';
 
 const outsideMapRule = function (position) {
-    return (position.x < 1 || position.x > mapSize || position.y < 1 || position.y > mapSize) ? 'game-over' : 'next';
+    const outsideMapSnake = checkPositionOutsideMap(position);
+    return outsideMapSnake ? 'game-over' : 'next';
 }
 
 const bodyCollideRule = function (position, snakeBody) {
-    const bodyCollideItem = checkPositionOnSnakeBody(position, snakeBody);
-    return bodyCollideItem ? 'game-over' : 'next';
+    const bodyCollideInfo = checkPositionOnSnakeBody(position, snakeBody);
+    return bodyCollideInfo ? 'game-over' : 'next';
 }
 
 export {

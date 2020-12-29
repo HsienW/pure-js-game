@@ -8,9 +8,68 @@ const getRandomPosition = () => {
     }
 }
 
-const checkEqualPositions = (positionA, positionB) => {
-    return positionA.x === positionB.x && positionA.y === positionB.y
+const checkValueIsEmpty = (value) => {
+    if (value === null || value === undefined || value.length === 0 || Object.keys(value).length === 0) {
+        return true;
+    }
+    return false;
 }
+
+const checkEqualPositions = (positionA, positionB) => {
+    if (!checkValueIsEmpty(positionA) && !checkValueIsEmpty(positionB)) {
+        return positionA.x === positionB.x && positionA.y === positionB.y
+    }
+    return null;
+}
+
+const checkPositionOutsideMap = (position) => {
+    if (!checkValueIsEmpty(position)) {
+        return (position.x < 1 || position.x > mapSize || position.y < 1 || position.y > mapSize);
+    }
+    return null;
+}
+
+// ignoreHead 用來忽略 bodyData 中拿到自己蛇頭的卡控
+const checkPositionOnSnakeBody = (position, snakeBody) => {
+    // 回傳撞到自己的蛇
+    if (snakeBody.length !== 0) {
+        return snakeBody.some((bodyItem, index) => {
+            if (index === 0) return false
+            return checkEqualPositions(position, bodyItem)
+        })
+    }
+    return null;
+}
+
+const checkFoodOnSnakeBody = (food, allSnake) => {
+    // 回傳吃到的蛇跟那顆食物
+    if (allSnake.length !== 0) {
+        return allSnake.filter((snakeItem) => {
+            let snakeItemHeadPosition = snakeItem.getSnakeHeadPosition();
+            let foodPosition = food.getFoodPosition();
+            if (checkEqualPositions(foodPosition, snakeItemHeadPosition)) {
+                return snakeItem;
+            }
+        });
+    }
+    return null;
+}
+
+const checkKeydownIsExistOperation = (keydownEventCode, operationObject) => {
+    return Object.keys(operationObject).some((operationItem) => {
+        return operationItem === keydownEventCode;
+    });
+}
+
+// // ignoreHead 用來忽略 bodyData 中拿到自己蛇頭的卡控
+// const checkOnSnakeBody = (position, allSnake, {ignoreHead = false} = {}) => {
+//     let result = allSnake.filter((snakeItem) => {
+//         return snakeItem.snakeBody.filter((snakeBodyItem, index) => {
+//             if (ignoreHead && index === 0) return false
+//             return checkEqualPositions(snakeBodyItem, position);
+//         })
+//     });
+// }
 
 // const checkFoodOnSnakeBody = (allFood, allSnake) => {
 //     // 回傳吃到的蛇跟那顆食物
@@ -30,45 +89,11 @@ const checkEqualPositions = (positionA, positionB) => {
 //     return result;
 // }
 
-// ignoreHead 用來忽略 bodyData 中拿到自己蛇頭的卡控
-const checkPositionOnSnakeBody = (position, snakeBody) => {
-    // 回傳撞到自己的蛇
-    return snakeBody.some((bodyItem, index) => {
-        if (index === 0) return false
-        return checkEqualPositions(position, bodyItem)
-    })
-}
-
-const checkFoodOnSnakeBody = (food, allSnake) => {
-    // 回傳吃到的蛇跟那顆食物
-    return allSnake.filter((snakeItem) => {
-        let snakeItemHeadPosition = snakeItem.getSnakeHeadPosition();
-        let foodPosition = food.getFoodPosition();
-        if (checkEqualPositions(foodPosition, snakeItemHeadPosition)) {
-            return snakeItem;
-        }
-    });
-}
-
-// // ignoreHead 用來忽略 bodyData 中拿到自己蛇頭的卡控
-// const checkOnSnakeBody = (position, allSnake, {ignoreHead = false} = {}) => {
-//     let result = allSnake.filter((snakeItem) => {
-//         return snakeItem.snakeBody.filter((snakeBodyItem, index) => {
-//             if (ignoreHead && index === 0) return false
-//             return checkEqualPositions(snakeBodyItem, position);
-//         })
-//     });
-// }
-
-const checkKeydownIsExistOperation = (keydownEventCode, operationObject) => {
-    return Object.keys(operationObject).some((operationItem) => {
-        return operationItem === keydownEventCode;
-    });
-}
 
 export {
     getRandomPosition,
     checkEqualPositions,
+    checkPositionOutsideMap,
     checkPositionOnSnakeBody,
     // checkOnSnakeBody,
     checkFoodOnSnakeBody,
