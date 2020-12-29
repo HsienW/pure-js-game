@@ -104,7 +104,7 @@ const gameJudge = (function () {
 
     operations.snakeEatFood = function (food, eatFoodSnakes) {
         let snakeAddBodyRate = food.getFoodAddBodyRate();
-        eatFoodSnakes.forEach(function (snake) {
+        eatFoodSnakes.forEach((snake) => {
             snake['expandSnakeBody'](snakeAddBodyRate);
         });
     };
@@ -114,7 +114,7 @@ const gameJudge = (function () {
         let sameTeamAllSnake = allSnake[snakeTeam];
         let isAllDead = false;
 
-        sameTeamAllSnake.forEach(function (teamMember) {
+        sameTeamAllSnake.forEach((teamMember) => {
             // 若有任何一個 team member 的死亡狀態不為 true, 表示該隊還有人活著, isAllDead 為 false
             if (!teamMember.snakeDead) {
                 isAllDead = false;
@@ -130,14 +130,14 @@ const gameJudge = (function () {
     }
 
     operations.snakeTeamWin = function (snakeTeam, sameTeamAllSnake) {
-        sameTeamAllSnake.forEach(function (teamMember) {
+        sameTeamAllSnake.forEach((teamMember) => {
             teamMember['snakeTeamLose']();
         });
 
         for (let team in allSnake) {
             if (team !== snakeTeam) {
                 let otherTeamSnakes = allSnake[team];
-                otherTeamSnakes.forEach(function (otherSnake) {
+                otherTeamSnakes.forEach((otherSnake) => {
                     otherSnake['snakeTeamWin']();
                 });
             }
