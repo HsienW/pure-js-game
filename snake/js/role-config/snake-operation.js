@@ -58,17 +58,3 @@ export {
     aSnakeOperation,
     bSnakeOperation
 }
-
-// export {
-//     aGamerOperation,
-//     bGamerOperation
-// }
-
-// const getDirection = () => {
-//     lastDirection = direction
-//     return lastDirection;
-// }
-//
-// export {
-//     getDirection
-// }

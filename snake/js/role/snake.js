@@ -1,4 +1,4 @@
-import {aSnakeOperation, bSnakeOperation} from '../behavior/operation.js';
+import {aSnakeOperation, bSnakeOperation} from '../role-config/snake-operation.js';
 import {checkKeydownIsExistOperation} from '../common/util.js';
 import {gameOverRuleChecker} from '../checker/checker.js';
 import {gameJudge} from '../judge/judge.js';
