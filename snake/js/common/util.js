@@ -8,6 +8,10 @@ const getRandomPosition = () => {
     }
 }
 
+const getRandomFoodType = (max) => {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
 const checkValueIsEmpty = (value) => {
     if (value === null || value === undefined || value.length === 0 || Object.keys(value).length === 0) {
         return true;
@@ -32,7 +36,7 @@ const checkPositionOutsideMap = (position) => {
 // ignoreHead 用來忽略 bodyData 中拿到自己蛇頭的卡控
 const checkPositionOnSnakeBody = (position, snakeBody) => {
     // 回傳撞到自己的蛇
-    if (snakeBody.length !== 0) {
+    if (!checkValueIsEmpty(snakeBody)) {
         return snakeBody.some((bodyItem, index) => {
             if (index === 0) return false
             return checkEqualPositions(position, bodyItem)
@@ -43,7 +47,7 @@ const checkPositionOnSnakeBody = (position, snakeBody) => {
 
 const checkFoodOnSnakeBody = (food, allSnake) => {
     // 回傳吃到的蛇跟那顆食物
-    if (allSnake.length !== 0) {
+    if (!checkValueIsEmpty(allSnake)) {
         return allSnake.filter((snakeItem) => {
             let snakeItemHeadPosition = snakeItem.getSnakeHeadPosition();
             let foodPosition = food.getFoodPosition();
@@ -92,6 +96,7 @@ const checkKeydownIsExistOperation = (keydownEventCode, operationObject) => {
 
 export {
     getRandomPosition,
+    getRandomFoodType,
     checkEqualPositions,
     checkPositionOutsideMap,
     checkPositionOnSnakeBody,

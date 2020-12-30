@@ -1,12 +1,12 @@
-import {getRandomPosition, checkFoodOnSnakeBody} from '../common/util.js';
+import {getRandomPosition, checkFoodOnSnakeBody, getRandomFoodType} from '../common/util.js';
 import {gameJudge} from '../judge/judge.js';
 import {map} from './map.js';
 
-const Food = function (foodPosition, foodType, addBodyRate) {
+const Food = function (foodPosition, foodType, bodyExpandRate) {
     this.foodPosition = foodPosition;
     this.foodType = foodType;
     // 吃到食物後, 蛇身體會增長的格子數
-    this.addBodyRate = addBodyRate;
+    this.bodyExpandRate = bodyExpandRate;
 }
 
 Food.prototype.createFoodPosition = function () {
@@ -21,8 +21,8 @@ Food.prototype.getFoodPosition = function () {
     return this.foodPosition;
 }
 
-Food.prototype.getFoodAddBodyRate = function () {
-    return this.addBodyRate;
+Food.prototype.getFoodBodyExpandRate = function () {
+    return this.bodyExpandRate;
 }
 
 // Food.prototype.updateFoodPosition = function () {
@@ -34,10 +34,8 @@ Food.prototype.updateFoodPosition = function (allSnake) {
     let eatFoodSnakes = checkFoodOnSnakeBody(this, allSnake);
     if (eatFoodSnakes.length !== 0) {
         gameJudge.noticeJudgeAction('snakeEatFood', this, eatFoodSnakes);
+        // 有吃到的話就重新 render 食物的位子
         this.foodPosition = this.createFoodPosition();
-        // 有吃到的話就增長蛇身體, 並且重新產生食物
-        // isExpandSnake[0].expandSnakeBody(this.addBodyRate);
-        // this.foodPosition = this.createFoodPosition();
     }
     eatFoodSnakes.length = 0;
 }
@@ -53,8 +51,11 @@ Food.prototype.renderFood = function () {
 const foodAInitPosition = getRandomPosition();
 const foodBInitPosition = getRandomPosition();
 
-const snakeFactory = function (foodPosition, foodType, addBodyRate) {
-    const newFood = new Food(foodPosition, foodType, addBodyRate);
+const snakeFactory = function (foodPosition, foodType, bodyExpandRate) {
+
+    console.log(getRandomFoodType(2));
+
+    const newFood = new Food(foodPosition, foodType, bodyExpandRate);
     gameJudge.noticeJudgeAction('addFood', newFood);
     return newFood;
 }

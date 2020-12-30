@@ -52,7 +52,7 @@ const main = (currentTime) => {
 
     window.requestAnimationFrame(main);
 
-    const secondRender = (currentTime - lastRenderTime) / 1000;
+    const secondRender = (currentTime - lastRenderTime) / 500;
     if (secondRender < 1 / snakeSpeed) {
         return;
     }

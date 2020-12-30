@@ -59,6 +59,10 @@ Snake.prototype.expandSnakeBody = function (addRate) {
     this.newSnakeBody += addRate;
 }
 
+// Snake.prototype.updateSnakeSpeed = function (speed) {
+//     this.snakeSpeed += speed;
+// }
+
 Snake.prototype.clearSnakeBody = function () {
     this.snakeBody.length = 0;
 }
