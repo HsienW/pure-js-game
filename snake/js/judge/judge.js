@@ -103,7 +103,7 @@ const gameJudge = (function () {
     };
 
     operations.snakeEatFood = function (food, eatFoodSnakes) {
-        let snakeAddBodyRate = food.getFoodAddBodyRate();
+        let snakeAddBodyRate = food.getFoodBodyExpandRate();
         eatFoodSnakes.forEach((snake) => {
             snake['expandSnakeBody'](snakeAddBodyRate);
         });

@@ -1,6 +1,7 @@
 /** Strategy Pattern **/
 
-const Operation = function () {}
+const Operation = function () {
+}
 
 Operation.prototype.doUp = function (direction) {
     // if (direction.y !== 0) return;
