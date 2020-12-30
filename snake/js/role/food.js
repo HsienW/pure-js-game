@@ -1,12 +1,20 @@
-import {getRandomPosition, checkFoodOnSnakeBody, getRandomFoodType} from '../common/util.js';
+import {
+    getRandomPosition,
+    getRandomFoodAmount,
+    getRandomFoodType,
+    checkFoodOnSnakeBody,
+} from '../common/util.js';
+import {foodTypeInfo} from '../role-config/food-type.js';
 import {gameJudge} from '../judge/judge.js';
 import {map} from './map.js';
 
-const Food = function (foodPosition, foodType, bodyExpandRate) {
+const Food = function (foodPosition, foodType, bodyExpandRate, speedRate) {
     this.foodPosition = foodPosition;
     this.foodType = foodType;
     // 吃到食物後, 蛇身體會增長的格子數
     this.bodyExpandRate = bodyExpandRate;
+    // 吃到食物後, 蛇會變成多塊的移動速度
+    this.speedRate = speedRate;
 }
 
 Food.prototype.createFoodPosition = function () {
@@ -25,11 +33,7 @@ Food.prototype.getFoodBodyExpandRate = function () {
     return this.bodyExpandRate;
 }
 
-// Food.prototype.updateFoodPosition = function () {
-//     this.foodPosition = this.createFoodPosition();
-// }
-
-Food.prototype.updateFoodPosition = function (allSnake) {
+Food.prototype.updateFood = function (allSnake) {
     // 檢查蛇是否有吃到食物
     let eatFoodSnakes = checkFoodOnSnakeBody(this, allSnake);
     if (eatFoodSnakes.length !== 0) {
@@ -48,22 +52,44 @@ Food.prototype.renderFood = function () {
     map.gameMap.appendChild(foodElement);
 }
 
-const foodAInitPosition = getRandomPosition();
-const foodBInitPosition = getRandomPosition();
-
-const snakeFactory = function (foodPosition, foodType, bodyExpandRate) {
-
-    console.log(getRandomFoodType(2));
-
-    const newFood = new Food(foodPosition, foodType, bodyExpandRate);
+const foodFactory = function (foodPosition, foodType, bodyExpandRate, speedRate) {
+    const newFood = new Food(foodPosition, foodType, bodyExpandRate, speedRate);
     gameJudge.noticeJudgeAction('addFood', newFood);
     return newFood;
 }
 
-const foodA = snakeFactory(foodAInitPosition, 'general', 1);
-const foodB = snakeFactory(foodBInitPosition, 'general', 1);
+const initFoodAmount = getRandomFoodAmount(3);
+
+const initAllFood = function () {
+    for (let i = 0; i < initFoodAmount; i++) {
+        const initPosition = getRandomPosition();
+        const initFoodTypeInfo = foodTypeInfo[getRandomFoodType(3)](1, 1);
+        foodFactory(initPosition, initFoodTypeInfo.type, initFoodTypeInfo.expandRate, initFoodTypeInfo.speedRate);
+    }
+}
+
+const updateAllFood = function (snakeList) {
+    const allFood = gameJudge.getJudgeData('getAllFood');
+    for (let foodType in allFood) {
+        let foods = allFood[foodType];
+        foods.forEach((foodItem) => {
+            foodItem['updateFood'](snakeList);
+        });
+    }
+}
+
+const renderAllFood = function () {
+    const allFood = gameJudge.getJudgeData('getAllFood');
+    for (let foodType in allFood) {
+        let foods = allFood[foodType];
+        foods.forEach((foodItem) => {
+            foodItem['renderFood']();
+        });
+    }
+}
 
 export {
-    foodA,
-    foodB
+    initAllFood,
+    updateAllFood,
+    renderAllFood
 }

@@ -2,7 +2,8 @@
 // import {snakeSpeed, updateSnake, renderSnake, getSnakeHead, snakeBodyIntersection} from './snake.js';
 // import {checkOnSnakeBody} from './common/util.js';
 import {snakeA, snakeB} from './role/snake.js';
-import {foodA, foodB} from './role/food.js';
+import {initAllFood, updateAllFood, renderAllFood} from './role/food.js';
+// import {foodA, foodB} from './role/food.js';
 import {map} from './role/map.js';
 import {gameJudge} from './judge/judge.js';
 
@@ -21,8 +22,9 @@ let lastRenderTime = 2;
 
 const update = () => {
     // gameJudge.updateGameRenderData();
-    foodA.updateFoodPosition(snakeList);
-    foodB.updateFoodPosition(snakeList);
+    // foodA.updateFood(snakeList);
+    // foodB.updateFood(snakeList);
+    updateAllFood(snakeList);
     snakeA.updateSnakePosition();
     snakeB.updateSnakePosition();
     snakeA.checkSnakeDead();
@@ -37,8 +39,9 @@ const update = () => {
 const render = () => {
     map.gameMap.innerHTML = '';
     // gameJudge.doGameRender();
-    foodA.renderFood(map.gameMap);
-    foodB.renderFood(map.gameMap);
+    // foodA.renderFood(map.gameMap);
+    // foodB.renderFood(map.gameMap);
+    renderAllFood();
     snakeA.renderSnake(map.gameMap);
     snakeB.renderSnake(map.gameMap);
 }
@@ -65,4 +68,5 @@ const main = (currentTime) => {
 // gameJudge.initGameRender();
 snakeA.initListenerOperation();
 snakeB.initListenerOperation();
+initAllFood();
 window.requestAnimationFrame(main);

@@ -8,6 +8,10 @@ const getRandomPosition = () => {
     }
 }
 
+const getRandomFoodAmount = (max) => {
+    return Math.floor(Math.random() * Math.floor(max)) + 1;
+}
+
 const getRandomFoodType = (max) => {
     return Math.floor(Math.random() * Math.floor(max));
 }
@@ -96,7 +100,9 @@ const checkKeydownIsExistOperation = (keydownEventCode, operationObject) => {
 
 export {
     getRandomPosition,
+    getRandomFoodAmount,
     getRandomFoodType,
+    checkValueIsEmpty,
     checkEqualPositions,
     checkPositionOutsideMap,
     checkPositionOnSnakeBody,

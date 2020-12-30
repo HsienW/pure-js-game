@@ -1,29 +1,29 @@
 /** Strategy Pattern **/
 
-const Operation = function () {
+const BaseOperation = function () {
 }
 
-Operation.prototype.doUp = function (direction) {
+BaseOperation.prototype.doUp = function (direction) {
     // if (direction.y !== 0) return;
     return {x: 0, y: -1};
 };
 
-Operation.prototype.doDown = function (direction) {
+BaseOperation.prototype.doDown = function (direction) {
     // if (direction.y !== 0) return;
     return {x: 0, y: 1};
 };
 
-Operation.prototype.doLeft = function (direction) {
+BaseOperation.prototype.doLeft = function (direction) {
     // if (direction.x !== 0) return;
     return {x: -1, y: 0};
 };
 
-Operation.prototype.doRight = function (direction) {
+BaseOperation.prototype.doRight = function (direction) {
     // if (direction.x !== 0) return;
     return {x: 1, y: 0};
 };
 
-const baseOperation = new Operation();
+const baseOperation = new BaseOperation();
 
 const aSnakeOperation = {
     ArrowUp: function (direction) {
