@@ -27,7 +27,26 @@ body {
     border: .25vmin solid black;
 }
 
-.food {
+.general-expand-food {
     background-color: #ffa000;
     border: .25vmin solid black;
+    border-radius:999em;
+}
+
+.mega-expand-food {
+    background-color: #14a343;
+    border: .25vmin solid black;
+    border-radius:999em;
+}
+
+.double-fast-food {
+    background-color: #571bbf;
+    border: .25vmin solid black;
+    border-radius:999em;
+}
+
+.food {
+    background-color: #e60ecc;
+    border: .25vmin solid black;
+    border-radius:999em;
 }

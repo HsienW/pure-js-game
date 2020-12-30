@@ -12,6 +12,7 @@ const foodTypeInfo = {
     0: function (baseExpandRate, baseSpeed) {
         return {
             type: 'general-expand',
+            styleName: 'general-expand-food',
             expandRate: baseExpandRate * 1,
             speedRate: baseSpeed * 1
         };
@@ -19,6 +20,7 @@ const foodTypeInfo = {
     1: function (baseExpandRate, baseSpeed) {
         return {
             type: 'mega-expand',
+            styleName: 'mega-expand-food',
             expandRate: baseExpandRate * 2,
             speedRate: baseSpeed * 1
         };
@@ -26,6 +28,7 @@ const foodTypeInfo = {
     2: function (baseExpandRate, baseSpeed) {
         return {
             type: 'double-fast',
+            styleName: 'double-fast-food',
             expandRate: baseExpandRate * 0,
             speedRate: baseSpeed * 0.5
         };
@@ -33,6 +36,7 @@ const foodTypeInfo = {
     3: function (baseExpandRate, baseSpeed) {
         return {
             type: 'treble-fast',
+            styleName: 'treble-fast-food',
             expandRate: baseExpandRate * 0,
             speedRate: baseSpeed * 0.25
         };

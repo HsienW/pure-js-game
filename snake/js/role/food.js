@@ -8,9 +8,10 @@ import {foodTypeInfo} from '../role-config/food-type.js';
 import {gameJudge} from '../judge/judge.js';
 import {map} from './map.js';
 
-const Food = function (foodPosition, foodType, bodyExpandRate, speedRate) {
+const Food = function (foodPosition, foodType, foodStyleName, bodyExpandRate, speedRate) {
     this.foodPosition = foodPosition;
     this.foodType = foodType;
+    this.foodStyleName = foodStyleName;
     // 吃到食物後, 蛇身體會增長的格子數
     this.bodyExpandRate = bodyExpandRate;
     // 吃到食物後, 蛇會變成多塊的移動速度
@@ -48,23 +49,29 @@ Food.prototype.renderFood = function () {
     const foodElement = document.createElement('div');
     foodElement.style.gridRowStart = this.foodPosition.y;
     foodElement.style.gridColumnStart = this.foodPosition.x;
-    foodElement.classList.add('food');
+    foodElement.classList.add(this.foodStyleName);
     map.gameMap.appendChild(foodElement);
 }
 
-const foodFactory = function (foodPosition, foodType, bodyExpandRate, speedRate) {
-    const newFood = new Food(foodPosition, foodType, bodyExpandRate, speedRate);
+const foodFactory = function (foodPosition, foodType, foodStyleName, bodyExpandRate, speedRate) {
+    const newFood = new Food(foodPosition, foodType, foodStyleName, bodyExpandRate, speedRate);
     gameJudge.noticeJudgeAction('addFood', newFood);
     return newFood;
 }
 
-const initFoodAmount = getRandomFoodAmount(3);
+const initFoodAmount = getRandomFoodAmount(4);
 
 const initAllFood = function () {
     for (let i = 0; i < initFoodAmount; i++) {
         const initPosition = getRandomPosition();
         const initFoodTypeInfo = foodTypeInfo[getRandomFoodType(3)](1, 1);
-        foodFactory(initPosition, initFoodTypeInfo.type, initFoodTypeInfo.expandRate, initFoodTypeInfo.speedRate);
+        foodFactory(
+            initPosition,
+            initFoodTypeInfo.type,
+            initFoodTypeInfo.styleName,
+            initFoodTypeInfo.expandRate,
+            initFoodTypeInfo.speedRate
+        );
     }
 }
 
