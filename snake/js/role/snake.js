@@ -1,5 +1,4 @@
-// import {aSnakeOperation, bSnakeOperation} from '../role-config/snake-operation.js';
-import {checkKeydownIsExistOperation, getRandomFoodType} from '../common/util.js';
+import {checkKeydownIsExistOperation} from '../common/util.js';
 import {gameOverRuleChecker} from '../checker/checker.js';
 import {gameJudge} from '../judge/judge.js';
 import {map} from './map.js';
@@ -113,60 +112,44 @@ const snakeFactory = function (snakeSpeed, snakeTeam, snakeName, initBodyPositio
     return newSnake;
 }
 
-const initAllSnake = function () {
-    const initATeamSnake = snakeTypeInfo[0]();
-    const initBTeamSnake = snakeTypeInfo[1]();
+const initSnakeAmount = Object.keys(snakeTypeInfo);
 
-    snakeFactory(
-        initATeamSnake.snakeSpeed,
-        initATeamSnake.snakeTeam,
-        initATeamSnake.snakeName,
-        initATeamSnake.initBodyPosition,
-        initATeamSnake.direction,
-        initATeamSnake.operation,
-        initATeamSnake.snakeStyleName,
-    );
-    snakeFactory(
-        initBTeamSnake.snakeSpeed,
-        initBTeamSnake.snakeTeam,
-        initBTeamSnake.snakeName,
-        initBTeamSnake.initBodyPosition,
-        initBTeamSnake.direction,
-        initBTeamSnake.operation,
-        initBTeamSnake.snakeStyleName,
-    );
+const initAllSnake = function () {
+    for (let i = 0; i < initSnakeAmount.length; i++) {
+        const initSnakeTypeInfo = snakeTypeInfo[i]();
+        snakeFactory(
+            initSnakeTypeInfo.snakeSpeed,
+            initSnakeTypeInfo.snakeTeam,
+            initSnakeTypeInfo.snakeName,
+            initSnakeTypeInfo.initBodyPosition,
+            initSnakeTypeInfo.direction,
+            initSnakeTypeInfo.operation,
+            initSnakeTypeInfo.snakeStyleName,
+        );
+    }
+    callAllSnakeItemMethod('initListenerOperation');
+}
+
+const callAllSnakeItemMethod = function (...args) {
+    const allSnake = gameJudge.getJudgeData('getAllSnake');
+    for (let snakeTeam in allSnake) {
+        let snakes = allSnake[snakeTeam];
+        snakes.forEach((snakeItem) => {
+            snakeItem[args]();
+        });
+    }
 }
 
 const checkAllSnakeDead = function () {
-    const allSnake = gameJudge.getJudgeData('getAllSnake');
-    for (let snakeTeam in allSnake) {
-        let snakes = allSnake[snakeTeam];
-        snakes.forEach((snakeItem) => {
-            snakeItem['checkSnakeDead']();
-        });
-    }
+    callAllSnakeItemMethod('checkSnakeDead');
 }
 
-
 const updateAllSnakePosition = function () {
-    const allSnake = gameJudge.getJudgeData('getAllSnake');
-    for (let snakeTeam in allSnake) {
-        let snakes = allSnake[snakeTeam];
-        snakes.forEach((snakeItem) => {
-            snakeItem['updateSnakePosition']();
-        });
-    }
+    callAllSnakeItemMethod('updateSnakePosition');
 }
 
 const renderAllSnake = function () {
-    const allSnake = gameJudge.getJudgeData('getAllSnake');
-    for (let snakeTeam in allSnake) {
-        let snakes = allSnake[snakeTeam];
-        snakes.forEach((snakeItem) => {
-            snakeItem['initListenerOperation']();
-            snakeItem['renderSnake']();
-        });
-    }
+    callAllSnakeItemMethod('renderSnake');
 }
 
 export {
