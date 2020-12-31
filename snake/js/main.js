@@ -8,13 +8,13 @@ let lastRenderTime = 2;
 const update = () => {
     updateAllFood();
     updateAllSnakePosition();
-    checkAllSnakeDead();
 }
 
 const render = () => {
     map.gameMap.innerHTML = '';
     renderAllFood();
     renderAllSnake();
+    checkAllSnakeDead();
 }
 
 const main = (currentTime) => {

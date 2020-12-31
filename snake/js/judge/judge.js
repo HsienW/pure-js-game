@@ -1,5 +1,7 @@
 /** Mediator Pattern **/
 
+import {noticeConfirm} from '../common/notice.js';
+
 const gameJudge = (function () {
     const allFood = {};
     const allSnake = {};
@@ -63,6 +65,7 @@ const gameJudge = (function () {
                 otherTeamSnakes.forEach((otherSnake) => {
                     otherSnake['snakeTeamWin']();
                 });
+                noticeConfirm(`${otherTeamSnakes[0].getSnakeTeam()} is winner!`);
             }
         }
     };

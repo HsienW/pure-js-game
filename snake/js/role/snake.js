@@ -36,6 +36,10 @@ Snake.prototype.getSnakeDirection = function () {
     return this.snakeDirection;
 }
 
+Snake.prototype.getSnakeTeam = function () {
+    return this.snakeTeam;
+}
+
 Snake.prototype.snakeTeamWin = function () {
     this.snakeWin = true;
 }
@@ -50,7 +54,6 @@ Snake.prototype.checkSnakeDead = function () {
     if (gameOverRuleChecker(snakeHeadPosition, snakeBody) === 'game-over' && !this.snakeDead) {
         this.snakeDead = true;
         this.clearSnakeBody();
-        // noticeConfirm(`${this.snakeName} is game over`);
         gameJudge.noticeJudgeAction('snakeDead', this);
     }
 }
