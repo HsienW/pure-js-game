@@ -51,14 +51,19 @@ const checkPositionOnSnakeBody = (position, snakeBody) => {
 
 const checkFoodOnSnakeBody = (food, allSnake) => {
     // 回傳吃到的蛇跟那顆食物
+    let result = [];
     if (!checkValueIsEmpty(allSnake)) {
-        return allSnake.filter((snakeItem) => {
-            let snakeItemHeadPosition = snakeItem.getSnakeHeadPosition();
-            let foodPosition = food.getFoodPosition();
-            if (checkEqualPositions(foodPosition, snakeItemHeadPosition)) {
-                return snakeItem;
-            }
-        });
+        for (let snakeTeam in allSnake) {
+            let snakes = allSnake[snakeTeam];
+            snakes.forEach((snakeItem) => {
+                let snakeItemHeadPosition = snakeItem.getSnakeHeadPosition();
+                let foodPosition = food.getFoodPosition();
+                if (checkEqualPositions(foodPosition, snakeItemHeadPosition)) {
+                    result.push(snakeItem);
+                }
+            });
+        }
+        return result;
     }
     return null;
 }
@@ -68,35 +73,6 @@ const checkKeydownIsExistOperation = (keydownEventCode, operationObject) => {
         return operationItem === keydownEventCode;
     });
 }
-
-// // ignoreHead 用來忽略 bodyData 中拿到自己蛇頭的卡控
-// const checkOnSnakeBody = (position, allSnake, {ignoreHead = false} = {}) => {
-//     let result = allSnake.filter((snakeItem) => {
-//         return snakeItem.snakeBody.filter((snakeBodyItem, index) => {
-//             if (ignoreHead && index === 0) return false
-//             return checkEqualPositions(snakeBodyItem, position);
-//         })
-//     });
-// }
-
-// const checkFoodOnSnakeBody = (allFood, allSnake) => {
-//     // 回傳吃到的蛇跟那顆食物
-//     let result = [];
-//     allSnake.forEach((snakeItem) => {
-//         allFood.forEach((foodItem) => {
-//             let snakeItemHeadPosition = snakeItem.getSnakeHeadPosition();
-//             let foodItemPosition = foodItem.getFoodPosition();
-//             if (checkEqualPositions(snakeItemHeadPosition, foodItemPosition)) {
-//                 result.push({
-//                     snake: snakeItem,
-//                     food: foodItem
-//                 })
-//             }
-//         });
-//     });
-//     return result;
-// }
-
 
 export {
     getRandomPosition,

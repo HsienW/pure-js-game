@@ -34,8 +34,9 @@ Food.prototype.getFoodBodyExpandRate = function () {
     return this.bodyExpandRate;
 }
 
-Food.prototype.updateFood = function (allSnake) {
+Food.prototype.updateFood = function () {
     // 檢查蛇是否有吃到食物
+    let allSnake = gameJudge.getJudgeData('getAllSnake');
     let eatFoodSnakes = checkFoodOnSnakeBody(this, allSnake);
     if (eatFoodSnakes.length !== 0) {
         gameJudge.noticeJudgeAction('snakeEatFood', this, eatFoodSnakes);
