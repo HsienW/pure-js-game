@@ -76,24 +76,22 @@ const initAllFood = function () {
     }
 }
 
-const updateAllFood = function (snakeList) {
+const callAllFoodItemMethod = function (...args) {
     const allFood = gameJudge.getJudgeData('getAllFood');
     for (let foodType in allFood) {
         let foods = allFood[foodType];
         foods.forEach((foodItem) => {
-            foodItem['updateFood'](snakeList);
+            foodItem[args]();
         });
     }
 }
 
+const updateAllFood = function () {
+    callAllFoodItemMethod('updateFood');
+}
+
 const renderAllFood = function () {
-    const allFood = gameJudge.getJudgeData('getAllFood');
-    for (let foodType in allFood) {
-        let foods = allFood[foodType];
-        foods.forEach((foodItem) => {
-            foodItem['renderFood']();
-        });
-    }
+    callAllFoodItemMethod('renderFood');
 }
 
 export {
