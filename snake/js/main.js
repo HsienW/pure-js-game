@@ -1,5 +1,6 @@
 import {initAllFood, updateAllFood, renderAllFood} from './role/food.js';
 import {initAllSnake, checkAllSnakeDead, updateAllSnakePosition, renderAllSnake} from './role/snake.js';
+import {initGlobalGameTimer} from './role/timer.js';
 import {map} from './role/map.js';
 
 const snakeSpeed = 1;
@@ -38,4 +39,6 @@ const main = (currentTime) => {
 
 initAllFood();
 initAllSnake();
+initGlobalGameTimer();
+// countdownTimer('game-timer', 10);
 window.requestAnimationFrame(main);

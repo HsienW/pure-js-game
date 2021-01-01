@@ -112,22 +112,21 @@ Snake.prototype.renderSnake = function () {
 const snakeFactory = function (snakeSpeed, snakeTeam, snakeName, initBodyPosition, direction, operation, snakeStyleName) {
     let newSnake = new Snake(snakeSpeed, snakeTeam, snakeName, initBodyPosition, direction, operation, snakeStyleName);
     gameJudge.noticeJudgeAction('addSnake', newSnake);
-    return newSnake;
 }
 
 const initSnakeAmount = Object.keys(snakeTypeInfo);
 
 const initAllSnake = function () {
     for (let i = 0; i < initSnakeAmount.length; i++) {
-        const initSnakeTypeInfo = snakeTypeInfo[i]();
+        const initSnake = snakeTypeInfo[i]();
         snakeFactory(
-            initSnakeTypeInfo.snakeSpeed,
-            initSnakeTypeInfo.snakeTeam,
-            initSnakeTypeInfo.snakeName,
-            initSnakeTypeInfo.initBodyPosition,
-            initSnakeTypeInfo.direction,
-            initSnakeTypeInfo.operation,
-            initSnakeTypeInfo.snakeStyleName,
+            initSnake.snakeSpeed,
+            initSnake.snakeTeam,
+            initSnake.snakeName,
+            initSnake.initBodyPosition,
+            initSnake.direction,
+            initSnake.operation,
+            initSnake.snakeStyleName,
         );
     }
     callAllSnakeItemMethod('initListenerOperation');
