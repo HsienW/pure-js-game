@@ -5,6 +5,7 @@ import {noticeConfirm} from '../common/notice.js';
 const gameJudge = (function () {
     const allFood = {};
     const allSnake = {};
+    const allTimer = {};
     const operations = {};
 
     operations.addFood = function (food) {
@@ -19,12 +20,22 @@ const gameJudge = (function () {
         allSnake[snakeTeam].push(snake);
     };
 
+    operations.addTimer = function (timer) {
+        let timerId = timer.timerId;
+        allTimer[timerId] = allTimer[timerId] || [];
+        allTimer[timerId].push(timerId);
+    };
+
     operations.getAllFood = function () {
         return allFood;
     };
 
     operations.getAllSnake = function () {
         return allSnake;
+    };
+
+    operations.getAllTimer = function () {
+        return allTimer;
     };
 
     operations.snakeEatFood = function (food, eatFoodSnakes) {

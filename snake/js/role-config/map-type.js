@@ -6,13 +6,13 @@
 // 大: 61x61
 
 const mapSizeType = {
-    'small': function () {
+    small: function () {
         return 21;
     },
-    'middle': function () {
+    middle: function () {
         return 41;
     },
-    'large': function () {
+    large: function () {
         return 61;
     }
 }

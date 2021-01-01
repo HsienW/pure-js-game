@@ -57,20 +57,19 @@ Food.prototype.renderFood = function () {
 const foodFactory = function (foodPosition, foodType, foodStyleName, bodyExpandRate, speedRate) {
     const newFood = new Food(foodPosition, foodType, foodStyleName, bodyExpandRate, speedRate);
     gameJudge.noticeJudgeAction('addFood', newFood);
-    return newFood;
 }
 
 const initFoodAmount = getRandomFoodAmount(4);
 
 const initAllFood = function () {
     for (let i = 0; i < initFoodAmount; i++) {
-        const initFoodTypeInfo = foodTypeInfo[getRandomFoodType(3)](1, 1);
+        const initFood = foodTypeInfo[getRandomFoodType(3)](1, 1);
         foodFactory(
-            initFoodTypeInfo.position,
-            initFoodTypeInfo.type,
-            initFoodTypeInfo.styleName,
-            initFoodTypeInfo.expandRate,
-            initFoodTypeInfo.speedRate
+            initFood.position,
+            initFood.type,
+            initFood.styleName,
+            initFood.expandRate,
+            initFood.speedRate
         );
     }
 }

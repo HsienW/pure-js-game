@@ -1,4 +1,4 @@
-const noticeConfirm = function (message) {
+const noticeConfirm = (message) => {
     confirm(message);
 }
 
