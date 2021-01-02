@@ -6,22 +6,22 @@
 // slowness play (慢速模式) = 遊戲倒數 180 秒為 1 局
 
 const gameTimerTypeInfo = {
-    speedPlay: function (timerId) {
+    speedPlay: function () {
         return {
-            timerId: timerId,
-            gameTime: 60
+            timerType: 'global-game-time',
+            timerStopNumber: 60000
         }
     },
-    normalPlay: function (timerId) {
+    normalPlay: function () {
         return {
-            timerId: timerId,
-            gameTime: 120
+            timerType: 'global-game-time',
+            timerStopNumber: 5
         }
     },
-    slownessPlay: function (timerId) {
+    slownessPlay: function () {
         return {
-            timerId: timerId,
-            gameTime: 180
+            timerType: 'global-game-time',
+            timerStopNumber: 180000
         }
     }
 }
