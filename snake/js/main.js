@@ -1,6 +1,6 @@
 import {initAllFood, updateAllFood, renderAllFood} from './role/food.js';
 import {initAllSnake, checkAllSnakeDead, updateAllSnakePosition, renderAllSnake} from './role/snake.js';
-import {initGlobalGameTimer} from './role/timer.js';
+import {globalGameTimer} from './role/timer.js';
 import {map} from './role/map.js';
 
 const snakeSpeed = 1;
@@ -27,9 +27,15 @@ const main = (currentTime) => {
 
     window.requestAnimationFrame(main);
 
-    const secondRender = (currentTime - lastRenderTime) / 500;
+    const secondRender = (currentTime - lastRenderTime) / 1000;
     if (secondRender < 1 / snakeSpeed) {
         return;
+    }
+
+    console.log(globalGameTimer.getTimerStopNumber() - globalGameTimer.getTimerCount());
+
+    if (globalGameTimer.getTimerCount() >= globalGameTimer.getTimerStopNumber()) {
+        globalGameTimer.timerStop();
     }
 
     lastRenderTime = currentTime;
@@ -39,6 +45,5 @@ const main = (currentTime) => {
 
 initAllFood();
 initAllSnake();
-initGlobalGameTimer();
-// countdownTimer('game-timer', 10);
+globalGameTimer.timerStart();
 window.requestAnimationFrame(main);

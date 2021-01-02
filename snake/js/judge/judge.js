@@ -21,9 +21,9 @@ const gameJudge = (function () {
     };
 
     operations.addTimer = function (timer) {
-        let timerId = timer.timerId;
-        allTimer[timerId] = allTimer[timerId] || [];
-        allTimer[timerId].push(timerId);
+        let timerType = timer.timerType;
+        allTimer[timerType] = allTimer[timerType] || [];
+        allTimer[timerType].push(timer);
     };
 
     operations.getAllFood = function () {

@@ -1,53 +1,67 @@
-import {gameJudge} from '../judge/judge.js';
 import {gameTimerTypeInfo} from '../role-config/timer-type.js';
 
-const Timer = function (timerId, count) {
+const Timer = function (timerId, timerStopNumber) {
     this.timerId = timerId;
-    this.count = count;
+    this.timerStopNumber = timerStopNumber;
     this.timerActivation = null;
+    this.count = null;
 }
 
-Timer.prototype.countdownLoop = function (time) {
-    let ms = Math.floor(time / 1000);
-    this.count = this.count - ms;
-
-    if (this.count <= 0) {
-        this.stop();
+Timer.prototype.countdownLoop = function (secondRender) {
+    if (secondRender < 1) {
+        return;
     }
-
-    this.start();
+    this.timerActivation = null;
+    this.count = Math.floor((secondRender / 1000));
+    this.timerStart();
 }
 
-// Timer.prototype.getCount = function () {
-//     return this.count;
-// }
+Timer.prototype.getTimerStopNumber = function () {
+    return this.timerStopNumber;
+}
 
-Timer.prototype.start = function (countType) {
+Timer.prototype.getTimerCount = function () {
+    return this.count;
+}
+
+Timer.prototype.timerStart = function () {
     if (!this.timerActivation) {
-        this.timerActivation = window.requestAnimationFrame(countType);
+        this.timerActivation = window.requestAnimationFrame(this.countdownLoop.bind(this));
     }
 }
 
-Timer.prototype.stop = function () {
+Timer.prototype.timerStop = function () {
     if (this.timerActivation) {
         window.cancelAnimationFrame(this.timerActivation);
         this.timerActivation = null;
     }
 }
 
-// const timerFactory = function (timerId, count) {
-//     let newTimer = new Timer(timerId, count);
-//     gameJudge.noticeJudgeAction('addTimer', newTimer);
-//     return newTimer;
-// }
-
-const initGlobalGameTimer = function () {
-    const initGameTimer = gameTimerTypeInfo['normalPlay']('global-game-time');
-    let newTimer = new Timer(initGameTimer.timerId, initGameTimer.timerId);
-    newTimer.start(newTimer.countdownLoop);
-    // timerFactory(initGameTimer.timerId, initGameTimer.gameTime);
+const timerFactory = function (timerId, count) {
+    let newTimer = new Timer(timerId, count);
+    // gameJudge.noticeJudgeAction('addTimer', newTimer);
+    return newTimer;
 }
 
+const initGameTimerType = gameTimerTypeInfo['normalPlay']();
+const globalGameTimer = timerFactory(initGameTimerType.timerId, initGameTimerType.timerStopNumber);
+
+// const checkGlobalGameTime = function () {
+//     if (globalGameTimer.getTimerCount() >= globalGameTimer.getTimerStopNumber()) {
+//         globalGameTimer.timerStop();
+//     }
+//     return globalGameTimer.getTimerActivation();
+// }
+
+// const initGlobalGameTimer = function () {
+//     const initGameTimer = gameTimerTypeInfo['normalPlay']('global-game-time');
+//     let newTimer = new Timer(initGameTimer.timerId, initGameTimer.gameTime);
+//     newTimer.timerStart();
+//     // timerFactory(initGameTimer.timerId, initGameTimer.gameTime);
+// }
+
 export {
-    initGlobalGameTimer
+    globalGameTimer,
+    // checkGlobalGameTime
+    // initGlobalGameTimer
 }
