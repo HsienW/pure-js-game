@@ -11,10 +11,17 @@ body {
 #game-map {
     background-color: #cacaca;
     width: 100vmin;
-    height: 100vmin;
+    height: 90vmin;
     display: grid;
     grid-template-rows: repeat(41, 1fr);
     grid-template-columns: repeat(41, 1fr);
+}
+
+#game-timer {
+    background-color: #948f8f;
+    width: 100vmin;
+    height: 9vmin;
+    margin-bottom: 1vmin;
 }
 
 .a-snake-body {
