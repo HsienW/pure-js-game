@@ -1,4 +1,5 @@
 import {gameTimerTypeInfo} from '../role-config/timer-type.js';
+import {map} from "./map";
 
 const Timer = function (timerId, timerStopNumber) {
     this.timerId = timerId;
