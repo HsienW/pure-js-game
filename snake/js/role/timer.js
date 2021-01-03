@@ -1,5 +1,4 @@
 import {gameTimerTypeInfo} from '../role-config/timer-type.js';
-import {map} from "./map";
 
 const Timer = function (timerId, timerStopNumber) {
     this.timerId = timerId;
@@ -47,12 +46,17 @@ const timerFactory = function (timerId, count) {
 const initGameTimerType = gameTimerTypeInfo['normalPlay']();
 const globalGameTimer = timerFactory(initGameTimerType.timerId, initGameTimerType.timerStopNumber);
 
-// const checkGlobalGameTime = function () {
-//     if (globalGameTimer.getTimerCount() >= globalGameTimer.getTimerStopNumber()) {
-//         globalGameTimer.timerStop();
-//     }
-//     return globalGameTimer.getTimerActivation();
-// }
+const globalGameTimerStart = function () {
+    globalGameTimer.timerStart();
+}
+
+const globalGameTimerStop = function () {
+    globalGameTimer.timerStop();
+}
+
+const checkGlobalGameTimeFinish = function () {
+    return globalGameTimer.getTimerCount() >= globalGameTimer.getTimerStopNumber();
+}
 
 // const initGlobalGameTimer = function () {
 //     const initGameTimer = gameTimerTypeInfo['normalPlay']('global-game-time');
@@ -63,6 +67,9 @@ const globalGameTimer = timerFactory(initGameTimerType.timerId, initGameTimerTyp
 
 export {
     globalGameTimer,
+    checkGlobalGameTimeFinish,
+    globalGameTimerStart,
+    globalGameTimerStop
     // checkGlobalGameTime
     // initGlobalGameTimer
 }
