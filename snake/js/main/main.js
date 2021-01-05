@@ -1,4 +1,7 @@
-// import {GameStartState, GamePauseState, GameFinishState} from '';
+/** State Pattern **/
+
+import {GameStartState, GamePauseState, GameFinishState} from './main-state.js';
+import {mainStateHandler} from './main-state-handler.js';
 
 const Main = function (mainStateHandler) {
     this.mainStateHandler = mainStateHandler;
@@ -27,7 +30,3 @@ Main.prototype.gameFinish = function () {
     this.mainStateHandler.isFinish();
     this.currentState = this.gameFinishState;
 }
-
-const MainStateFactory = (function () {
-    const state = function () {};
-})();
