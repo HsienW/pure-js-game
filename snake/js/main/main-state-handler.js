@@ -1,19 +1,19 @@
-const mainStatusHandler = (function () {
+const mainStateHandler = (function () {
     const handler = {};
 
-    handler.gameStart = function () {
+    handler.isStart = function () {
 
     };
 
-    handler.gamePause = function () {
+    handler.isPause = function () {
 
     };
 
-    handler.gameFinish = function () {
+    handler.isFinish = function () {
 
     };
 })();
 
 export {
-    mainStatusHandler
+    mainStateHandler
 }
