@@ -1,17 +1,16 @@
 /** State Pattern **/
 
-import {GameStartState, GamePauseState, GameFinishState} from './main-state.js';
-// import {mainStateHandler} from './main-state-handler.js';
+import {gameFinishState} from './main-state.js';
 
 const Main = function () {
-    // this.mainStateHandler = mainStateHandler;
     this.startButton = null;
     this.pauseButton = null;
     this.finishButton = null;
-    this.gameStartState = new GameStartState();
-    this.gamePauseState = new GamePauseState();
-    this.gameFinishState = new GameFinishState();
-    this.currentState = this.gameFinishState;
+    // this.gameStartState = gameStartState;
+    // this.gamePauseState = gamePauseState;
+    // this.gameFinishState = gameFinishState;
+    // 設定初始狀態
+    this.currentState = gameFinishState;
 }
 
 Main.prototype.initGameMain = function () {
@@ -34,27 +33,15 @@ Main.prototype.bindMainEvent = function () {
 
     // 將每個 button 點擊後對應要做的事, 委託出去給 currentState 的 handler
     this.startButton.onclick = function () {
-        mainInstance.currentState.clickStartHandler();
+        mainInstance.currentState.start.clickHandler.call(mainInstance);
     }
     this.pauseButton.onclick = function () {
-        mainInstance.currentState.clickPauseHandler();
+        mainInstance.currentState.pause.clickHandler.call(mainInstance);
     }
     this.finishButton.onclick = function () {
-        mainInstance.currentState.clickFinishHandler();
+        mainInstance.currentState.finish.clickHandler.call(mainInstance);
     }
 };
-
-Main.prototype.gameStart = function () {
-    this.currentState = this.gameStartState;
-}
-
-Main.prototype.gamePause = function () {
-    this.currentState = this.gamePauseState;
-}
-
-Main.prototype.gameFinish = function () {
-    this.currentState = this.gameFinishState;
-}
 
 const gameMain = new Main();
 
