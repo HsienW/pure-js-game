@@ -1,3 +1,5 @@
+import {gameMain} from './main.js';
+
 const BaseState = function () {};
 
 // BaseState 用來當子類沒有加到正確的 Handler 時的提醒, 所以 throw 一個 error
@@ -13,24 +15,28 @@ BaseState.prototype.clickFinishHandler = function () {
     throw new Error('子類別要覆蓋此方法');
 };
 
-const MainStateFactory = (function () {
+// stateFactory 用來創建子類
+const stateFactory = (function () {
     return function (args) {
-        const Factory = function () {};
+        const NewState = function () {};
 
-        Factory.prototype = new BaseState();
+        // 先將 BaseState 的實例, 掛在新子類的 prototype 上, 以便拿到屬性與共用的 function
+        NewState.prototype = new BaseState();
 
+        // 針對新子類的 prototype 掛上對應的 handler
         for (let i in args) {
-            Factory.prototype[i] = args[i];
+            NewState.prototype[i] = args[i];
         }
-        return Factory;
+        return NewState;
     }
 })();
 
-const GameStartState = MainStateFactory({
+const GameStartState = stateFactory({
     clickStartHandler: function () {
         console.log('開始中, 無法再次開始');
     },
     clickPauseHandler: function () {
+        gameMain.gamePause();
         console.log('暫停遊戲');
     },
     clickFinishHandler: function () {
@@ -38,20 +44,23 @@ const GameStartState = MainStateFactory({
     }
 });
 
-const GamePauseState = MainStateFactory({
+const GamePauseState = stateFactory({
     clickStartHandler: function () {
+        gameMain.gameStart();
         console.log('開始遊戲');
     },
     clickPauseHandler: function () {
         console.log('暫停中, 無法再次暫停');
     },
     clickFinishHandler: function () {
+        gameMain.gameFinish();
         console.log('結束遊戲');
     }
 });
 
-const GameFinishState = MainStateFactory({
+const GameFinishState = stateFactory({
     clickStartHandler: function () {
+        gameMain.gameStart();
         console.log('開始遊戲');
     },
     clickPauseHandler: function () {
