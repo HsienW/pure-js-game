@@ -35,7 +35,6 @@ let lastRenderTime = 2;
 //     window.requestAnimationFrame(mainAnimation);
 // }
 
-
 const mainAnimation = (function () {
     const operations = {};
 
@@ -45,7 +44,7 @@ const mainAnimation = (function () {
     }
 
     operations.render = function () {
-        map.gameMap.innerHTML = '';
+        map.renderMap();
         renderAllFood();
         renderAllSnake();
         checkAllSnakeDead();

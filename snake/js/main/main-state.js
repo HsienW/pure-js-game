@@ -1,4 +1,5 @@
 // import {isMainStart} from './main-animation.js';
+import {mainAnimation} from './main-animation.js';
 
 const gameStartState = {
     start: {
@@ -44,6 +45,7 @@ const gameFinishState = {
         clickHandler: function () {
             console.log('開始遊戲');
             // isMainStart();
+            mainAnimation.doAnimationAction('isStart');
             this.currentState = gameStartState;
         }
     },
