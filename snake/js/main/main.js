@@ -6,9 +6,6 @@ const Main = function () {
     this.startButton = null;
     this.pauseButton = null;
     this.finishButton = null;
-    // this.gameStartState = gameStartState;
-    // this.gamePauseState = gamePauseState;
-    // this.gameFinishState = gameFinishState;
     // 設定初始狀態
     this.currentState = gameFinishState;
 }
