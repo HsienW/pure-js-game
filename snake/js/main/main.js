@@ -26,7 +26,7 @@ Main.prototype.initGameMain = function () {
 Main.prototype.bindMainEvent = function () {
     // 將初始化取得的 main 實例的參照, 保存在 mainInstance 變數中,
     // 以防 onclick event 發生時 this 指向被修改成 button dom
-    const mainInstance = this ;
+    const mainInstance = this;
 
     // 將每個 button 點擊後對應要做的事, 委託出去給 currentState 的 handler
     this.startButton.onclick = function () {
