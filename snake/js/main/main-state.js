@@ -10,6 +10,7 @@ const gameStartState = {
     pause: {
         clickHandler: function () {
             console.log('暫停遊戲');
+            mainAnimation.doAnimationAction('isPause');
             this.currentState = gamePauseState;
         }
     },
@@ -24,6 +25,7 @@ const gamePauseState = {
     start: {
         clickHandler: function () {
             console.log('開始遊戲');
+            mainAnimation.doAnimationAction('isStart');
             this.currentState = gameStartState;
         }
     },
@@ -45,6 +47,7 @@ const gameFinishState = {
         clickHandler: function () {
             console.log('開始遊戲');
             // isMainStart();
+            mainAnimation.doAnimationAction('isInit');
             mainAnimation.doAnimationAction('isStart');
             this.currentState = gameStartState;
         }
