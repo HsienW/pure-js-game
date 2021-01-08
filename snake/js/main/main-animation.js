@@ -2,40 +2,10 @@ import {initAllFood, updateAllFood, renderAllFood} from '../role/food.js';
 import {initAllSnake, checkAllSnakeDead, updateAllSnakePosition, renderAllSnake} from '../role/snake.js';
 import {map} from '../role/map.js';
 
-let snakeSpeed = 1;
-let lastRenderTime = 2;
-
-// const update = function () {
-//     updateAllFood();
-//     updateAllSnakePosition();
-// }
-//
-// const render = function () {
-//     map.gameMap.innerHTML = '';
-//     renderAllFood();
-//     renderAllSnake();
-//     checkAllSnakeDead();
-// }
-
-// const mainAnimation = function (currentTime) {
-//     window.requestAnimationFrame(mainAnimation);
-//     const secondRender = (currentTime - lastRenderTime) / 500;
-//     if (secondRender < 1 / snakeSpeed) {
-//         return;
-//     }
-//
-//     lastRenderTime = currentTime;
-//     render();
-//     update();
-// }
-
-// const isMainStart = function () {
-//     initAllFood();
-//     initAllSnake();
-//     window.requestAnimationFrame(mainAnimation);
-// }
-
 const mainAnimation = (function () {
+    let activation = null;
+    let snakeSpeed = 1;
+    let lastRenderTime = 2;
     const operations = {};
 
     operations.update = function () {
@@ -51,8 +21,10 @@ const mainAnimation = (function () {
     }
 
     operations.doAnimation = function (currentTime) {
-        window.requestAnimationFrame(operations.doAnimation);
-        const secondRender = (currentTime - lastRenderTime) / 500;
+        activation = null;
+        operations.isStart();
+        const secondRender = (currentTime - lastRenderTime) / 250;
+
         if (secondRender < 1 / snakeSpeed) {
             return;
         }
@@ -62,10 +34,22 @@ const mainAnimation = (function () {
         operations.update();
     }
 
-    operations.isStart = function () {
+    operations.isInit = function () {
         initAllFood();
         initAllSnake();
-        window.requestAnimationFrame(operations.doAnimation);
+    }
+
+    operations.isStart = function () {
+        if (!activation) {
+            activation = window.requestAnimationFrame(operations.doAnimation);
+        }
+    }
+
+    operations.isPause = function () {
+        if (activation) {
+            window.cancelAnimationFrame(activation);
+            activation = null;
+        }
     }
 
     const doAnimationAction = function (action) {
