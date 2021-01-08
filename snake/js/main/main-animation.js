@@ -21,7 +21,6 @@ const mainAnimation = (function () {
     }
 
     operations.doAnimation = function (currentTime) {
-        activation = null;
         operations.isStart();
         const secondRender = (currentTime - lastRenderTime) / 250;
 
@@ -40,16 +39,11 @@ const mainAnimation = (function () {
     }
 
     operations.isStart = function () {
-        if (!activation) {
-            activation = window.requestAnimationFrame(operations.doAnimation);
-        }
+        activation = window.requestAnimationFrame(operations.doAnimation);
     }
 
     operations.isPause = function () {
-        if (activation) {
-            window.cancelAnimationFrame(activation);
-            activation = null;
-        }
+        window.cancelAnimationFrame(activation);
     }
 
     const doAnimationAction = function (action) {
