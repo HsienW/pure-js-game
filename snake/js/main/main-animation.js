@@ -46,6 +46,10 @@ const mainAnimation = (function () {
         window.cancelAnimationFrame(activation);
     }
 
+    operations.isFinish = function () {
+        window.cancelAnimationFrame(activation);
+    }
+
     const doAnimationAction = function (action) {
         return operations[action].apply(this);
     }

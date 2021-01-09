@@ -3,9 +3,9 @@
 import {noticeConfirm} from '../common/notice.js';
 
 const gameJudge = (function () {
-    const allFood = {};
-    const allSnake = {};
-    const allTimer = {};
+    let allFood = {};
+    let allSnake = {};
+    let allTimer = {};
     const operations = {};
 
     operations.addFood = function (food) {
@@ -36,6 +36,18 @@ const gameJudge = (function () {
 
     operations.getAllTimer = function () {
         return allTimer;
+    };
+
+    operations.clearAllFood = function () {
+        allFood = {};
+    };
+
+    operations.clearAllSnake = function () {
+        allSnake = {};
+    };
+
+    operations.clearAllTimer = function () {
+        allTimer = {};
     };
 
     operations.snakeEatFood = function (food, eatFoodSnakes) {
