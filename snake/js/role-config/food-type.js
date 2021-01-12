@@ -29,24 +29,24 @@ const foodTypeInfo = {
             speedRate: baseSpeed * 1
         };
     },
-    2: function (baseExpandRate, baseSpeed) {
-        return {
-            type: 'double-fast',
-            position: getRandomPosition(),
-            styleName: 'double-fast-food',
-            expandRate: baseExpandRate * 0,
-            speedRate: baseSpeed * 0.5
-        };
-    },
-    3: function (baseExpandRate, baseSpeed) {
-        return {
-            type: 'treble-fast',
-            position: getRandomPosition(),
-            styleName: 'treble-fast-food',
-            expandRate: baseExpandRate * 0,
-            speedRate: baseSpeed * 0.25
-        };
-    }
+    // 2: function (baseExpandRate, baseSpeed) {
+    //     return {
+    //         type: 'double-fast',
+    //         position: getRandomPosition(),
+    //         styleName: 'double-fast-food',
+    //         expandRate: baseExpandRate * 0,
+    //         speedRate: baseSpeed * 0.5
+    //     };
+    // },
+    // 3: function (baseExpandRate, baseSpeed) {
+    //     return {
+    //         type: 'treble-fast',
+    //         position: getRandomPosition(),
+    //         styleName: 'treble-fast-food',
+    //         expandRate: baseExpandRate * 0,
+    //         speedRate: baseSpeed * 0.25
+    //     };
+    // }
 
 }
 
