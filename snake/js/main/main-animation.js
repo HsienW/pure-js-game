@@ -22,8 +22,11 @@ const mainAnimation = (function () {
 
     operations.doAnimation = function (currentTime) {
         operations.isStart();
-        const secondRender = (currentTime - lastRenderTime) / 250;
 
+        // 若要開啟 speed 食物, 要固定基本更新秒數 除以 1000(毫秒)
+        const secondRender = (currentTime - lastRenderTime) / 100;
+
+        // 若要開啟 speed 食物, 這邊不能擋
         if (secondRender < 1 / snakeSpeed) {
             return;
         }

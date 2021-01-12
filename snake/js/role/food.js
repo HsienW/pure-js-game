@@ -63,7 +63,7 @@ const initFoodAmount = getRandomFoodAmount(4);
 
 const initAllFood = function () {
     for (let i = 0; i < initFoodAmount; i++) {
-        const initFood = foodTypeInfo[getRandomFoodType(3)](1, 1);
+        const initFood = foodTypeInfo[getRandomFoodType(1)](1, 1);
         foodFactory(
             initFood.position,
             initFood.type,
