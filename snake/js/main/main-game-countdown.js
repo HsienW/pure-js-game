@@ -1,24 +1,38 @@
 // import {gameTimerTypeInfo} from '../role-config/timer-type.js';
 
 const mainGameCountdown = (function () {
-    let count = null;
-    let stopNumber = null;
     let activation = null;
+    let startTime = null;
+    let finishTime = null;
+    let progress = null;
     const operations = {};
 
-    operations.countdownLoop = function (secondRender) {
-        if (secondRender < 1) {
-            return;
-        }
-        count = Math.floor((secondRender / 1000));
+    operations.countdownLoop = function (timeStamp) {
+        (function () {
+            if(!startTime) {
+                startTime = timeStamp;
+            }
 
-        console.log(count);
+             if ((timeStamp - startTime) < 1 ) {
+                 return;
+             }
+
+            progress = Math.floor((timeStamp - startTime)) / 1000;
+            finishTime = finishTime - progress;
+            console.log(finishTime);
+        })()
+
+        // finishTime = finishTime - progress;
+
+        // timeElapsed = Math.floor((timeElapsed / 1000));
+        //
+        // console.log(timeElapsed);
 
         operations.isStart();
     }
 
-    operations.setStopNumber = function (countdownStopNumber) {
-        stopNumber = countdownStopNumber;
+    operations.setFinishTime = function (countdownFinishNumber) {
+        finishTime = countdownFinishNumber;
     }
 
     operations.isStart = function () {
@@ -30,7 +44,7 @@ const mainGameCountdown = (function () {
     }
 
     operations.checkFinish = function () {
-        if (count >= stopNumber) {
+        if (progress >= finishTime) {
             cancelAnimationFrame(activation);
             return true;
         }
