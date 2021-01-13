@@ -38,15 +38,9 @@ const gameJudge = (function () {
         return allTimer;
     };
 
-    operations.clearAllFood = function () {
+    operations.clearAllRole = function () {
         allFood = {};
-    };
-
-    operations.clearAllSnake = function () {
         allSnake = {};
-    };
-
-    operations.clearAllTimer = function () {
         allTimer = {};
     };
 

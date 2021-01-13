@@ -1,4 +1,5 @@
 import {mainAnimation} from './main-animation.js';
+import {mainGameCountdown} from './main-game-countdown.js';
 import {gameJudge} from '../judge/judge.js';
 
 const gameStartState = {
@@ -11,6 +12,7 @@ const gameStartState = {
         clickHandler: function () {
             console.log('暫停遊戲');
             mainAnimation.doAnimationAction('isPause');
+            mainGameCountdown.countdownAction('isPause');
             this.currentState = gamePauseState;
         }
     },
@@ -26,6 +28,7 @@ const gamePauseState = {
         clickHandler: function () {
             console.log('繼續遊戲');
             mainAnimation.doAnimationAction('isStart');
+            mainGameCountdown.countdownAction('isStart');
             this.currentState = gameStartState;
         }
     },
@@ -47,12 +50,13 @@ const gameFinishState = {
     start: {
         clickHandler: function () {
             console.log('開始遊戲');
-            gameJudge.noticeJudgeAction('clearAllFood', this);
-            gameJudge.noticeJudgeAction('clearAllSnake', this);
-            gameJudge.noticeJudgeAction('clearAllTimer', this);
+            gameJudge.noticeJudgeAction('clearAllRole', this);
 
             mainAnimation.doAnimationAction('isInit');
             mainAnimation.doAnimationAction('isStart');
+
+            mainGameCountdown.countdownAction('setStopNumber', 120);
+            mainGameCountdown.countdownAction('isStart');
 
             this.currentState = gameStartState;
         }
