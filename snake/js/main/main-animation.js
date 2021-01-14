@@ -16,7 +16,7 @@ const mainAnimation = (function () {
     operations.render = function () {
         map.renderMap();
         renderAllFood();
-        renderAllSnake();
+        renderAllSnake()
         checkAllSnakeDead();
     }
 
@@ -42,15 +42,15 @@ const mainAnimation = (function () {
     }
 
     operations.isStart = function () {
-        activation = window.requestAnimationFrame(operations.doAnimation);
+        activation = requestAnimationFrame(operations.doAnimation);
     }
 
     operations.isPause = function () {
-        window.cancelAnimationFrame(activation);
+        cancelAnimationFrame(activation);
     }
 
     operations.isFinish = function () {
-        window.cancelAnimationFrame(activation);
+        cancelAnimationFrame(activation);
     }
 
     const doAnimationAction = function (action) {

@@ -4,31 +4,21 @@ const mainGameCountdown = (function () {
     let activation = null;
     let startTime = null;
     let finishTime = null;
+    let lastTimeStamp = null;
     let progress = null;
     const operations = {};
 
     operations.countdownLoop = function (timeStamp) {
-        (function () {
-            if(!startTime) {
-                startTime = timeStamp;
-            }
+        if (!startTime) {
+            startTime = timeStamp;
+        }
+        lastTimeStamp = Math.floor((timeStamp - startTime) / 1000);
 
-             if ((timeStamp - startTime) < 1 ) {
-                 return;
-             }
+        progress = finishTime - lastTimeStamp;
 
-            progress = Math.floor((timeStamp - startTime)) / 1000;
-            finishTime = finishTime - progress;
-            console.log(finishTime);
-        })()
-
-        // finishTime = finishTime - progress;
-
-        // timeElapsed = Math.floor((timeElapsed / 1000));
-        //
-        // console.log(timeElapsed);
-
+        // console.log(progress);
         operations.isStart();
+        operations.checkFinish();
     }
 
     operations.setFinishTime = function (countdownFinishNumber) {
@@ -44,11 +34,9 @@ const mainGameCountdown = (function () {
     }
 
     operations.checkFinish = function () {
-        if (progress >= finishTime) {
+        if (progress === 0) {
             cancelAnimationFrame(activation);
-            return true;
         }
-        return false;
     }
 
     const countdownAction = function () {
