@@ -55,7 +55,7 @@ const gameFinishState = {
             mainAnimation.doAnimationAction('isInit');
             mainAnimation.doAnimationAction('isStart');
 
-            mainGameCountdown.countdownAction('setFinishTime', 120);
+            mainGameCountdown.countdownAction('setFinishTime', 5);
             mainGameCountdown.countdownAction('isStart');
 
             this.currentState = gameStartState;
