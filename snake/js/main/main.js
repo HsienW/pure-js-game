@@ -40,6 +40,10 @@ Main.prototype.bindMainEvent = function () {
     }
 };
 
+Main.prototype.changeCurrentState = function (newState) {
+    this.currentState = newState;
+}
+
 const gameMain = new Main();
 
 gameMain.initGameMain();
