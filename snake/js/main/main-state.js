@@ -40,7 +40,10 @@ const gamePauseState = {
     finish: {
         clickHandler: function () {
             console.log('結束遊戲');
+
             mainAnimation.doAnimationAction('isFinish');
+            gameJudge.noticeJudgeAction('gameFinish');
+
             this.currentState = gameFinishState;
         }
     }

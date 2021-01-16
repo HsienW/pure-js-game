@@ -36,6 +36,13 @@ Snake.prototype.getSnakeDirection = function () {
     return this.snakeDirection;
 }
 
+Snake.prototype.getSnakeScore = function () {
+    if (this.snakeBody.length <= 0) {
+        return 0;
+    }
+    return this.snakeBody.length - 1;
+}
+
 Snake.prototype.getSnakeTeam = function () {
     return this.snakeTeam;
 }
