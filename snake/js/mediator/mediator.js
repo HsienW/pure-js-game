@@ -4,7 +4,7 @@ import {noticeConfirm} from '../common/notice.js';
 import {checkValueIsEmpty} from '../common/util.js';
 import {mainAnimation} from '../main/main-animation.js';
 
-const gameJudge = (function () {
+const mediator = (function () {
     let allFood = {};
     let allSnake = {};
     let allTeamScore = {};
@@ -130,5 +130,5 @@ const gameJudge = (function () {
 })();
 
 export {
-    gameJudge
+    mediator
 }

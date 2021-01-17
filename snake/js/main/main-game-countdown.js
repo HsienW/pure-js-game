@@ -36,7 +36,9 @@ const mainGameCountdown = (function () {
     operations.checkFinish = function () {
         if (progress === 0) {
             cancelAnimationFrame(activation);
+            return 'game-over'
         }
+        return false;
     }
 
     const countdownAction = function () {
@@ -94,7 +96,7 @@ export {
 //
 // const timerFactory = function (timerId, count) {
 //     let newTimer = new Timer(timerId, count);
-//     // gameJudge.noticeJudgeAction('addTimer', newTimer);
+//     // mediator.noticeJudgeAction('addTimer', newTimer);
 //     return newTimer;
 // }
 //

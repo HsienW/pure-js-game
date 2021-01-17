@@ -1,6 +1,6 @@
 import {mainAnimation} from './main-animation.js';
 import {mainGameCountdown} from './main-game-countdown.js';
-import {gameJudge} from '../judge/judge.js';
+import {mediator} from '../mediator/mediator.js';
 
 const gameStartState = {
     start: {
@@ -42,7 +42,7 @@ const gamePauseState = {
             console.log('結束遊戲');
 
             mainAnimation.doAnimationAction('isFinish');
-            gameJudge.noticeJudgeAction('gameFinish');
+            mediator.noticeJudgeAction('gameFinish');
 
             this.currentState = gameFinishState;
         }
@@ -53,7 +53,7 @@ const gameFinishState = {
     start: {
         clickHandler: function () {
             console.log('開始遊戲');
-            gameJudge.noticeJudgeAction('clearAllRole', this);
+            mediator.noticeJudgeAction('clearAllRole', this);
 
             mainAnimation.doAnimationAction('isInit');
             mainAnimation.doAnimationAction('isStart');

@@ -1,7 +1,8 @@
 /** Chain of Responsibility Pattern **/
 
-import {eatFoodRule} from './check-snake-expand-rules.js';
-import {outsideMapRule, bodyCollideRule} from './check-snake-game-over-rules.js';
+// import {eatFoodRule} from './check-snake-expand-rules.js';
+import {outsideMapRule, bodyCollideRule} from './check-snake-dead-rules.js';
+import {gameTimeFinishRule, onlyOneTeamLeftRule} from './check-game-over-rules.js';
 
 const Checker = function (currentJudgeHandler) {
     this.currentCheckHandler = currentJudgeHandler;
@@ -26,14 +27,14 @@ Checker.prototype.passCheck = function (...args) {
 }
 
 // 檢查蛇是否需要增長身體規則
-const expandRuleChecker = function (allFood, allSnake) {
-    const checkEatFoodRule = new Checker(eatFoodRule);
+// const expandRuleChecker = function (allFood, allSnake) {
+//     const checkEatFoodRule = new Checker(eatFoodRule);
+//
+//     return checkEatFoodRule.passCheck(allFood, allSnake);
+// };
 
-    return checkEatFoodRule.passCheck(allFood, allSnake);
-};
-
-// 檢查蛇是否觸發遊戲結束規則
-const gameOverRuleChecker = function (position, snakeBody) {
+// 檢查單一隻蛇是否觸發死亡的規則
+const snakeDeadRuleChecker = function (position, snakeBody) {
     const checkOutsideMapRule = new Checker(outsideMapRule);
     const checkBodyCollideRule = new Checker(bodyCollideRule);
 
@@ -42,7 +43,17 @@ const gameOverRuleChecker = function (position, snakeBody) {
     return checkOutsideMapRule.passCheck(position, snakeBody);
 };
 
+// 檢查整回合遊戲是否結束的規則
+const gameOverRuleChecker = function () {
+    const checkTimeFinishRule = new Checker(gameTimeFinishRule);
+
+    checkTimeFinishRule.setNextCheckHandler(onlyOneTeamLeftRule);
+
+    return checkTimeFinishRule.passCheck();
+};
+
 export {
-    expandRuleChecker,
+    // expandRuleChecker,
+    snakeDeadRuleChecker,
     gameOverRuleChecker
 }
