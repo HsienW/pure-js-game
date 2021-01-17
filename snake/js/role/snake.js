@@ -1,6 +1,6 @@
 import {checkKeydownIsExistOperation} from '../common/util.js';
-import {gameOverRuleChecker} from '../checker/checker.js';
-import {gameJudge} from '../judge/judge.js';
+import {snakeDeadRuleChecker} from '../checker/checker.js';
+import {mediator} from '../mediator/mediator.js';
 import {map} from './map.js';
 import {snakeTypeInfo} from '../role-config/snake-type.js';
 
@@ -55,13 +55,13 @@ Snake.prototype.snakeTeamLose = function () {
     this.snakeWin = false;
 }
 
-Snake.prototype.checkSnakeDead = function () {
+Snake.prototype.checkSnakeItemDead = function () {
     let snakeHeadPosition = this.getSnakeHeadPosition();
     let snakeBody = this.getSnakeBody();
-    if (gameOverRuleChecker(snakeHeadPosition, snakeBody) === 'game-over' && !this.snakeDead) {
+    if (snakeDeadRuleChecker(snakeHeadPosition, snakeBody) === 'dead' && !this.snakeDead) {
         this.snakeDead = true;
         this.clearSnakeBody();
-        gameJudge.noticeJudgeAction('snakeDead', this);
+        mediator.noticeJudgeAction('snakeDead', this);
     }
 }
 
@@ -85,7 +85,7 @@ Snake.prototype.addSnakeBody = function () {
     this.newSnakeBody = 0;
 }
 
-Snake.prototype.updateSnakePosition = function () {
+Snake.prototype.updateSnakeItemPosition = function () {
     if (!this.snakeDead) {
         this.addSnakeBody();
         // 取得蛇頭位子的 x y 座標
@@ -104,7 +104,7 @@ Snake.prototype.updateSnakePosition = function () {
     }
 }
 
-Snake.prototype.renderSnake = function () {
+Snake.prototype.renderSnakeItem = function () {
     if (!this.snakeDead) {
         this.snakeBody.forEach((bodyItem) => {
             const snakeElement = document.createElement('div');
@@ -118,12 +118,12 @@ Snake.prototype.renderSnake = function () {
 
 const snakeFactory = function (snakeSpeed, snakeTeam, snakeName, initBodyPosition, direction, operation, snakeStyleName) {
     let newSnake = new Snake(snakeSpeed, snakeTeam, snakeName, initBodyPosition, direction, operation, snakeStyleName);
-    gameJudge.noticeJudgeAction('addSnake', newSnake);
+    mediator.noticeJudgeAction('addSnake', newSnake);
 }
 
 const initSnakeAmount = Object.keys(snakeTypeInfo);
 
-const initAllSnake = function () {
+const initSnakes = function () {
     for (let i = 0; i < initSnakeAmount.length; i++) {
         const initSnake = snakeTypeInfo[i]();
         snakeFactory(
@@ -136,11 +136,11 @@ const initAllSnake = function () {
             initSnake.snakeStyleName,
         );
     }
-    callAllSnakeItemMethod('initListenerOperation');
+    callSnakesItemMethod('initListenerOperation');
 }
 
-const callAllSnakeItemMethod = function (...args) {
-    const allSnake = gameJudge.getJudgeData('getAllSnake');
+const callSnakesItemMethod = function (...args) {
+    const allSnake = mediator.getJudgeData('getAllSnake');
     for (let snakeTeam in allSnake) {
         let snakes = allSnake[snakeTeam];
         snakes.forEach((snakeItem) => {
@@ -149,21 +149,21 @@ const callAllSnakeItemMethod = function (...args) {
     }
 }
 
-const checkAllSnakeDead = function () {
-    callAllSnakeItemMethod('checkSnakeDead');
+const checkSnakesDead = function () {
+    callSnakesItemMethod('checkSnakeItemDead');
 }
 
-const updateAllSnakePosition = function () {
-    callAllSnakeItemMethod('updateSnakePosition');
+const updateSnakesPosition = function () {
+    callSnakesItemMethod('updateSnakeItemPosition');
 }
 
-const renderAllSnake = function () {
-    callAllSnakeItemMethod('renderSnake');
+const renderSnakes = function () {
+    callSnakesItemMethod('renderSnakeItem');
 }
 
 export {
-    initAllSnake,
-    checkAllSnakeDead,
-    updateAllSnakePosition,
-    renderAllSnake
+    initSnakes,
+    checkSnakesDead,
+    updateSnakesPosition,
+    renderSnakes
 }

@@ -5,7 +5,7 @@ import {
     checkFoodOnSnakeBody,
 } from '../common/util.js';
 import {foodTypeInfo} from '../role-config/food-type.js';
-import {gameJudge} from '../judge/judge.js';
+import {mediator} from '../mediator/mediator.js';
 import {map} from './map.js';
 
 const Food = function (foodPosition, foodType, foodStyleName, bodyExpandRate, speedRate) {
@@ -34,19 +34,19 @@ Food.prototype.getFoodBodyExpandRate = function () {
     return this.bodyExpandRate;
 }
 
-Food.prototype.updateFood = function () {
+Food.prototype.updateFoodItem = function () {
     // 檢查蛇是否有吃到食物
-    let allSnake = gameJudge.getJudgeData('getAllSnake');
+    let allSnake = mediator.getJudgeData('getAllSnake');
     let eatFoodSnakes = checkFoodOnSnakeBody(this, allSnake);
     if (eatFoodSnakes.length !== 0) {
-        gameJudge.noticeJudgeAction('snakeEatFood', this, eatFoodSnakes);
+        mediator.noticeJudgeAction('snakeEatFood', this, eatFoodSnakes);
         // 有吃到的話就重新 render 食物的位子
         this.foodPosition = this.createFoodPosition();
     }
     eatFoodSnakes.length = 0;
 }
 
-Food.prototype.renderFood = function () {
+Food.prototype.renderFoodItem = function () {
     const foodElement = document.createElement('div');
     foodElement.style.gridRowStart = this.foodPosition.y;
     foodElement.style.gridColumnStart = this.foodPosition.x;
@@ -56,12 +56,12 @@ Food.prototype.renderFood = function () {
 
 const foodFactory = function (foodPosition, foodType, foodStyleName, bodyExpandRate, speedRate) {
     const newFood = new Food(foodPosition, foodType, foodStyleName, bodyExpandRate, speedRate);
-    gameJudge.noticeJudgeAction('addFood', newFood);
+    mediator.noticeJudgeAction('addFood', newFood);
 }
 
 const initFoodAmount = getRandomFoodAmount(4);
 
-const initAllFood = function () {
+const initFoods = function () {
     for (let i = 0; i < initFoodAmount; i++) {
         const initFood = foodTypeInfo[getRandomFoodType(1)](1, 1);
         foodFactory(
@@ -74,8 +74,8 @@ const initAllFood = function () {
     }
 }
 
-const callAllFoodItemMethod = function (...args) {
-    const allFood = gameJudge.getJudgeData('getAllFood');
+const callFoodItemMethod = function (...args) {
+    const allFood = mediator.getJudgeData('getAllFood');
     for (let foodType in allFood) {
         let foods = allFood[foodType];
         foods.forEach((foodItem) => {
@@ -84,16 +84,16 @@ const callAllFoodItemMethod = function (...args) {
     }
 }
 
-const updateAllFood = function () {
-    callAllFoodItemMethod('updateFood');
+const updateFoods = function () {
+    callFoodItemMethod('updateFoodItem');
 }
 
-const renderAllFood = function () {
-    callAllFoodItemMethod('renderFood');
+const renderFoods = function () {
+    callFoodItemMethod('renderFoodItem');
 }
 
 export {
-    initAllFood,
-    updateAllFood,
-    renderAllFood
+    initFoods,
+    updateFoods,
+    renderFoods
 }

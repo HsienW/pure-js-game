@@ -1,6 +1,9 @@
-import {initAllFood, updateAllFood, renderAllFood} from '../role/food.js';
-import {initAllSnake, checkAllSnakeDead, updateAllSnakePosition, renderAllSnake} from '../role/snake.js';
+import {initFoods, updateFoods, renderFoods} from '../role/food.js';
+import {initSnakes, checkSnakesDead, updateSnakesPosition, renderSnakes} from '../role/snake.js';
+import {after} from '../decorator/decorator.js';
+import {gameOverRuleChecker} from '../checker/checker.js';
 import {map} from '../role/map.js';
+import {mediator} from "../mediator/mediator";
 
 const mainAnimation = (function () {
     let activation = null;
@@ -8,16 +11,15 @@ const mainAnimation = (function () {
     let lastRenderTime = 2;
     const operations = {};
 
-    operations.update = function () {
-        updateAllFood();
-        updateAllSnakePosition();
+    operations.updateData = function () {
+        updateFoods();
+        updateSnakesPosition();
     }
 
     operations.render = function () {
         map.renderMap();
-        renderAllFood();
-        renderAllSnake()
-        checkAllSnakeDead();
+        renderFoods();
+        renderSnakes();
     }
 
     operations.doAnimation = function (currentTime) {
@@ -32,13 +34,14 @@ const mainAnimation = (function () {
         }
 
         lastRenderTime = currentTime;
-        operations.render();
-        operations.update();
+        operations.updateData();
+        // operations.render();
+        after(operations.render, checkData);
     }
 
     operations.isInit = function () {
-        initAllFood();
-        initAllSnake();
+        initFoods();
+        initSnakes();
     }
 
     operations.isStart = function () {
@@ -51,6 +54,14 @@ const mainAnimation = (function () {
 
     operations.isFinish = function () {
         cancelAnimationFrame(activation);
+    }
+
+    const checkData = function () {
+        checkSnakesDead();
+        if(gameOverRuleChecker() === 'game-over') {
+            operations.isFinish();
+            mediator.noticeJudgeAction('snakeSettleScore');
+        }
     }
 
     const doAnimationAction = function (action) {

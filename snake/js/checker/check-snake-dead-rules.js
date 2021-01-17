@@ -2,12 +2,12 @@ import {checkPositionOutsideMap, checkPositionOnSnakeBody} from '../common/util.
 
 const outsideMapRule = function (position) {
     const outsideMapSnake = checkPositionOutsideMap(position);
-    return outsideMapSnake ? 'game-over' : 'next';
+    return outsideMapSnake ? 'dead' : 'next';
 }
 
 const bodyCollideRule = function (position, snakeBody) {
     const bodyCollideInfo = checkPositionOnSnakeBody(position, snakeBody);
-    return bodyCollideInfo ? 'game-over' : 'next';
+    return bodyCollideInfo ? 'dead' : 'next';
 }
 
 export {
