@@ -1,6 +1,5 @@
-import {mainAnimation} from './main-animation.js';
-import {mainGameCountdown} from './main-game-countdown.js';
-import {mediator} from '../mediator/mediator.js';
+import {mainGameMediator} from '../mediator/main-game-mediator.js';
+import {roleMediator} from '../mediator/role-mediator.js';
 
 const gameStartState = {
     start: {
@@ -11,8 +10,7 @@ const gameStartState = {
     pause: {
         clickHandler: function () {
             console.log('暫停遊戲');
-            mainAnimation.doAnimationAction('isPause');
-            mainGameCountdown.countdownAction('isPause');
+            mainGameMediator.callMainGameMediatorAction('gamePause');
             this.currentState = gamePauseState;
         }
     },
@@ -27,8 +25,7 @@ const gamePauseState = {
     start: {
         clickHandler: function () {
             console.log('繼續遊戲');
-            mainAnimation.doAnimationAction('isStart');
-            mainGameCountdown.countdownAction('isStart');
+            mainGameMediator.callMainGameMediatorAction('gameStart');
             this.currentState = gameStartState;
         }
     },
@@ -40,10 +37,7 @@ const gamePauseState = {
     finish: {
         clickHandler: function () {
             console.log('結束遊戲');
-
-            mainAnimation.doAnimationAction('isFinish');
-            mediator.noticeJudgeAction('gameFinish');
-
+            mainGameMediator.callMainGameMediatorAction('gameFinish');
             this.currentState = gameFinishState;
         }
     }
@@ -53,13 +47,10 @@ const gameFinishState = {
     start: {
         clickHandler: function () {
             console.log('開始遊戲');
-            mediator.noticeJudgeAction('clearAllRole', this);
+            roleMediator.callRoleMediatorAction('clearAllRole', this);
 
-            mainAnimation.doAnimationAction('isInit');
-            mainAnimation.doAnimationAction('isStart');
-
-            mainGameCountdown.countdownAction('setFinishTime', 5);
-            mainGameCountdown.countdownAction('isStart');
+            mainGameMediator.callMainGameMediatorAction('gameInit', 5);
+            mainGameMediator.callMainGameMediatorAction('gameStart');
 
             this.currentState = gameStartState;
         }
