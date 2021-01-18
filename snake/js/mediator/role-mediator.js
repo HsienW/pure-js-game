@@ -2,13 +2,11 @@
 
 import {noticeConfirm} from '../common/notice.js';
 import {checkValueIsEmpty} from '../common/util.js';
-import {mainAnimation} from '../main/main-animation.js';
 
-const mediator = (function () {
+const roleMediator = (function () {
     let allFood = {};
     let allSnake = {};
     let allTeamScore = {};
-    // let allTimer = {};
     const operations = {};
 
     operations.addFood = function (food) {
@@ -23,12 +21,6 @@ const mediator = (function () {
         allSnake[snakeTeam].push(snake);
     };
 
-    // operations.addTimer = function (timer) {
-    //     let timerType = timer.timerType;
-    //     allTimer[timerType] = allTimer[timerType] || [];
-    //     allTimer[timerType].push(timer);
-    // };
-
     operations.getAllFood = function () {
         return allFood;
     };
@@ -37,14 +29,9 @@ const mediator = (function () {
         return allSnake;
     };
 
-    // operations.getAllTimer = function () {
-    //     return allTimer;
-    // };
-
     operations.clearAllRole = function () {
         allFood = {};
         allSnake = {};
-        // allTimer = {};
     };
 
     operations.snakeEatFood = function (food, eatFoodSnakes) {
@@ -102,33 +89,25 @@ const mediator = (function () {
                 allTeamScore[team] = allTeamScore[team] + score;
             });
         }
-
-        console.log('算分算分算分算分算分算分算分');
-        console.log(allTeamScore);
-    }
-
-    operations.gameFinish = function () {
-        mainAnimation.doAnimationAction('isFinish');
-        operations.snakeSettleScore();
     }
 
     //處理呼叫參數的介面
-    const getJudgeData = function () {
+    const getRoleMediatorData = function () {
         let action = Array.prototype.shift.call(arguments);
         return operations[action].apply(this);
     }
 
-    const noticeJudgeAction = function () {
+    const callRoleMediatorAction = function () {
         let action = Array.prototype.shift.call(arguments);
         operations[action].apply(this, arguments);
     }
 
     return {
-        getJudgeData: getJudgeData,
-        noticeJudgeAction: noticeJudgeAction
+        getRoleMediatorData: getRoleMediatorData,
+        callRoleMediatorAction: callRoleMediatorAction
     };
 })();
 
 export {
-    mediator
+    roleMediator
 }

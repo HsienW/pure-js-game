@@ -3,9 +3,9 @@ import {initSnakes, checkSnakesDead, updateSnakesPosition, renderSnakes} from '.
 import {after} from '../decorator/decorator.js';
 import {gameOverRuleChecker} from '../checker/checker.js';
 import {map} from '../role/map.js';
-import {mediator} from "../mediator/mediator";
+import {mainGameMediator} from '../mediator/main-game-mediator.js';
 
-const mainAnimation = (function () {
+const mainGameAnimation = (function () {
     let activation = null;
     let snakeSpeed = 1;
     let lastRenderTime = 2;
@@ -35,8 +35,8 @@ const mainAnimation = (function () {
 
         lastRenderTime = currentTime;
         operations.updateData();
-        // operations.render();
-        after(operations.render, checkData);
+        operations.render();
+        // after(operations.render, operations.checkData);
     }
 
     operations.isInit = function () {
@@ -56,25 +56,24 @@ const mainAnimation = (function () {
         cancelAnimationFrame(activation);
     }
 
-    const checkData = function () {
+    operations.checkData = function () {
         checkSnakesDead();
-        if(gameOverRuleChecker() === 'game-over') {
-            operations.isFinish();
-            mediator.noticeJudgeAction('snakeSettleScore');
+        if (gameOverRuleChecker() === 'game-over') {
+            mainGameMediator.callMainGameMediatorAction('gameFinish');
         }
     }
 
-    const doAnimationAction = function (action) {
+    const animationAction = function (action) {
         return operations[action].apply(this);
     }
 
     return {
-        doAnimationAction: doAnimationAction
+        animationAction: animationAction
     }
 
 })()
 
 export {
-    mainAnimation,
+    mainGameAnimation,
 }
 

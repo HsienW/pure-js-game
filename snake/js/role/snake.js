@@ -1,6 +1,6 @@
 import {checkKeydownIsExistOperation} from '../common/util.js';
 import {snakeDeadRuleChecker} from '../checker/checker.js';
-import {mediator} from '../mediator/mediator.js';
+import {roleMediator} from '../mediator/role-mediator.js';
 import {map} from './map.js';
 import {snakeTypeInfo} from '../role-config/snake-type.js';
 
@@ -61,7 +61,7 @@ Snake.prototype.checkSnakeItemDead = function () {
     if (snakeDeadRuleChecker(snakeHeadPosition, snakeBody) === 'dead' && !this.snakeDead) {
         this.snakeDead = true;
         this.clearSnakeBody();
-        mediator.noticeJudgeAction('snakeDead', this);
+        roleMediator.callRoleMediatorAction('snakeDead', this);
     }
 }
 
@@ -118,7 +118,7 @@ Snake.prototype.renderSnakeItem = function () {
 
 const snakeFactory = function (snakeSpeed, snakeTeam, snakeName, initBodyPosition, direction, operation, snakeStyleName) {
     let newSnake = new Snake(snakeSpeed, snakeTeam, snakeName, initBodyPosition, direction, operation, snakeStyleName);
-    mediator.noticeJudgeAction('addSnake', newSnake);
+    roleMediator.callRoleMediatorAction('addSnake', newSnake);
 }
 
 const initSnakeAmount = Object.keys(snakeTypeInfo);
@@ -140,7 +140,7 @@ const initSnakes = function () {
 }
 
 const callSnakesItemMethod = function (...args) {
-    const allSnake = mediator.getJudgeData('getAllSnake');
+    const allSnake = roleMediator.getRoleMediatorData('getAllSnake');
     for (let snakeTeam in allSnake) {
         let snakes = allSnake[snakeTeam];
         snakes.forEach((snakeItem) => {

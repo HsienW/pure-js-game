@@ -1,6 +1,6 @@
 /** State Pattern **/
 
-import {gameFinishState} from './main-state.js';
+import {gameFinishState} from './main-game-state.js';
 
 const Main = function () {
     this.startButton = null;
@@ -10,7 +10,7 @@ const Main = function () {
     this.currentState = gameFinishState;
 }
 
-Main.prototype.initGameMain = function () {
+Main.prototype.initMainGame = function () {
     this.dom = document.createElement('div');
     this.dom.innerHTML = '<button class="start-button">開始遊戲</button> \ <button class="pause-button" >暫停遊戲</button> \ <button class="finish-button" >結束遊戲</button> ';
     document.body.appendChild(this.dom);
@@ -40,14 +40,14 @@ Main.prototype.bindMainEvent = function () {
     }
 };
 
-Main.prototype.changeCurrentState = function (newState) {
-    this.currentState = newState;
+Main.prototype.changeStateToFinish = function () {
+    this.currentState = gameFinishState;
 }
 
-const gameMain = new Main();
+const mainGame = new Main();
 
-gameMain.initGameMain();
+mainGame.initMainGame();
 
 export {
-    gameMain
+    mainGame,
 }
