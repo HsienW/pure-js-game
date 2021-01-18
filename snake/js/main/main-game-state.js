@@ -11,7 +11,6 @@ const gameStartState = {
         clickHandler: function () {
             console.log('暫停遊戲');
             mainGameMediator.callMainGameMediatorAction('gamePause');
-            this.currentState = gamePauseState;
         }
     },
     finish: {
@@ -26,7 +25,6 @@ const gamePauseState = {
         clickHandler: function () {
             console.log('繼續遊戲');
             mainGameMediator.callMainGameMediatorAction('gameStart');
-            this.currentState = gameStartState;
         }
     },
     pause: {
@@ -38,7 +36,6 @@ const gamePauseState = {
         clickHandler: function () {
             console.log('結束遊戲');
             mainGameMediator.callMainGameMediatorAction('gameFinish');
-            this.currentState = gameFinishState;
         }
     }
 }
@@ -48,11 +45,8 @@ const gameFinishState = {
         clickHandler: function () {
             console.log('開始遊戲');
             roleMediator.callRoleMediatorAction('clearAllRole', this);
-
             mainGameMediator.callMainGameMediatorAction('gameInit', 5);
             mainGameMediator.callMainGameMediatorAction('gameStart');
-
-            this.currentState = gameStartState;
         }
     },
     pause: {

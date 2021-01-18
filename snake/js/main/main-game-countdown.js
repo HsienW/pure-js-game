@@ -1,3 +1,5 @@
+import {mainGameMediator} from '../mediator/main-game-mediator.js';
+
 const mainGameCountdown = (function () {
     let activation = null;
     let startTime = null;
@@ -37,10 +39,9 @@ const mainGameCountdown = (function () {
 
     operations.checkCountdownFinish = function () {
         if (progress === 0) {
-            cancelAnimationFrame(activation);
-            return 'game-over'
+            console.log('時間到');
+            mainGameMediator.callMainGameMediatorAction('gameFinish');
         }
-        return false;
     }
 
     const countdownAction = function () {
