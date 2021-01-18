@@ -74,6 +74,16 @@ const checkKeydownIsExistOperation = (keydownEventCode, operationObject) => {
     });
 }
 
+const checkSnakeOnlyOneTeamLeft = (allSnake) => {
+    for (let snakeTeam in allSnake) {
+        let snakes = allSnake[snakeTeam];
+        snakes.some((snakeItem) => {
+            snakeItem.snakeDead.includes(true);
+        });
+    }
+}
+
+
 export {
     getRandomPosition,
     getRandomFoodAmount,

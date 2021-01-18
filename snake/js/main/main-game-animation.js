@@ -1,7 +1,7 @@
 import {initFoods, updateFoods, renderFoods} from '../role/food.js';
 import {initSnakes, checkSnakesDead, updateSnakesPosition, renderSnakes} from '../role/snake.js';
 import {after} from '../decorator/decorator.js';
-import {gameOverRuleChecker} from '../checker/checker.js';
+// import {gameOverRuleChecker} from '../checker/checker.js';
 import {map} from '../role/map.js';
 import {mainGameMediator} from '../mediator/main-game-mediator.js';
 

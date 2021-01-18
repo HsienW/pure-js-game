@@ -2,7 +2,7 @@
 
 // import {eatFoodRule} from './check-snake-expand-rules.js';
 import {outsideMapRule, bodyCollideRule} from './check-snake-dead-rules.js';
-import {gameTimeFinishRule, onlyOneTeamLeftRule} from './check-game-over-rules.js';
+import {onlyOneTeamLeftRule} from './check-halfway-victory-rules.js';
 
 const Checker = function (currentJudgeHandler) {
     this.currentCheckHandler = currentJudgeHandler;
@@ -44,16 +44,16 @@ const snakeDeadRuleChecker = function (position, snakeBody) {
 };
 
 // 檢查整回合遊戲是否結束的規則
-const gameOverRuleChecker = function () {
-    const checkTimeFinishRule = new Checker(gameTimeFinishRule);
+const halfwayVictoryRuleChecker = function (allSnake) {
+    const checkOnlyOneTeamLeftRule = new Checker(onlyOneTeamLeftRule);
 
-    checkTimeFinishRule.setNextCheckHandler(onlyOneTeamLeftRule);
+    // checkTimeFinishRule.setNextCheckHandler(onlyOneTeamLeftRule);
 
-    return checkTimeFinishRule.passCheck();
+    return checkOnlyOneTeamLeftRule.passCheck();
 };
 
 export {
     // expandRuleChecker,
     snakeDeadRuleChecker,
-    gameOverRuleChecker
+    halfwayVictoryRuleChecker
 }
