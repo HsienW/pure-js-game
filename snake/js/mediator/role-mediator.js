@@ -3,6 +3,8 @@
 import {noticeConfirm} from '../common/notice.js';
 import {checkValueIsEmpty} from '../common/util.js';
 
+// roleMediator 負責中間管理角色相關的行為
+// 例如: 食物、蛇、團隊計分相關的呼叫
 const roleMediator = (function () {
     let allFood = {};
     let allSnake = {};

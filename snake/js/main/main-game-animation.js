@@ -58,9 +58,9 @@ const mainGameAnimation = (function () {
 
     operations.checkData = function () {
         checkSnakesDead();
-        if (gameOverRuleChecker() === 'game-over') {
-            mainGameMediator.callMainGameMediatorAction('gameFinish');
-        }
+        // if (gameOverRuleChecker() === 'game-over') {
+        //     mainGameMediator.callMainGameMediatorAction('gameFinish');
+        // }
     }
 
     const animationAction = function (action) {
