@@ -1,4 +1,4 @@
-import {checkKeydownIsExistOperation} from '../common/util.js';
+import {checkKeydownIsExistOperation} from '../common/role-util.js';
 import {snakeDeadRuleChecker} from '../checker/checker.js';
 import {roleMediator} from '../mediator/role-mediator.js';
 import {map} from './map.js';
@@ -36,11 +36,16 @@ Snake.prototype.getSnakeDirection = function () {
     return this.snakeDirection;
 }
 
+// 增加的身體長度等於拿到的分數
 Snake.prototype.getSnakeScore = function () {
     if (this.snakeBody.length <= 0) {
         return 0;
     }
     return this.snakeBody.length - 1;
+}
+
+Snake.prototype.getSnakeDead = function () {
+    return this.snakeDead;
 }
 
 Snake.prototype.getSnakeTeam = function () {
@@ -61,7 +66,7 @@ Snake.prototype.checkSnakeItemDead = function () {
     if (snakeDeadRuleChecker(snakeHeadPosition, snakeBody) === 'dead' && !this.snakeDead) {
         this.snakeDead = true;
         this.clearSnakeBody();
-        roleMediator.callRoleMediatorAction('snakeDead', this);
+        // roleMediator.callRoleMediatorAction('snakeDead', this);
     }
 }
 

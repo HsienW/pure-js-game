@@ -38,6 +38,7 @@ const mainGameAnimation = (function () {
         operations.updateRoleData();
         operations.renderRole();
         operations.checkRoleState();
+        // roleMediator.callRoleMediatorAction('snakeSettleScore');
         // after(operations.render, operations.checkData);
     }
 

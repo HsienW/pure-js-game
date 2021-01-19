@@ -2,6 +2,7 @@
 
 import {noticeConfirm} from '../common/notice.js';
 import {checkValueIsEmpty} from '../common/util.js';
+import {checkOnlySurviveTeam} from '../common/role-util.js';
 
 // roleMediator 負責中介管理角色相關的行為
 // 例如: 食物、蛇、團隊計分、團隊勝利等等...
@@ -48,9 +49,9 @@ const roleMediator = (function () {
         let sameTeamAllSnake = allSnake[snakeTeam];
         let isAllDead = false;
 
-        sameTeamAllSnake.forEach((teamMember) => {
+        sameTeamAllSnake.forEach((teamSnake) => {
             // 若有任何一個 team member 的死亡狀態不為 true, 表示該隊還有人活著, isAllDead 為 false
-            if (!teamMember.snakeDead) {
+            if (!teamSnake.snakeDead) {
                 isAllDead = false;
                 return
             }
@@ -63,7 +64,7 @@ const roleMediator = (function () {
         }
     }
 
-    operations.judgeTeamWin = function (snakeTeam) {
+    operations.judgeSnakeTeamWin = function (snakeTeam) {
 
         console.log();
 
@@ -86,16 +87,20 @@ const roleMediator = (function () {
         // }
     };
 
-    operations.snakeSettleScore = function () {
+    operations.addSnakeTeamScore = function () {
         for (let team in allSnake) {
             let snakeTeam = allSnake[team];
+
             snakeTeam.forEach((snakeItem) => {
                 const score = snakeItem.getSnakeScore();
-                if (checkValueIsEmpty(allTeamScore[team])) {
+                const isDead = snakeItem.getSnakeDead();
+                // 如果蛇還活著而且分數是初始狀態(為空)的話, 再把初始值賦予給 allTeamScore 計算
+                if (!isDead && checkValueIsEmpty(allTeamScore[team])) {
                     allTeamScore[team] = score;
                     return;
                 }
                 allTeamScore[team] = allTeamScore[team] + score;
+                console.log(allTeamScore);
             });
         }
     }

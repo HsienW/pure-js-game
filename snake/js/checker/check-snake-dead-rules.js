@@ -1,4 +1,4 @@
-import {checkPositionOutsideMap, checkPositionOnSnakeBody} from '../common/util.js';
+import {checkPositionOutsideMap, checkPositionOnSnakeBody} from '../common/role-util.js';
 
 const outsideMapRule = function (position) {
     const outsideMapSnake = checkPositionOutsideMap(position);
