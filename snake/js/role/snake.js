@@ -37,12 +37,12 @@ Snake.prototype.getSnakeDirection = function () {
 }
 
 // 增加的身體長度等於拿到的分數
-Snake.prototype.getSnakeScore = function () {
-    if (this.snakeBody.length <= 0) {
-        return 0;
-    }
-    return this.snakeBody.length - 1;
-}
+// Snake.prototype.getSnakeScore = function () {
+//     if (this.snakeBody.length <= 0) {
+//         return 0;
+//     }
+//     return this.snakeBody.length - 1;
+// }
 
 Snake.prototype.getSnakeDead = function () {
     return this.snakeDead;
