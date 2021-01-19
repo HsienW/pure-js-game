@@ -38,7 +38,6 @@ const mainGameAnimation = (function () {
         operations.updateRoleData();
         operations.renderRole();
         operations.checkRoleState();
-        // roleMediator.callRoleMediatorAction('snakeSettleScore');
         // after(operations.render, operations.checkData);
     }
 
@@ -70,7 +69,7 @@ const mainGameAnimation = (function () {
         if (halfwayWinTeam) {
             const winTeamName = halfwayWinTeam[0][0].snakeTeam;
             mainGameMediator.callMainGameMediatorAction('gameFinish');
-            roleMediator.callRoleMediatorAction('judgeTeamWin', winTeamName);
+            roleMediator.callRoleMediatorAction('judgeSnakeTeamWin', winTeamName);
         }
     }
 

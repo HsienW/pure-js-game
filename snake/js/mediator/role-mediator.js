@@ -41,28 +41,30 @@ const roleMediator = (function () {
         let snakeAddBodyRate = food.getFoodBodyExpandRate();
         eatFoodSnakes.forEach((snake) => {
             snake['expandSnakeBody'](snakeAddBodyRate);
+            // 增加的身體長度等於拿到的分數
+            operations.addSnakeTeamScore(snake, snakeAddBodyRate);
         });
     };
 
-    operations.snakeDead = function (snake) {
-        let snakeTeam = snake.snakeTeam;
-        let sameTeamAllSnake = allSnake[snakeTeam];
-        let isAllDead = false;
-
-        sameTeamAllSnake.forEach((teamSnake) => {
-            // 若有任何一個 team member 的死亡狀態不為 true, 表示該隊還有人活著, isAllDead 為 false
-            if (!teamSnake.snakeDead) {
-                isAllDead = false;
-                return
-            }
-            // 若有全部 team member 的死亡狀態為 true, 則 isAllDead 為 true
-            isAllDead = true;
-        });
-
-        if (isAllDead) {
-            // operations.judgeTeamWin(snakeTeam);
-        }
-    }
+    // operations.snakeDead = function (snake) {
+    //     let snakeTeam = snake.snakeTeam;
+    //     let sameTeamAllSnake = allSnake[snakeTeam];
+    //     let isAllDead = false;
+    //
+    //     sameTeamAllSnake.forEach((teamSnake) => {
+    //         // 若有任何一個 team member 的死亡狀態不為 true, 表示該隊還有人活著, isAllDead 為 false
+    //         if (!teamSnake.snakeDead) {
+    //             isAllDead = false;
+    //             return
+    //         }
+    //         // 若有全部 team member 的死亡狀態為 true, 則 isAllDead 為 true
+    //         isAllDead = true;
+    //     });
+    //
+    //     if (isAllDead) {
+    //         // operations.judgeTeamWin(snakeTeam);
+    //     }
+    // }
 
     operations.judgeSnakeTeamWin = function (snakeTeam) {
 
@@ -74,7 +76,7 @@ const roleMediator = (function () {
         //     teamMember['snakeTeamLose']();
         // });
 
-        noticeConfirm(`${snakeTeam} is winner!`);
+        // noticeConfirm(`${snakeTeam} is winner!`);
 
         // for (let team in allSnake) {
         //     if (team !== snakeTeam) {
@@ -87,22 +89,16 @@ const roleMediator = (function () {
         // }
     };
 
-    operations.addSnakeTeamScore = function () {
-        for (let team in allSnake) {
-            let snakeTeam = allSnake[team];
+    operations.addSnakeTeamScore = function (snake, score) {
+        const snakeTeam = snake.getSnakeTeam();
+        const isDead = snake.getSnakeDead();
 
-            snakeTeam.forEach((snakeItem) => {
-                const score = snakeItem.getSnakeScore();
-                const isDead = snakeItem.getSnakeDead();
-                // 如果蛇還活著而且分數是初始狀態(為空)的話, 再把初始值賦予給 allTeamScore 計算
-                if (!isDead && checkValueIsEmpty(allTeamScore[team])) {
-                    allTeamScore[team] = score;
-                    return;
-                }
-                allTeamScore[team] = allTeamScore[team] + score;
-                console.log(allTeamScore);
-            });
+        if (!isDead && checkValueIsEmpty(allTeamScore[snakeTeam])) {
+            allTeamScore[snakeTeam] = score;
+            return;
         }
+        allTeamScore[snakeTeam] = allTeamScore[snakeTeam] + score;
+        console.log(allTeamScore);
     }
 
     //處理呼叫參數的介面
