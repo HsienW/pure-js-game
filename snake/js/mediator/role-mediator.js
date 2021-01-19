@@ -59,24 +59,31 @@ const roleMediator = (function () {
         });
 
         if (isAllDead) {
-            operations.snakeTeamWin(snakeTeam, sameTeamAllSnake);
+            // operations.judgeTeamWin(snakeTeam);
         }
     }
 
-    operations.snakeTeamWin = function (snakeTeam, sameTeamAllSnake) {
-        sameTeamAllSnake.forEach((teamMember) => {
-            teamMember['snakeTeamLose']();
-        });
+    operations.judgeTeamWin = function (snakeTeam) {
 
-        for (let team in allSnake) {
-            if (team !== snakeTeam) {
-                let otherTeamSnakes = allSnake[team];
-                otherTeamSnakes.forEach((otherSnake) => {
-                    otherSnake['snakeTeamWin']();
-                });
-                noticeConfirm(`${otherTeamSnakes[0].getSnakeTeam()} is winner!`);
-            }
-        }
+        console.log();
+
+        // let sameTeamAllSnake = allSnake[snakeTeam];
+
+        // sameTeamAllSnake.forEach((teamMember) => {
+        //     teamMember['snakeTeamLose']();
+        // });
+
+        noticeConfirm(`${snakeTeam} is winner!`);
+
+        // for (let team in allSnake) {
+        //     if (team !== snakeTeam) {
+        //         let otherTeamSnakes = allSnake[team];
+        //         otherTeamSnakes.forEach((otherSnake) => {
+        //             otherSnake['snakeTeamWin']();
+        //         });
+        //         // noticeConfirm(`${otherTeamSnakes[0].getSnakeTeam()} is winner!`);
+        //     }
+        // }
     };
 
     operations.snakeSettleScore = function () {

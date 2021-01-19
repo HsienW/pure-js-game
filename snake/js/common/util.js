@@ -74,6 +74,25 @@ const checkKeydownIsExistOperation = (keydownEventCode, operationObject) => {
     });
 }
 
+const checkOnlySurviveTeam = (allSnake) => {
+    // 回傳剩下唯一有人存活的 Snake Team
+    let result = [];
+    if (!checkValueIsEmpty(allSnake)) {
+        for (let snakeTeam in allSnake) {
+            let snakes = allSnake[snakeTeam];
+            if (snakes.some(snakeItem => snakeItem.snakeDead === false)) {
+                result.push(snakes);
+            }
+        }
+        if (result.length === 1) {
+            return [...result];
+        }
+        return false;
+    }
+    return null;
+}
+
+
 export {
     getRandomPosition,
     getRandomFoodAmount,
@@ -85,4 +104,5 @@ export {
     // checkOnSnakeBody,
     checkFoodOnSnakeBody,
     checkKeydownIsExistOperation,
+    checkOnlySurviveTeam
 }

@@ -1,9 +1,10 @@
 import {initFoods, updateFoods, renderFoods} from '../role/food.js';
 import {initSnakes, checkSnakesDead, updateSnakesPosition, renderSnakes} from '../role/snake.js';
-import {after} from '../decorator/decorator.js';
-import {gameOverRuleChecker} from '../checker/checker.js';
+// import {after} from '../decorator/decorator.js';
+import {halfwayFinishRuleChecker} from '../checker/checker.js';
 import {map} from '../role/map.js';
 import {mainGameMediator} from '../mediator/main-game-mediator.js';
+import {roleMediator} from '../mediator/role-mediator.js';
 
 const mainGameAnimation = (function () {
     let activation = null;
@@ -11,12 +12,12 @@ const mainGameAnimation = (function () {
     let lastRenderTime = 2;
     const operations = {};
 
-    operations.updateData = function () {
+    operations.updateRoleData = function () {
         updateFoods();
         updateSnakesPosition();
     }
 
-    operations.render = function () {
+    operations.renderRole = function () {
         map.renderMap();
         renderFoods();
         renderSnakes();
@@ -34,8 +35,9 @@ const mainGameAnimation = (function () {
         }
 
         lastRenderTime = currentTime;
-        operations.updateData();
-        operations.render();
+        operations.updateRoleData();
+        operations.renderRole();
+        operations.checkRoleState();
         // after(operations.render, operations.checkData);
     }
 
@@ -56,11 +58,19 @@ const mainGameAnimation = (function () {
         cancelAnimationFrame(activation);
     }
 
-    operations.checkData = function () {
+    operations.checkRoleState = function () {
+        // 檢查場上每個單一蛇的存活狀態
         checkSnakesDead();
-        // if (gameOverRuleChecker() === 'game-over') {
-        //     mainGameMediator.callMainGameMediatorAction('gameFinish');
-        // }
+
+        // 檢查場上每隊的存活狀態
+        const allSnake = roleMediator.getRoleMediatorData('getAllSnake');
+        const halfwayWinTeam = halfwayFinishRuleChecker(allSnake);
+
+        if (halfwayWinTeam) {
+            const winTeamName = halfwayWinTeam[0][0].snakeTeam;
+            mainGameMediator.callMainGameMediatorAction('gameFinish');
+            roleMediator.callRoleMediatorAction('judgeTeamWin', winTeamName);
+        }
     }
 
     const animationAction = function (action) {
