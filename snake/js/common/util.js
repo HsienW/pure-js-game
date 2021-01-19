@@ -85,7 +85,7 @@ const checkOnlySurviveTeam = (allSnake) => {
             }
         }
         if (result.length === 1) {
-            return [...result];
+            return result;
         }
         return false;
     }

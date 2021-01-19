@@ -5,8 +5,8 @@ import {mainGameAnimation} from '../main/main-game-animation.js';
 import {mainGameCountdown} from '../main/main-game-countdown.js';
 import {gameStartState, gamePauseState, gameFinishState} from '../main/main-game-state.js';
 
-// mainGameMediator 負責中間管理遊戲進行相關的行為
-// 例如: 初始、進行、暫停、結束相關的呼叫
+// mainGameMediator 負責中介管理遊戲進行相關的行為
+// 例如: 初始、進行、暫停、結束等等...
 const mainGameMediator = (function () {
     const operations = {};
 
