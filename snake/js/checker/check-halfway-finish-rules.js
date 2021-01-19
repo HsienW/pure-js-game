@@ -1,4 +1,4 @@
-import {checkOnlySurviveTeam} from '../common/util.js';
+import {checkOnlySurviveTeam} from '../common/role-util.js';
 
 const onlySurviveTeamRule = function (allSnake) {
     const onlySurviveTeam = checkOnlySurviveTeam(allSnake);

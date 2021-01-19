@@ -1,9 +1,5 @@
-import {
-    getRandomPosition,
-    getRandomFoodAmount,
-    getRandomFoodType,
-    checkFoodOnSnakeBody,
-} from '../common/util.js';
+import {getRandomPosition, getRandomFoodAmount, getRandomFoodType} from '../common/util.js';
+import {checkFoodOnSnakeBody} from '../common/role-util.js';
 import {foodTypeInfo} from '../role-config/food-type.js';
 import {roleMediator} from '../mediator/role-mediator.js';
 import {map} from './map.js';

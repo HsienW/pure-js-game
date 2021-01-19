@@ -45,7 +45,7 @@ const gameFinishState = {
         clickHandler: function () {
             console.log('開始遊戲');
             roleMediator.callRoleMediatorAction('clearAllRole', this);
-            mainGameMediator.callMainGameMediatorAction('gameInit', 10);
+            mainGameMediator.callMainGameMediatorAction('gameInit', 20);
             mainGameMediator.callMainGameMediatorAction('gameStart');
         }
     },
