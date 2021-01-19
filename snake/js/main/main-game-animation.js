@@ -64,7 +64,7 @@ const mainGameAnimation = (function () {
 
         // 檢查場上每隊的存活狀態
         const allSnake = roleMediator.getRoleMediatorData('getAllSnake');
-        const halfwayWinTeam = halfwayFinishRuleChecker(allSnake);
+        const halfwayWinTeam = halfwayFinishRuleChecker(allSnake); // 時間還沒到, 但中途獲勝的團隊
 
         if (halfwayWinTeam) {
             const winTeamName = halfwayWinTeam[0][0].snakeTeam;
