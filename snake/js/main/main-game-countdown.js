@@ -1,4 +1,5 @@
 import {mainGameMediator} from '../mediator/main-game-mediator.js';
+import {roleTeamMediator} from '../mediator/role-team-mediator.js';
 
 const mainGameCountdown = (function () {
     let activation = null;
@@ -41,6 +42,7 @@ const mainGameCountdown = (function () {
         if (progress === 0) {
             console.log('時間到');
             mainGameMediator.callAction('gameFinish');
+            roleTeamMediator.callAction('compareTeamTotalScore');
         }
     }
 

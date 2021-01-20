@@ -43,7 +43,7 @@ const gameFinishState = {
     start: {
         clickHandler: function () {
             console.log('開始遊戲');
-            mainGameMediator.callAction('gameInit', 120);
+            mainGameMediator.callAction('gameInit', 5);
             mainGameMediator.callAction('gameStart');
         }
     },
