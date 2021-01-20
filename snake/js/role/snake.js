@@ -1,6 +1,6 @@
 import {checkKeydownIsExistOperation} from '../common/role-util.js';
 import {snakeDeadRuleChecker} from '../checker/checker.js';
-import {roleMediator} from '../mediator/role-mediator.js';
+import {roleItemMediator} from '../mediator/role-item-mediator.js';
 import {map} from './map.js';
 import {snakeTypeInfo} from '../role-config/snake-type.js';
 
@@ -123,7 +123,7 @@ Snake.prototype.renderSnakeItem = function () {
 
 const snakeFactory = function (snakeSpeed, snakeTeam, snakeName, initBodyPosition, direction, operation, snakeStyleName) {
     let newSnake = new Snake(snakeSpeed, snakeTeam, snakeName, initBodyPosition, direction, operation, snakeStyleName);
-    roleMediator.callRoleMediatorAction('addSnake', newSnake);
+    roleItemMediator.callAction('addSnake', newSnake);
 }
 
 const initSnakeAmount = Object.keys(snakeTypeInfo);

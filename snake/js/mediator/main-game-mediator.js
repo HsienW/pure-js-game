@@ -38,13 +38,13 @@ const mainGameMediator = (function () {
     }
 
     //處理呼叫參數的介面
-    const callMainGameMediatorAction = function () {
+    const callAction = function () {
         let action = Array.prototype.shift.call(arguments);
         operations[action].apply(this, arguments);
     }
 
     return {
-        callMainGameMediatorAction: callMainGameMediatorAction
+        callAction: callAction
     };
 })();
 

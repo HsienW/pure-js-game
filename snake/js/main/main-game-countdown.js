@@ -40,7 +40,7 @@ const mainGameCountdown = (function () {
     operations.checkCountdownFinish = function () {
         if (progress === 0) {
             console.log('時間到');
-            mainGameMediator.callMainGameMediatorAction('gameFinish');
+            mainGameMediator.callAction('gameFinish');
         }
     }
 

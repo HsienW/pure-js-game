@@ -1,17 +1,15 @@
 /** Mediator Pattern **/
 
-// import {noticeConfirm} from '../common/notice.js';
 import {initFoods} from '../role/food.js';
 import {initSnakes} from '../role/snake.js';
-import {checkValueIsEmpty} from '../common/util.js';
-// import {checkOnlySurviveTeam} from '../common/role-util.js';
+import {roleTeamMediator} from './role-team-mediator.js';
 
-// roleMediator 負責中介管理角色相關的行為
-// 例如: 食物、蛇、團隊計分、團隊勝利等等...
-const roleMediator = (function () {
+// roleItemMediator 負責中介管理單一角色相關的行為
+// 例如: 食物、蛇的初始化、渲染、更新等等...
+
+const roleItemMediator = (function () {
     let allFood = {};
     let allSnake = {};
-    let allSnakeTeamScore = {};
     const operations = {};
 
     operations.addFood = function (food) {
@@ -44,7 +42,7 @@ const roleMediator = (function () {
         eatFoodSnakes.forEach((snake) => {
             snake['expandSnakeBody'](snakeAddBodyRate);
             // 增加的身體長度等於拿到的分數
-            operations.addSnakeTeamScore(snake, snakeAddBodyRate);
+            roleTeamMediator.callAction('addSnakeTeamScore', snake, snakeAddBodyRate);
         });
     };
 
@@ -77,42 +75,6 @@ const roleMediator = (function () {
         callRoleItemMethod(allSnake, 'renderSnakeItem');
     }
 
-
-    operations.judgeSnakeTeamWin = function (snakeTeam) {
-
-        console.log();
-
-        // let sameTeamAllSnake = allSnake[snakeTeam];
-
-        // sameTeamAllSnake.forEach((teamMember) => {
-        //     teamMember['snakeTeamLose']();
-        // });
-
-        // noticeConfirm(`${snakeTeam} is winner!`);
-
-        // for (let team in allSnake) {
-        //     if (team !== snakeTeam) {
-        //         let otherTeamSnakes = allSnake[team];
-        //         otherTeamSnakes.forEach((otherSnake) => {
-        //             otherSnake['snakeTeamWin']();
-        //         });
-        //         // noticeConfirm(`${otherTeamSnakes[0].getSnakeTeam()} is winner!`);
-        //     }
-        // }
-    };
-
-    operations.addSnakeTeamScore = function (snake, score) {
-        const snakeTeam = snake.getSnakeTeam();
-        const isDead = snake.getSnakeDead();
-
-        if (!isDead && checkValueIsEmpty(allSnakeTeamScore[snakeTeam])) {
-            allSnakeTeamScore[snakeTeam] = score;
-            return;
-        }
-        allSnakeTeamScore[snakeTeam] = allSnakeTeamScore[snakeTeam] + score;
-        console.log(allSnakeTeamScore);
-    }
-
     //處理某種角色, 全部的 item 需要一起呼叫的
     const callRoleItemMethod = function (role, methodName) {
         for (let key in role) {
@@ -124,22 +86,22 @@ const roleMediator = (function () {
     }
 
     //處理呼叫參數的介面
-    const getRoleMediatorData = function () {
+    const getData = function () {
         let action = Array.prototype.shift.call(arguments);
         return operations[action].apply(this);
     }
 
-    const callRoleMediatorAction = function () {
+    const callAction = function () {
         let action = Array.prototype.shift.call(arguments);
         operations[action].apply(this, arguments);
     }
 
     return {
-        getRoleMediatorData: getRoleMediatorData,
-        callRoleMediatorAction: callRoleMediatorAction
+        getData: getData,
+        callAction: callAction
     };
 })();
 
 export {
-    roleMediator
+    roleItemMediator
 }
