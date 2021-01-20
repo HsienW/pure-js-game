@@ -1,5 +1,4 @@
 import {mainGameMediator} from '../mediator/main-game-mediator.js';
-import {roleItemMediator} from '../mediator/role-item-mediator.js';
 
 const gameStartState = {
     start: {
@@ -44,7 +43,6 @@ const gameFinishState = {
     start: {
         clickHandler: function () {
             console.log('開始遊戲');
-            roleItemMediator.callAction('clearAllRole', this);
             mainGameMediator.callAction('gameInit', 120);
             mainGameMediator.callAction('gameStart');
         }

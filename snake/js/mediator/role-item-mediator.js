@@ -42,7 +42,7 @@ const roleItemMediator = (function () {
         eatFoodSnakes.forEach((snake) => {
             snake['expandSnakeBody'](snakeAddBodyRate);
             // 增加的身體長度等於拿到的分數
-            roleTeamMediator.callAction('addSnakeTeamScore', snake, snakeAddBodyRate);
+            roleTeamMediator.callAction('addTeamScore', snake, snakeAddBodyRate);
         });
     };
 
