@@ -1,7 +1,7 @@
 import {getRandomPosition, getRandomFoodAmount, getRandomFoodType} from '../common/util.js';
 import {checkFoodOnSnakeBody} from '../common/role-util.js';
 import {foodTypeInfo} from '../role-config/food-type.js';
-import {roleMediator} from '../mediator/role-mediator.js';
+import {roleItemMediator} from '../mediator/role-item-mediator.js';
 import {map} from './map.js';
 
 const Food = function (foodPosition, foodType, foodStyleName, bodyExpandRate, speedRate) {
@@ -32,10 +32,10 @@ Food.prototype.getFoodBodyExpandRate = function () {
 
 Food.prototype.updateFoodItem = function () {
     // 檢查蛇是否有吃到食物
-    let allSnake = roleMediator.getRoleMediatorData('getAllSnake');
+    let allSnake = roleItemMediator.getData('getAllSnake');
     let eatFoodSnakes = checkFoodOnSnakeBody(this, allSnake);
     if (eatFoodSnakes.length !== 0) {
-        roleMediator.callRoleMediatorAction('snakeEatFood', this, eatFoodSnakes);
+        roleItemMediator.callAction('snakeEatFood', this, eatFoodSnakes);
         // 有吃到的話就重新 render 食物的位子
         this.foodPosition = this.createFoodPosition();
     }
@@ -52,7 +52,7 @@ Food.prototype.renderFoodItem = function () {
 
 const foodFactory = function (foodPosition, foodType, foodStyleName, bodyExpandRate, speedRate) {
     const newFood = new Food(foodPosition, foodType, foodStyleName, bodyExpandRate, speedRate);
-    roleMediator.callRoleMediatorAction('addFood', newFood);
+    roleItemMediator.callAction('addFood', newFood);
 }
 
 const initFoodAmount = getRandomFoodAmount(4);

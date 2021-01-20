@@ -1,5 +1,5 @@
 import {mainGameMediator} from '../mediator/main-game-mediator.js';
-import {roleMediator} from '../mediator/role-mediator.js';
+import {roleItemMediator} from '../mediator/role-item-mediator.js';
 
 const gameStartState = {
     start: {
@@ -10,7 +10,7 @@ const gameStartState = {
     pause: {
         clickHandler: function () {
             console.log('暫停遊戲');
-            mainGameMediator.callMainGameMediatorAction('gamePause');
+            mainGameMediator.callAction('gamePause');
         }
     },
     finish: {
@@ -24,7 +24,7 @@ const gamePauseState = {
     start: {
         clickHandler: function () {
             console.log('繼續遊戲');
-            mainGameMediator.callMainGameMediatorAction('gameStart');
+            mainGameMediator.callAction('gameStart');
         }
     },
     pause: {
@@ -35,7 +35,7 @@ const gamePauseState = {
     finish: {
         clickHandler: function () {
             console.log('結束遊戲');
-            mainGameMediator.callMainGameMediatorAction('gameFinish');
+            mainGameMediator.callAction('gameFinish');
         }
     }
 }
@@ -44,9 +44,9 @@ const gameFinishState = {
     start: {
         clickHandler: function () {
             console.log('開始遊戲');
-            roleMediator.callRoleMediatorAction('clearAllRole', this);
-            mainGameMediator.callMainGameMediatorAction('gameInit', 120);
-            mainGameMediator.callMainGameMediatorAction('gameStart');
+            roleItemMediator.callAction('clearAllRole', this);
+            mainGameMediator.callAction('gameInit', 120);
+            mainGameMediator.callAction('gameStart');
         }
     },
     pause: {

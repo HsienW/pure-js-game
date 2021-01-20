@@ -1,8 +1,7 @@
 // import {after} from '../decorator/decorator.js';
-import {halfwayFinishRuleChecker} from '../checker/checker.js';
 import {map} from '../role/map.js';
-import {mainGameMediator} from '../mediator/main-game-mediator.js';
-import {roleMediator} from '../mediator/role-mediator.js';
+import {roleItemMediator} from '../mediator/role-item-mediator.js';
+import {roleTeamMediator} from '../mediator/role-team-mediator.js';
 
 const mainGameAnimation = (function () {
     let activation = null;
@@ -11,33 +10,26 @@ const mainGameAnimation = (function () {
     const operations = {};
 
     operations.updateRoleData = function () {
-        roleMediator.callRoleMediatorAction('updateAllFood');
-        roleMediator.callRoleMediatorAction('updateAllSnakePosition');
+        roleItemMediator.callAction('updateAllFood');
+        roleItemMediator.callAction('updateAllSnakePosition');
     }
 
     operations.renderRole = function () {
         map.renderMap();
-        roleMediator.callRoleMediatorAction('renderAllFood');
-        roleMediator.callRoleMediatorAction('renderAllSnake');
+        roleItemMediator.callAction('renderAllFood');
+        roleItemMediator.callAction('renderAllSnake');
     }
 
     // 檢查場上每個 role item 的狀態
     // 例如: 每隻蛇是否死亡
     operations.checkRoleItemState = function () {
-        roleMediator.callRoleMediatorAction('checkAllSnakeDead');
+        roleItemMediator.callAction('checkAllSnakeDead');
     }
 
     // 檢查場上每個 team 的狀態
     // 例如: 是否有 team 時間到之前就中途獲勝
     operations.checkRoleTeamState = function () {
-        const allSnake = roleMediator.getRoleMediatorData('getAllSnake');
-        const halfwayWinTeam = halfwayFinishRuleChecker(allSnake); // 時間還沒到, 但中途獲勝的團隊
-
-        if (halfwayWinTeam) {
-            const winTeamName = halfwayWinTeam[0][0].snakeTeam;
-            mainGameMediator.callMainGameMediatorAction('gameFinish');
-            roleMediator.callRoleMediatorAction('judgeSnakeTeamWin', winTeamName);
-        }
+        roleTeamMediator.callAction('checkSnakeTeamHalfwayWin');
     }
 
     operations.doAnimation = function (currentTime) {
@@ -60,8 +52,8 @@ const mainGameAnimation = (function () {
     }
 
     operations.isInit = function () {
-        roleMediator.callRoleMediatorAction('initAllFood');
-        roleMediator.callRoleMediatorAction('initAllSnake');
+        roleItemMediator.callAction('initAllFood');
+        roleItemMediator.callAction('initAllSnake');
     }
 
     operations.isStart = function () {
