@@ -29,7 +29,7 @@ const mainGameAnimation = (function () {
     // 檢查場上每個 team 的狀態
     // 例如: 是否有 team 時間到之前就中途獲勝
     operations.checkRoleTeamState = function () {
-        roleTeamMediator.callAction('checkSnakeTeamHalfwayWin');
+        roleTeamMediator.callAction('checkTeamHalfwayWin');
     }
 
     operations.doAnimation = function (currentTime) {
@@ -52,6 +52,7 @@ const mainGameAnimation = (function () {
     }
 
     operations.isInit = function () {
+        roleItemMediator.callAction('clearAllRole');
         roleItemMediator.callAction('initAllFood');
         roleItemMediator.callAction('initAllSnake');
     }

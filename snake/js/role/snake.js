@@ -6,7 +6,7 @@ import {snakeTypeInfo} from '../role-config/snake-type.js';
 
 const Snake = function (snakeSpeed, snakeTeam, snakeName, initBodyPosition, direction, operation, snakeStyleName) {
     this.newSnakeBody = 0;
-    this.snakeWin = false;
+    // this.snakeWin = false;
     this.snakeDead = false;
     this.snakeSpeed = snakeSpeed;
     this.snakeTeam = snakeTeam;
@@ -52,13 +52,13 @@ Snake.prototype.getSnakeTeam = function () {
     return this.snakeTeam;
 }
 
-Snake.prototype.snakeTeamWin = function () {
-    this.snakeWin = true;
-}
-
-Snake.prototype.snakeTeamLose = function () {
-    this.snakeWin = false;
-}
+// Snake.prototype.snakeTeamWin = function () {
+//     this.snakeWin = true;
+// }
+//
+// Snake.prototype.snakeTeamLose = function () {
+//     this.snakeWin = false;
+// }
 
 Snake.prototype.checkSnakeItemDead = function () {
     let snakeHeadPosition = this.getSnakeHeadPosition();
