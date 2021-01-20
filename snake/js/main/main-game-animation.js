@@ -21,6 +21,25 @@ const mainGameAnimation = (function () {
         roleMediator.callRoleMediatorAction('renderAllSnake');
     }
 
+    // 檢查場上每個 role item 的狀態
+    // 例如: 每隻蛇是否死亡
+    operations.checkRoleItemState = function () {
+        roleMediator.callRoleMediatorAction('checkAllSnakeDead');
+    }
+
+    // 檢查場上每個 team 的狀態
+    // 例如: 是否有 team 時間到之前就中途獲勝
+    operations.checkRoleTeamState = function () {
+        const allSnake = roleMediator.getRoleMediatorData('getAllSnake');
+        const halfwayWinTeam = halfwayFinishRuleChecker(allSnake); // 時間還沒到, 但中途獲勝的團隊
+
+        if (halfwayWinTeam) {
+            const winTeamName = halfwayWinTeam[0][0].snakeTeam;
+            mainGameMediator.callMainGameMediatorAction('gameFinish');
+            roleMediator.callRoleMediatorAction('judgeSnakeTeamWin', winTeamName);
+        }
+    }
+
     operations.doAnimation = function (currentTime) {
         operations.isStart();
 
@@ -35,7 +54,8 @@ const mainGameAnimation = (function () {
         lastRenderTime = currentTime;
         operations.updateRoleData();
         operations.renderRole();
-        operations.checkRoleState();
+        operations.checkRoleItemState();
+        operations.checkRoleTeamState();
         // after(operations.render, operations.checkData);
     }
 
@@ -54,23 +74,6 @@ const mainGameAnimation = (function () {
 
     operations.isFinish = function () {
         cancelAnimationFrame(activation);
-    }
-
-    operations.checkRoleState = function () {
-        // 檢查場上每個單一蛇的存活狀態
-        // checkSnakesDead();
-
-        roleMediator.callRoleMediatorAction('checkAllSnakeDead');
-
-        // 檢查場上每隊的存活狀態
-        const allSnake = roleMediator.getRoleMediatorData('getAllSnake');
-        const halfwayWinTeam = halfwayFinishRuleChecker(allSnake); // 時間還沒到, 但中途獲勝的團隊
-
-        if (halfwayWinTeam) {
-            const winTeamName = halfwayWinTeam[0][0].snakeTeam;
-            mainGameMediator.callMainGameMediatorAction('gameFinish');
-            roleMediator.callRoleMediatorAction('judgeSnakeTeamWin', winTeamName);
-        }
     }
 
     const animationAction = function (action) {
