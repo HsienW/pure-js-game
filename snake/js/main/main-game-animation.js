@@ -55,6 +55,8 @@ const mainGameAnimation = (function () {
         roleItemMediator.callAction('clearAllRole');
         roleItemMediator.callAction('initAllFood');
         roleItemMediator.callAction('initAllSnake');
+        roleTeamMediator.callAction('clearTeamScore');
+        roleTeamMediator.callAction('initTeamScore');
     }
 
     operations.isStart = function () {

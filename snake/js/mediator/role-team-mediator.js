@@ -5,15 +5,22 @@ import {checkValueIsEmpty, checkObjectIsEmpty} from '../common/util.js';
 import {halfwayFinishRuleChecker} from '../checker/checker.js';
 import {mainGameMediator} from './main-game-mediator.js';
 import {roleItemMediator} from './role-item-mediator.js';
-// import {checkOnlySurviveTeam} from '../common/role-util.js';
 
 // roleTeamMediator 負責中介管理團隊相關的行為
-// 例如: 團隊計分、團隊勝利判定等等...
+// 例如: 初始計分、團隊加分、團隊勝利判定等等...
 
 const roleTeamMediator = (function () {
     let allTeamScore = {};
     let winTeam = {};
     const operations = {};
+
+    operations.initTeamScore = function () {
+        const allSnake = roleItemMediator.getData('getAllSnake');
+
+        for (let team in allSnake) {
+            allTeamScore[team] = 0;
+        }
+    }
 
     operations.addTeamScore = function (snake, score) {
         const team = snake.getSnakeTeam();
@@ -28,26 +35,28 @@ const roleTeamMediator = (function () {
         console.log(allTeamScore);
     }
 
+    operations.clearTeamScore = function () {
+        allTeamScore = {};
+    }
+
     operations.compareTeamTotalScore = function () {
         for (let team in allTeamScore) {
-
+            // 若 winTeam 是空的, 就設定第一個值為初始比較值
             if (checkObjectIsEmpty(winTeam)) {
-                winTeam[team] = allTeamScore[team];
-                return;
+                winTeam['teamName'] = team;
+                winTeam['score'] = allTeamScore[team];
             }
-
-            if (allTeamScore[team] > winTeam[team]) {
-
+            if (allTeamScore[team] === winTeam['score']) {
+                winTeam['teamName'] = '平手, No one';
+                winTeam['score'] = 0;
             }
-
-            // if (team !== snakeTeam) {
-            //     let otherTeamSnakes = allSnake[team];
-            //     otherTeamSnakes.forEach((otherSnake) => {
-            //         otherSnake['snakeTeamWin']();
-            //     });
-            //     // noticeConfirm(`${otherTeamSnakes[0].getSnakeTeam()} is winner!`);
-            // }
+            if (allTeamScore[team] > winTeam['score']) {
+                winTeam['teamName'] = team;
+                winTeam['score'] = allTeamScore[team];
+            }
         }
+        const winTeamName = winTeam['teamName'];
+        judgeTeamWin(winTeamName);
     }
 
     operations.checkTeamHalfwayWin = function () {
@@ -55,30 +64,15 @@ const roleTeamMediator = (function () {
         const halfwayWinTeam = halfwayFinishRuleChecker(allSnake); // 時間還沒到, 但中途獲勝的團隊
 
         if (halfwayWinTeam) {
-            const winTeamName = halfwayWinTeam[0][0].snakeTeam;
             mainGameMediator.callAction('gameFinish');
-            operations.judgeTeamWin(winTeamName);
+            const winTeamName = halfwayWinTeam[0][0].snakeTeam;
+            judgeTeamWin(winTeamName);
         }
     }
 
-    operations.judgeTeamWin = function (winTeamName) {
+    //封在內部判定勝負的 function
+    const judgeTeamWin = function (winTeamName) {
         noticeConfirm(`${winTeamName} is winner!`);
-
-        // let sameTeamAllSnake = allSnake[snakeTeam];
-
-        // sameTeamAllSnake.forEach((teamMember) => {
-        //     teamMember['snakeTeamLose']();
-        // });
-
-        // for (let team in allSnake) {
-        //     if (team !== snakeTeam) {
-        //         let otherTeamSnakes = allSnake[team];
-        //         otherTeamSnakes.forEach((otherSnake) => {
-        //             otherSnake['snakeTeamWin']();
-        //         });
-        //         // noticeConfirm(`${otherTeamSnakes[0].getSnakeTeam()} is winner!`);
-        //     }
-        // }
     };
 
     //處理呼叫參數的介面
