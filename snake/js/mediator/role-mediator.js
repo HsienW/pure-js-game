@@ -1,15 +1,17 @@
 /** Mediator Pattern **/
 
-import {noticeConfirm} from '../common/notice.js';
+// import {noticeConfirm} from '../common/notice.js';
+import {initFoods} from '../role/food.js';
+import {initSnakes} from '../role/snake.js';
 import {checkValueIsEmpty} from '../common/util.js';
-import {checkOnlySurviveTeam} from '../common/role-util.js';
+// import {checkOnlySurviveTeam} from '../common/role-util.js';
 
 // roleMediator 負責中介管理角色相關的行為
 // 例如: 食物、蛇、團隊計分、團隊勝利等等...
 const roleMediator = (function () {
     let allFood = {};
     let allSnake = {};
-    let allTeamScore = {};
+    let allSnakeTeamScore = {};
     const operations = {};
 
     operations.addFood = function (food) {
@@ -46,25 +48,35 @@ const roleMediator = (function () {
         });
     };
 
-    // operations.snakeDead = function (snake) {
-    //     let snakeTeam = snake.snakeTeam;
-    //     let sameTeamAllSnake = allSnake[snakeTeam];
-    //     let isAllDead = false;
-    //
-    //     sameTeamAllSnake.forEach((teamSnake) => {
-    //         // 若有任何一個 team member 的死亡狀態不為 true, 表示該隊還有人活著, isAllDead 為 false
-    //         if (!teamSnake.snakeDead) {
-    //             isAllDead = false;
-    //             return
-    //         }
-    //         // 若有全部 team member 的死亡狀態為 true, 則 isAllDead 為 true
-    //         isAllDead = true;
-    //     });
-    //
-    //     if (isAllDead) {
-    //         // operations.judgeTeamWin(snakeTeam);
-    //     }
-    // }
+    operations.initAllFood = function () {
+        initFoods();
+    }
+
+    operations.updateAllFood = function () {
+        callRoleItemMethod(allFood, 'updateFoodItem');
+    }
+
+    operations.renderAllFood = function () {
+        callRoleItemMethod(allFood, 'renderFoodItem');
+    }
+
+    operations.initAllSnake = function () {
+        initSnakes();
+        callRoleItemMethod(allSnake, 'initListenerOperation');
+    }
+
+    operations.checkAllSnakeDead = function () {
+        callRoleItemMethod(allSnake, 'checkSnakeItemDead');
+    }
+
+    operations.updateAllSnakePosition = function () {
+        callRoleItemMethod(allSnake, 'updateSnakeItemPosition');
+    }
+
+    operations.renderAllSnake = function () {
+        callRoleItemMethod(allSnake, 'renderSnakeItem');
+    }
+
 
     operations.judgeSnakeTeamWin = function (snakeTeam) {
 
@@ -93,12 +105,22 @@ const roleMediator = (function () {
         const snakeTeam = snake.getSnakeTeam();
         const isDead = snake.getSnakeDead();
 
-        if (!isDead && checkValueIsEmpty(allTeamScore[snakeTeam])) {
-            allTeamScore[snakeTeam] = score;
+        if (!isDead && checkValueIsEmpty(allSnakeTeamScore[snakeTeam])) {
+            allSnakeTeamScore[snakeTeam] = score;
             return;
         }
-        allTeamScore[snakeTeam] = allTeamScore[snakeTeam] + score;
-        console.log(allTeamScore);
+        allSnakeTeamScore[snakeTeam] = allSnakeTeamScore[snakeTeam] + score;
+        console.log(allSnakeTeamScore);
+    }
+
+    //處理某種角色, 全部的 item 需要一起呼叫的
+    const callRoleItemMethod = function (role, methodName) {
+        for (let key in role) {
+            let items = role[key];
+            items.forEach((item) => {
+                item[methodName]();
+            });
+        }
     }
 
     //處理呼叫參數的介面

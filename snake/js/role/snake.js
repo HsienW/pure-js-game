@@ -141,34 +141,8 @@ const initSnakes = function () {
             initSnake.snakeStyleName,
         );
     }
-    callSnakesItemMethod('initListenerOperation');
-}
-
-const callSnakesItemMethod = function (...args) {
-    const allSnake = roleMediator.getRoleMediatorData('getAllSnake');
-    for (let snakeTeam in allSnake) {
-        let snakes = allSnake[snakeTeam];
-        snakes.forEach((snakeItem) => {
-            snakeItem[args]();
-        });
-    }
-}
-
-const checkSnakesDead = function () {
-    callSnakesItemMethod('checkSnakeItemDead');
-}
-
-const updateSnakesPosition = function () {
-    callSnakesItemMethod('updateSnakeItemPosition');
-}
-
-const renderSnakes = function () {
-    callSnakesItemMethod('renderSnakeItem');
 }
 
 export {
-    initSnakes,
-    checkSnakesDead,
-    updateSnakesPosition,
-    renderSnakes
+    initSnakes
 }

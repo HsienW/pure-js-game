@@ -70,26 +70,6 @@ const initFoods = function () {
     }
 }
 
-const callFoodItemMethod = function (...args) {
-    const allFood = roleMediator.getRoleMediatorData('getAllFood');
-    for (let foodType in allFood) {
-        let foods = allFood[foodType];
-        foods.forEach((foodItem) => {
-            foodItem[args]();
-        });
-    }
-}
-
-const updateFoods = function () {
-    callFoodItemMethod('updateFoodItem');
-}
-
-const renderFoods = function () {
-    callFoodItemMethod('renderFoodItem');
-}
-
 export {
     initFoods,
-    updateFoods,
-    renderFoods
 }

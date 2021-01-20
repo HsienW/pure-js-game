@@ -1,5 +1,3 @@
-import {initFoods, updateFoods, renderFoods} from '../role/food.js';
-import {initSnakes, checkSnakesDead, updateSnakesPosition, renderSnakes} from '../role/snake.js';
 // import {after} from '../decorator/decorator.js';
 import {halfwayFinishRuleChecker} from '../checker/checker.js';
 import {map} from '../role/map.js';
@@ -13,14 +11,14 @@ const mainGameAnimation = (function () {
     const operations = {};
 
     operations.updateRoleData = function () {
-        updateFoods();
-        updateSnakesPosition();
+        roleMediator.callRoleMediatorAction('updateAllFood');
+        roleMediator.callRoleMediatorAction('updateAllSnakePosition');
     }
 
     operations.renderRole = function () {
         map.renderMap();
-        renderFoods();
-        renderSnakes();
+        roleMediator.callRoleMediatorAction('renderAllFood');
+        roleMediator.callRoleMediatorAction('renderAllSnake');
     }
 
     operations.doAnimation = function (currentTime) {
@@ -42,8 +40,8 @@ const mainGameAnimation = (function () {
     }
 
     operations.isInit = function () {
-        initFoods();
-        initSnakes();
+        roleMediator.callRoleMediatorAction('initAllFood');
+        roleMediator.callRoleMediatorAction('initAllSnake');
     }
 
     operations.isStart = function () {
@@ -60,7 +58,9 @@ const mainGameAnimation = (function () {
 
     operations.checkRoleState = function () {
         // 檢查場上每個單一蛇的存活狀態
-        checkSnakesDead();
+        // checkSnakesDead();
+
+        roleMediator.callRoleMediatorAction('checkAllSnakeDead');
 
         // 檢查場上每隊的存活狀態
         const allSnake = roleMediator.getRoleMediatorData('getAllSnake');
