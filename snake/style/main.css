@@ -9,13 +9,6 @@ body {
     font-family: "Microsoft JhengHei";
 }
 
-#game-countdown {
-    background-color: #c7c7c7;
-    width: 80vmin;
-    height: 9vmin;
-    margin-bottom: 1vmin;
-}
-
 #game-map {
     background-color: #c7c7c7;
     width: 80vmin;
@@ -25,13 +18,20 @@ body {
     grid-template-columns: repeat(41, 1fr);
 }
 
-#game-control-area {
+.game-control-area {
     background-color: #c7c7c7;
     width: 80vmin;
     height: 9vmin;
-    margin-top: 1vmin;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+}
+
+.area-margin-top {
+    margin-top: 1vmin;
+}
+
+.area-margin-bottom {
+    margin-bottom: 1vmin;
 }
 
 .control-button {

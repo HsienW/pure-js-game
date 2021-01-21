@@ -11,7 +11,7 @@ const Main = function () {
 }
 
 Main.prototype.initMainGame = function () {
-    this.controlAreaDom = document.getElementById('game-control-area');
+    this.controlAreaDom = document.getElementById('control-button');
 
     this.startButton = this.controlAreaDom.querySelector('.start-button');
     this.pauseButton = this.controlAreaDom.querySelector('.pause-button');
