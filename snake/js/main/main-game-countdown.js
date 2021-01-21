@@ -14,15 +14,15 @@ const mainGameCountdown = (function () {
             startTime = timeStamp;
         }
         lastTimeStamp = Math.floor((timeStamp - startTime) / 1000);
-
         progress = finishTime - lastTimeStamp;
-
-        // console.log(progress);
         operations.isStart();
         operations.checkCountdownFinish();
     }
 
     operations.countdownInit = function (countdownFinishNumber) {
+        startTime = null;
+        lastTimeStamp = null;
+        progress = null;
         finishTime = countdownFinishNumber;
     }
 
