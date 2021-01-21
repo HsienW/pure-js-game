@@ -11,13 +11,11 @@ const Main = function () {
 }
 
 Main.prototype.initMainGame = function () {
-    this.dom = document.createElement('div');
-    this.dom.innerHTML = '<button class="start-button">開始遊戲</button> \ <button class="pause-button" >暫停遊戲</button> \ <button class="finish-button" >結束遊戲</button> ';
-    document.body.appendChild(this.dom);
+    this.controlAreaDom = document.getElementById('game-control-area');
 
-    this.startButton = this.dom.querySelector('.start-button');
-    this.pauseButton = this.dom.querySelector('.pause-button');
-    this.finishButton = this.dom.querySelector('.finish-button');
+    this.startButton = this.controlAreaDom.querySelector('.start-button');
+    this.pauseButton = this.controlAreaDom.querySelector('.pause-button');
+    this.finishButton = this.controlAreaDom.querySelector('.finish-button');
 
     this.bindMainEvent();
 }
