@@ -18,6 +18,14 @@ body {
     grid-template-columns: repeat(41, 1fr);
 }
 
+#game-countdown {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #fa9e2d;
+    text-align: center;
+    text-shadow: -1px 0 #524f4d, 0 1px #524f4d, 1px 0 #524f4d, 0 -1px #524f4d;
+}
+
 .game-control-area {
     background-color: #c7c7c7;
     width: 80vmin;
