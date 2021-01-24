@@ -14,6 +14,7 @@ const mainGameMediator = (function () {
         console.log('gameInit');
         mainGameAnimation.animationAction('isInit');
         mainGameCountdown.countdownAction('countdownInit', countdownFinishNumber);
+        mainGameCountdown.countdownAction('countdownBindDom');
     }
 
     operations.gameStart = function () {

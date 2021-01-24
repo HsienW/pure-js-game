@@ -10,18 +10,26 @@ const Main = function () {
     this.currentState = gameFinishState;
 }
 
-Main.prototype.initMainGame = function () {
-    this.controlAreaDom = document.getElementById('control-button');
+Main.prototype.initMainGameView = function () {
 
-    this.startButton = this.controlAreaDom.querySelector('.start-button');
-    this.pauseButton = this.controlAreaDom.querySelector('.pause-button');
-    this.finishButton = this.controlAreaDom.querySelector('.finish-button');
+    this.initControlButtonsDom();
+    this.bindControlButtonEvent();
 
-    this.bindMainEvent();
+    this.initCountdownDom();
+}
+
+Main.prototype.initControlButtonsDom = function () {
+    const controlButtonsDom = document.getElementsByClassName('control-button')[0];
+    this.startButton = controlButtonsDom.querySelector('.start-button');
+    this.pauseButton = controlButtonsDom.querySelector('.pause-button');
+    this.finishButton = controlButtonsDom.querySelector('.finish-button');
+}
+
+Main.prototype.initCountdownDom = function () {
 }
 
 // 綁定每個狀態之下的 click event
-Main.prototype.bindMainEvent = function () {
+Main.prototype.bindControlButtonEvent = function () {
     // 將初始化取得的 main 實例的參照, 保存在 mainInstance 變數中,
     // 以防 onclick event 發生時 this 指向被修改成 button dom
     const mainInstance = this;
@@ -44,7 +52,7 @@ Main.prototype.changeState = function (newState) {
 
 const mainGame = new Main();
 
-mainGame.initMainGame();
+mainGame.initMainGameView();
 
 export {
     mainGame,
