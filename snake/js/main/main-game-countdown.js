@@ -1,5 +1,6 @@
 import {mainGameMediator} from '../mediator/main-game-mediator.js';
 import {teamMediator} from '../mediator/team-mediator.js';
+import {mainGame} from './main.js';
 
 const mainGameCountdown = (function () {
     let activation = null;
@@ -15,6 +16,7 @@ const mainGameCountdown = (function () {
         }
         lastTimeStamp = Math.floor((timeStamp - startTime) / 1000);
         progress = finishTime - lastTimeStamp;
+        mainGame.updateCountdownDom(progress);
         operations.isStart();
         operations.checkCountdownFinish();
     }

@@ -6,8 +6,13 @@ const Main = function () {
     this.startButton = null;
     this.pauseButton = null;
     this.finishButton = null;
+    this.countdown = null;
     // 設定初始狀態
     this.currentState = gameFinishState;
+}
+
+Main.prototype.changeState = function (newState) {
+    this.currentState = newState;
 }
 
 Main.prototype.initMainGameView = function () {
@@ -23,9 +28,6 @@ Main.prototype.initControlButtonsDom = function () {
     this.startButton = controlButtonsDom.querySelector('.start-button');
     this.pauseButton = controlButtonsDom.querySelector('.pause-button');
     this.finishButton = controlButtonsDom.querySelector('.finish-button');
-}
-
-Main.prototype.initCountdownDom = function () {
 }
 
 // 綁定每個狀態之下的 click event
@@ -46,8 +48,14 @@ Main.prototype.bindControlButtonEvent = function () {
     }
 };
 
-Main.prototype.changeState = function (newState) {
-    this.currentState = newState;
+Main.prototype.initCountdownDom = function () {
+    this.countdown = document.getElementsByClassName('game-countdown')[0];
+    this.countdown.innerHTML = '<span>0</span>';
+}
+
+Main.prototype.updateCountdownDom = function (value) {
+    this.countdown.innerHTML = '<span>' + value + '</span>';
+
 }
 
 const mainGame = new Main();
