@@ -1,6 +1,6 @@
 import {mainGameMediator} from '../mediator/main-game-mediator.js';
 import {teamMediator} from '../mediator/team-mediator.js';
-import {mainViewMediator} from '../mediator/main-view-mediator.js';
+import {mainView} from './main-view.js';
 
 const mainGameCountdown = (function () {
     let activation = null;
@@ -18,7 +18,7 @@ const mainGameCountdown = (function () {
         progress = finishTime - lastTimeStamp;
         operations.isStart();
         operations.checkCountdownFinish();
-        mainViewMediator.callAction('updateCountdownDom', progress);
+        mainView.callAction('updateCountdownDom', progress);
     }
 
     operations.countdownInit = function (countdownFinishNumber) {
@@ -38,11 +38,6 @@ const mainGameCountdown = (function () {
 
     operations.isFinish = function () {
         cancelAnimationFrame(activation);
-    }
-
-    operations.countdownBindDom = function () {
-        const countdownDom = document.getElementsByClassName('game-countdown')[0];
-        countdownDom.innerHTML = `${progress}`;
     }
 
     operations.checkCountdownFinish = function () {

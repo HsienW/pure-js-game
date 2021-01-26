@@ -1,6 +1,7 @@
 /** Mediator Pattern **/
 
 import {mainGame} from '../main/main.js';
+import {mainView} from '../main/main-view.js';
 import {mainGameAnimation} from '../main/main-game-animation.js';
 import {mainGameCountdown} from '../main/main-game-countdown.js';
 import {gameStartState, gamePauseState, gameFinishState} from '../main/main-game-state.js';
@@ -14,7 +15,8 @@ const mainGameMediator = (function () {
         console.log('gameInit');
         mainGameAnimation.animationAction('isInit');
         mainGameCountdown.countdownAction('countdownInit', countdownFinishNumber);
-        mainGameCountdown.countdownAction('countdownBindDom');
+        mainView.callAction('initCountdownDom');
+        mainView.callAction('initTeamScoreDom');
     }
 
     operations.gameStart = function () {

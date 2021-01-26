@@ -1,4 +1,5 @@
 import {mainGameMediator} from '../mediator/main-game-mediator.js';
+import {mainGameTimeType} from '../main-config/main-game-time.js';
 
 const gameStartState = {
     start: {
@@ -43,7 +44,7 @@ const gameFinishState = {
     start: {
         clickHandler: function () {
             console.log('開始遊戲');
-            mainGameMediator.callAction('gameInit', 5);
+            mainGameMediator.callAction('gameInit', mainGameTimeType.short());
             mainGameMediator.callAction('gameStart');
         }
     },
