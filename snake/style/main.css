@@ -30,17 +30,17 @@ body {
 .game-control-area {
     background-color: #c7c7c7;
     width: 80vmin;
-    height: 9.75vmin;
+    height: 9.5vmin;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
 
 .area-margin-top {
-    margin-top: 0.25vmin;
+    margin-top: 0.5vmin;
 }
 
 .area-margin-bottom {
-    margin-bottom: 0.25vmin;
+    margin-bottom: 0.5vmin;
 }
 
 .control-button {

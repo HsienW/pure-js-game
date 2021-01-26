@@ -1,7 +1,7 @@
 /** State Pattern **/
 
 import {gameFinishState} from './main-game-state.js';
-import {mainViewMediator} from '../mediator/main-view-mediator.js';
+import {mainView} from './main-view.js';
 
 const Main = function () {
     this.startButton = null;
@@ -16,10 +16,10 @@ Main.prototype.changeState = function (newState) {
 }
 
 Main.prototype.initMainGameView = function () {
-    mainViewMediator.callAction('initControlButtonsDom');
-    mainViewMediator.callAction('initCountdownDom');
-    mainViewMediator.callAction('initTeamScoreDom');
-    mainViewMediator.callAction('bindControlButtonEvent');
+    mainView.callAction('initControlButtonsDom');
+    mainView.callAction('initCountdownDom');
+    mainView.callAction('initTeamScoreDom');
+    mainView.callAction('bindControlButtonEvent');
 }
 
 const mainGame = new Main();

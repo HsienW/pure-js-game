@@ -1,9 +1,10 @@
 /** Mediator Pattern **/
-import {mainGame} from '../main/main.js';
+import {mainGame} from './main.js';
+import {mainGameTimeType} from '../main-config/main-game-time.js';
 
 // mainViewMediator 負責中介管理遊戲 dom 相關的行為
 // 例如: bind dom 相關的操作等等...
-const mainViewMediator = (function () {
+const mainView = (function () {
     let controlButtonsDom = null;
     let countdownDom = null;
     let aTeamScoreDom = null;
@@ -19,7 +20,7 @@ const mainViewMediator = (function () {
 
     operations.initCountdownDom = function () {
         countdownDom = document.getElementsByClassName('game-countdown')[0];
-        countdownDom.innerHTML = '<div>0</div>';
+        countdownDom.innerHTML = '<div>' + mainGameTimeType.short() + '</div>';
     }
 
     operations.initTeamScoreDom = function () {
@@ -48,7 +49,15 @@ const mainViewMediator = (function () {
     };
 
     operations.updateCountdownDom = function (value) {
-        countdownDom.innerHTML = '<span>' + value + '</span>';
+        countdownDom.innerHTML = '<div>' + value + '</div>';
+    }
+
+    operations.updateATeamScoreDom = function (value) {
+        aTeamScoreDom.innerHTML = '<div>' + value + '</div>';
+    }
+
+    operations.updateBTeamScoreDom = function (value) {
+        bTeamScoreDom.innerHTML = '<div>' + value + '</div>';
     }
 
     //處理呼叫參數的介面
@@ -63,5 +72,5 @@ const mainViewMediator = (function () {
 })();
 
 export {
-    mainViewMediator
+    mainView
 }
