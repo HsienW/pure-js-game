@@ -6,10 +6,10 @@ import {halfwayFinishRuleChecker} from '../checker/checker.js';
 import {mainGameMediator} from './main-game-mediator.js';
 import {roleItemMediator} from './role-item-mediator.js';
 
-// roleTeamMediator 負責中介管理團隊相關的行為
+// teamMediator 負責中介管理團隊相關的行為
 // 例如: 初始計分、團隊加分、團隊勝利判定等等...
 
-const roleTeamMediator = (function () {
+const teamMediator = (function () {
     let allTeamScore = {};
     let winTeam = {};
     const operations = {};
@@ -87,5 +87,5 @@ const roleTeamMediator = (function () {
 })();
 
 export {
-    roleTeamMediator
+    teamMediator
 }

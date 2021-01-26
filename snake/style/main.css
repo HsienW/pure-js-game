@@ -18,7 +18,7 @@ body {
     grid-template-columns: repeat(41, 1fr);
 }
 
-#game-countdown {
+.game-countdown {
     font-size: 3rem;
     font-weight: 900;
     color: #fa9e2d;

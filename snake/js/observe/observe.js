@@ -1,52 +1,58 @@
 /** Observer pattern **/
 
-const initialState = {
-    name: 'initial',
-    subscriberName: 'initial'
-};
 
-const observer = function () {
-    this.observers = [];
-    this.state = {};
+const observer = (function () {
+    const subscriberList = {};
 
-    this.updateState = function (updateObj) {
-        if (Object.keys(updateObj).length === 0) {
-            this.state = {
-                ...initialState
-            };
-        } else {
-            Object.keys(updateObj).map(key => {
-                this.state = {
-                    ...this.state,
-                    [key]: updateObj[key]
-                };
-            });
+    const doSubscription = function (key, handler) {
+        if (!subscriberList[key]) {
+            subscriberList[key] = [];
         }
-        this.notifyObservers();
-    };
+        subscriberList[key].push(handler);
+    }
 
-    this.notifyObservers = function () {
-        if (this.observers.length > 0) {
-            this.observers.forEach(observer => {
-                observer(this.state);
-            });
+    const triggerPush = function () {
+        const key = Array.prototype.shift.call(arguments);
+        const handlers = subscriberList[key];
+        let handler;
+
+        if (!handlers || handlers.length === 0) {
+            return false;
         }
-    };
 
-    this.addObserver = function (observer) {
-        this.observers.push(observer);
-        return () => {
-            const index = this.observers.indexOf(observer);
-            this.observers.splice(index, 1);
-        };
-    };
+        for (let i = 0; handler; handler = handlers[i++]) {
+            handler.apply(this, arguments);
+        }
+    }
+
+    const removeSubscription = function (key, handler) {
+        const handlers = subscriberList[key];
+
+        if (!handlers) {
+            return false;
+        }
+
+        if (!handler) {
+            handlers.length === 0;
+            return;
+        }
+
+        for (let i = handlers.length - 1; i >= 0; i--) {
+            const checkHandler = handlers[i];
+
+            if (checkHandler === handler) {
+                handlers.splice(i, 1);
+            }
+        }
+    }
 
     return {
-        updateState: this.updateState,
-        notifyObservers: this.notifyObservers,
-        addObserver: this.addObserver
-    };
-};
+        doSubscription: doSubscription,
+        triggerPush: triggerPush,
+        removeSubscription: removeSubscription
+    }
+
+})();
 
 export {
     observer

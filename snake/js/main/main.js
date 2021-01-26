@@ -6,22 +6,32 @@ const Main = function () {
     this.startButton = null;
     this.pauseButton = null;
     this.finishButton = null;
+    this.countdown = null;
     // 設定初始狀態
     this.currentState = gameFinishState;
 }
 
-Main.prototype.initMainGame = function () {
-    this.controlAreaDom = document.getElementById('control-button');
+Main.prototype.changeState = function (newState) {
+    this.currentState = newState;
+}
 
-    this.startButton = this.controlAreaDom.querySelector('.start-button');
-    this.pauseButton = this.controlAreaDom.querySelector('.pause-button');
-    this.finishButton = this.controlAreaDom.querySelector('.finish-button');
+Main.prototype.initMainGameView = function () {
 
-    this.bindMainEvent();
+    this.initControlButtonsDom();
+    this.bindControlButtonEvent();
+
+    this.initCountdownDom();
+}
+
+Main.prototype.initControlButtonsDom = function () {
+    const controlButtonsDom = document.getElementsByClassName('control-button')[0];
+    this.startButton = controlButtonsDom.querySelector('.start-button');
+    this.pauseButton = controlButtonsDom.querySelector('.pause-button');
+    this.finishButton = controlButtonsDom.querySelector('.finish-button');
 }
 
 // 綁定每個狀態之下的 click event
-Main.prototype.bindMainEvent = function () {
+Main.prototype.bindControlButtonEvent = function () {
     // 將初始化取得的 main 實例的參照, 保存在 mainInstance 變數中,
     // 以防 onclick event 發生時 this 指向被修改成 button dom
     const mainInstance = this;
@@ -38,13 +48,19 @@ Main.prototype.bindMainEvent = function () {
     }
 };
 
-Main.prototype.changeState = function (newState) {
-    this.currentState = newState;
+Main.prototype.initCountdownDom = function () {
+    this.countdown = document.getElementsByClassName('game-countdown')[0];
+    this.countdown.innerHTML = '<span>0</span>';
+}
+
+Main.prototype.updateCountdownDom = function (value) {
+    this.countdown.innerHTML = '<span>' + value + '</span>';
+
 }
 
 const mainGame = new Main();
 
-mainGame.initMainGame();
+mainGame.initMainGameView();
 
 export {
     mainGame,
