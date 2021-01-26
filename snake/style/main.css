@@ -24,6 +24,7 @@ body {
     color: #fa9e2d;
     text-align: center;
     text-shadow: -1px 0 #524f4d, 0 1px #524f4d, 1px 0 #524f4d, 0 -1px #524f4d;
+    margin: auto;
 }
 
 .game-control-area {

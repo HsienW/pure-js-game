@@ -7,7 +7,6 @@ const Main = function () {
     this.startButton = null;
     this.pauseButton = null;
     this.finishButton = null;
-    this.countdown = null;
     // 設定初始狀態
     this.currentState = gameFinishState;
 }
@@ -19,6 +18,7 @@ Main.prototype.changeState = function (newState) {
 Main.prototype.initMainGameView = function () {
     mainViewMediator.callAction('initControlButtonsDom');
     mainViewMediator.callAction('initCountdownDom');
+    mainViewMediator.callAction('initTeamScoreDom');
     mainViewMediator.callAction('bindControlButtonEvent');
 }
 

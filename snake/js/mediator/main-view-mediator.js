@@ -4,18 +4,29 @@ import {mainGame} from '../main/main.js';
 // mainViewMediator 負責中介管理遊戲 dom 相關的行為
 // 例如: bind dom 相關的操作等等...
 const mainViewMediator = (function () {
+    let controlButtonsDom = null;
+    let countdownDom = null;
+    let aTeamScoreDom = null;
+    let bTeamScoreDom = null;
     const operations = {};
 
     operations.initControlButtonsDom = function () {
-        const controlButtonsDom = document.getElementsByClassName('control-button')[0];
+        controlButtonsDom = document.getElementsByClassName('control-button')[0];
         mainGame.startButton = controlButtonsDom.querySelector('.start-button');
         mainGame.pauseButton = controlButtonsDom.querySelector('.pause-button');
         mainGame.finishButton = controlButtonsDom.querySelector('.finish-button');
     }
 
     operations.initCountdownDom = function () {
-        mainGame.countdown = document.getElementsByClassName('game-countdown')[0];
-        mainGame.countdown.innerHTML = '<span>0</span>';
+        countdownDom = document.getElementsByClassName('game-countdown')[0];
+        countdownDom.innerHTML = '<div>0</div>';
+    }
+
+    operations.initTeamScoreDom = function () {
+        aTeamScoreDom = document.getElementsByClassName('a-team')[0];
+        bTeamScoreDom = document.getElementsByClassName('b-team')[0];
+        aTeamScoreDom.innerHTML = '<div>0</div>';
+        bTeamScoreDom.innerHTML = '<div>0</div>';
     }
 
     // 綁定每個狀態之下的 click event
@@ -37,7 +48,7 @@ const mainViewMediator = (function () {
     };
 
     operations.updateCountdownDom = function (value) {
-        mainGame.countdown.innerHTML = '<span>' + value + '</span>';
+        countdownDom.innerHTML = '<span>' + value + '</span>';
     }
 
     //處理呼叫參數的介面
