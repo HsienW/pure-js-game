@@ -1,5 +1,6 @@
 import {mainGameMediator} from '../mediator/main-game-mediator.js';
-import {roleTeamMediator} from '../mediator/role-team-mediator.js';
+import {teamMediator} from '../mediator/team-mediator.js';
+import {mainViewMediator} from '../mediator/main-view-mediator.js';
 
 const mainGameCountdown = (function () {
     let activation = null;
@@ -17,6 +18,7 @@ const mainGameCountdown = (function () {
         progress = finishTime - lastTimeStamp;
         operations.isStart();
         operations.checkCountdownFinish();
+        mainViewMediator.callAction('updateCountdownDom', progress);
     }
 
     operations.countdownInit = function (countdownFinishNumber) {
@@ -38,12 +40,22 @@ const mainGameCountdown = (function () {
         cancelAnimationFrame(activation);
     }
 
+    operations.countdownBindDom = function () {
+        const countdownDom = document.getElementsByClassName('game-countdown')[0];
+        countdownDom.innerHTML = `${progress}`;
+    }
+
     operations.checkCountdownFinish = function () {
         if (progress === 0) {
             console.log('時間到');
             mainGameMediator.callAction('gameFinish');
-            roleTeamMediator.callAction('compareTeamTotalScore');
+            teamMediator.callAction('compareTeamTotalScore');
         }
+    }
+
+    const getData = function () {
+        let action = Array.prototype.shift.call(arguments);
+        return operations[action].apply(this);
     }
 
     const countdownAction = function () {
@@ -52,6 +64,7 @@ const mainGameCountdown = (function () {
     }
 
     return {
+        getData: getData,
         countdownAction: countdownAction
     }
 

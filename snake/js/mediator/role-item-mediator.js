@@ -2,7 +2,7 @@
 
 import {initFoods} from '../role/food.js';
 import {initSnakes} from '../role/snake.js';
-import {roleTeamMediator} from './role-team-mediator.js';
+import {teamMediator} from './team-mediator.js';
 
 // roleItemMediator 負責中介管理單一角色相關的行為
 // 例如: 食物、蛇的初始化、渲染、更新等等...
@@ -42,7 +42,7 @@ const roleItemMediator = (function () {
         eatFoodSnakes.forEach((snake) => {
             snake['expandSnakeBody'](snakeAddBodyRate);
             // 增加的身體長度等於拿到的分數
-            roleTeamMediator.callAction('addTeamScore', snake, snakeAddBodyRate);
+            teamMediator.callAction('addTeamScore', snake, snakeAddBodyRate);
         });
     };
 

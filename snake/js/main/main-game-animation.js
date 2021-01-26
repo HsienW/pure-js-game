@@ -1,7 +1,7 @@
 // import {after} from '../decorator/decorator.js';
 import {map} from '../role/map.js';
 import {roleItemMediator} from '../mediator/role-item-mediator.js';
-import {roleTeamMediator} from '../mediator/role-team-mediator.js';
+import {teamMediator} from '../mediator/team-mediator.js';
 
 const mainGameAnimation = (function () {
     let activation = null;
@@ -29,7 +29,7 @@ const mainGameAnimation = (function () {
     // 檢查場上每個 team 的狀態
     // 例如: 是否有 team 時間到之前就中途獲勝
     operations.checkRoleTeamState = function () {
-        roleTeamMediator.callAction('checkTeamHalfwayWin');
+        teamMediator.callAction('checkTeamHalfwayWin');
     }
 
     operations.doAnimation = function (currentTime) {
@@ -55,8 +55,8 @@ const mainGameAnimation = (function () {
         roleItemMediator.callAction('clearAllRole');
         roleItemMediator.callAction('initAllFood');
         roleItemMediator.callAction('initAllSnake');
-        roleTeamMediator.callAction('clearTeamScore');
-        roleTeamMediator.callAction('initTeamScore');
+        teamMediator.callAction('clearTeamScore');
+        teamMediator.callAction('initTeamScore');
     }
 
     operations.isStart = function () {
